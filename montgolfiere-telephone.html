@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Montgolfière</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { width: 100%; height: 100%; overflow: hidden; background: #aee0ff; }
+  body {
+    background: linear-gradient(to bottom, #bfe9ff 0%, #ffd9b0 100%);
+    display: flex; align-items: center; justify-content: center;
+    font-family: -apple-system, system-ui, sans-serif; -webkit-tap-highlight-color: transparent;
+  }
+  svg { width: 92vw; max-width: 500px; height: auto; }
+  #hint { position: fixed; bottom: 22px; left: 0; right: 0; text-align: center; color: #b85a2a; font-size: 15px; opacity: 0.85; pointer-events: none; }
+</style>
+</head>
+<body>
+<svg id="scene" viewBox="0 0 380 340" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<linearGradient id="balloon" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#ff8a8a"/><stop offset="100%" stop-color="#e05a5a"/></linearGradient>
+<linearGradient id="balloon2" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#ffd24a"/><stop offset="100%" stop-color="#e0a030"/></linearGradient>
+</defs>
+<circle cx="320" cy="55" r="24" fill="#fff2c0" opacity="0.9"/>
+<g><ellipse cx="70" cy="80" rx="30" ry="13" fill="#fff" opacity="0.8"/><ellipse cx="95" cy="72" rx="22" ry="11" fill="#fff" opacity="0.8"/><animateTransform attributeName="transform" type="translate" values="0 0;30 0;0 0" dur="16s" repeatCount="indefinite"/></g>
+<g><ellipse cx="300" cy="150" rx="26" ry="11" fill="#fff" opacity="0.75"/><ellipse cx="318" cy="144" rx="18" ry="9" fill="#fff" opacity="0.75"/><animateTransform attributeName="transform" type="translate" values="0 0;-28 0;0 0" dur="20s" repeatCount="indefinite"/></g>
+
+<!-- petits oiseaux -->
+<g stroke="#5a5a6a" stroke-width="2" fill="none" stroke-linecap="round">
+<g><path d="M60 120 Q66 114 72 120 Q78 114 84 120"/><animateTransform attributeName="transform" type="translate" values="0 0;40 10;80 0" dur="12s" repeatCount="indefinite"/></g>
+</g>
+
+<g>
+<animateTransform attributeName="transform" type="translate" values="0 6; 0 -6; 0 6" dur="4s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1; 0.4 0 0.6 1"/>
+<g>
+<animateTransform attributeName="transform" type="rotate" values="-2 190 120; 2 190 120; -2 190 120" dur="4s" repeatCount="indefinite" additive="sum"/>
+
+<!-- enveloppe -->
+<path d="M138 130 Q138 60 190 56 Q242 60 242 130 Q242 160 214 178 L166 178 Q138 160 138 130 Z" fill="url(#balloon)"/>
+<path d="M166 60 Q160 130 166 178 L182 178 Q178 130 182 58 Z" fill="url(#balloon2)"/>
+<path d="M198 58 Q202 130 198 178 L214 178 Q220 130 214 60 Z" fill="url(#balloon2)"/>
+<path d="M182 57 Q188 130 182 178 L198 178 Q192 130 198 57 Z" fill="#fff0f0"/>
+<ellipse cx="165" cy="100" rx="8" ry="20" fill="#fff" opacity="0.2"/>
+
+<!-- cordes -->
+<line x1="166" y1="178" x2="176" y2="205" stroke="#8a6a4a" stroke-width="1.5"/>
+<line x1="214" y1="178" x2="204" y2="205" stroke="#8a6a4a" stroke-width="1.5"/>
+<line x1="182" y1="178" x2="184" y2="205" stroke="#8a6a4a" stroke-width="1.5"/>
+<line x1="198" y1="178" x2="196" y2="205" stroke="#8a6a4a" stroke-width="1.5"/>
+
+<!-- flamme -->
+<ellipse cx="190" cy="188" rx="7" ry="11" fill="#ffb028"><animate attributeName="ry" values="11;16;10;14;11" dur="0.3s" repeatCount="indefinite"/><animate attributeName="opacity" values="0.9;0.6;0.9" dur="0.3s" repeatCount="indefinite"/></ellipse>
+
+<!-- nacelle -->
+<path d="M172 205 L208 205 L204 230 L176 230 Z" fill="#a8763a"/>
+<rect x="172" y="205" width="36" height="6" fill="#c99050"/>
+<g stroke="#7a5228" stroke-width="1"><line x1="180" y1="211" x2="180" y2="230"/><line x1="190" y1="211" x2="190" y2="230"/><line x1="200" y1="211" x2="200" y2="230"/></g>
+</g>
+</g>
+
+<!-- collines en bas -->
+<g>
+<ellipse cx="90" cy="360" rx="140" ry="70" fill="#7bc04a"/>
+<ellipse cx="300" cy="365" rx="150" ry="70" fill="#8fd25a"/>
+</g>
+</svg>
+<div id="hint">Ma montgolfière 🎈</div>
+</body>
+</html>

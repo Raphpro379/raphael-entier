@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Poulpe</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { width: 100%; height: 100%; overflow: hidden; background: #1a6a9a; }
+  body {
+    background: linear-gradient(to bottom, #3a9fd0 0%, #1a6a9a 55%, #0a4a70 100%);
+    display: flex; align-items: center; justify-content: center;
+    font-family: -apple-system, system-ui, sans-serif; -webkit-tap-highlight-color: transparent;
+  }
+  svg { width: 92vw; max-width: 500px; height: auto; }
+  #hint { position: fixed; bottom: 22px; left: 0; right: 0; text-align: center; color: #cdeeff; font-size: 15px; opacity: 0.85; pointer-events: none; }
+</style>
+</head>
+<body>
+<svg id="scene" viewBox="0 0 380 340" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<radialGradient id="bodyp" cx="50%" cy="35%" r="65%"><stop offset="0%" stop-color="#ff8fc0"/><stop offset="100%" stop-color="#e05a9a"/></radialGradient>
+</defs>
+<!-- bulles -->
+<g fill="#ffffff" opacity="0.5">
+<circle cx="80" cy="300" r="5"><animate attributeName="cy" values="320;-20" dur="6s" repeatCount="indefinite"/></circle>
+<circle cx="140" cy="300" r="3"><animate attributeName="cy" values="330;-20" dur="7s" repeatCount="indefinite"/></circle>
+<circle cx="300" cy="300" r="6"><animate attributeName="cy" values="340;-20" dur="5.5s" repeatCount="indefinite"/></circle>
+<circle cx="330" cy="300" r="3"><animate attributeName="cy" values="320;-20" dur="8s" repeatCount="indefinite"/></circle>
+<circle cx="40" cy="300" r="4"><animate attributeName="cy" values="335;-20" dur="6.5s" repeatCount="indefinite"/></circle>
+</g>
+<!-- algues -->
+<g fill="#2a8a5a">
+<path d="M30 340 Q20 300 34 280 Q26 310 40 340 Z"><animate attributeName="d" values="M30 340 Q20 300 34 280 Q26 310 40 340 Z;M30 340 Q40 300 26 280 Q34 310 40 340 Z;M30 340 Q20 300 34 280 Q26 310 40 340 Z" dur="3s" repeatCount="indefinite"/></path>
+<path d="M350 340 Q340 296 354 276 Q346 308 360 340 Z"><animate attributeName="d" values="M350 340 Q340 296 354 276 Q346 308 360 340 Z;M350 340 Q360 296 346 276 Q354 308 360 340 Z;M350 340 Q340 296 354 276 Q346 308 360 340 Z" dur="3.4s" repeatCount="indefinite"/></path>
+</g>
+<g>
+<animateTransform attributeName="transform" type="translate" values="0 0; 0 -14; 0 0" dur="3.5s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1; 0.4 0 0.6 1"/>
+<!-- tentacules -->
+<g fill="url(#bodyp)">
+<path d="M158 200 Q150 240 140 270 Q136 285 148 282 Q152 250 168 214 Z"><animate attributeName="d" values="M158 200 Q150 240 140 270 Q136 285 148 282 Q152 250 168 214 Z;M158 200 Q148 238 152 272 Q152 288 162 282 Q158 248 168 214 Z;M158 200 Q150 240 140 270 Q136 285 148 282 Q152 250 168 214 Z" dur="2.5s" repeatCount="indefinite"/></path>
+<path d="M175 210 Q170 250 164 284 Q162 298 174 294 Q176 256 184 218 Z"><animate attributeName="d" values="M175 210 Q170 250 164 284 Q162 298 174 294 Q176 256 184 218 Z;M175 210 Q178 250 172 288 Q172 300 182 294 Q180 256 184 218 Z;M175 210 Q170 250 164 284 Q162 298 174 294 Q176 256 184 218 Z" dur="2.8s" repeatCount="indefinite"/></path>
+<path d="M205 210 Q210 250 216 284 Q218 298 206 294 Q204 256 196 218 Z"><animate attributeName="d" values="M205 210 Q210 250 216 284 Q218 298 206 294 Q204 256 196 218 Z;M205 210 Q202 250 208 288 Q208 300 198 294 Q200 256 196 218 Z;M205 210 Q210 250 216 284 Q218 298 206 294 Q204 256 196 218 Z" dur="2.6s" repeatCount="indefinite"/></path>
+<path d="M222 200 Q230 240 240 270 Q244 285 232 282 Q228 250 212 214 Z"><animate attributeName="d" values="M222 200 Q230 240 240 270 Q244 285 232 282 Q228 250 212 214 Z;M222 200 Q232 238 228 272 Q228 288 218 282 Q222 248 212 214 Z;M222 200 Q230 240 240 270 Q244 285 232 282 Q228 250 212 214 Z" dur="2.4s" repeatCount="indefinite"/></path>
+</g>
+<!-- corps -->
+<ellipse cx="190" cy="160" rx="58" ry="60" fill="url(#bodyp)"/>
+<ellipse cx="175" cy="130" rx="14" ry="18" fill="#ffb6d8" opacity="0.5"/>
+<circle cx="172" cy="158" r="13" fill="#fff"/>
+<circle cx="208" cy="158" r="13" fill="#fff"/>
+<circle cx="174" cy="160" r="6.5" fill="#2e2e2e"/>
+<circle cx="210" cy="160" r="6.5" fill="#2e2e2e"/>
+<circle cx="176" cy="157" r="2.2" fill="#fff"/><circle cx="212" cy="157" r="2.2" fill="#fff"/>
+<ellipse cx="158" cy="178" rx="8" ry="5" fill="#ff9ac0" opacity="0.7"/>
+<ellipse cx="222" cy="178" rx="8" ry="5" fill="#ff9ac0" opacity="0.7"/>
+<path d="M182 180 Q190 187 198 180" stroke="#2e2e2e" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+</g>
+</svg>
+<div id="hint">Mon poulpe 🐙</div>
+</body>
+</html>
