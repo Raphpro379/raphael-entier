@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Papillon</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { width: 100%; height: 100%; overflow: hidden; background: #bfe8ff; }
+  body { background: linear-gradient(to bottom, #cdeeff 0%, #bfe8ff 50%, #a8e0a8 100%); display: flex; align-items: center; justify-content: center; font-family: -apple-system, system-ui, sans-serif; -webkit-tap-highlight-color: transparent; }
+  svg { width: 92vw; max-width: 500px; height: auto; }
+  #hint { position: fixed; bottom: 22px; left: 0; right: 0; text-align: center; color: #b8479a; font-size: 15px; opacity: 0.85; pointer-events: none; }
+</style>
+</head>
+<body>
+<svg id="scene" viewBox="0 0 380 340" xmlns="http://www.w3.org/2000/svg">
+<circle cx="320" cy="55" r="24" fill="#fff2a8"/>
+<g><ellipse cx="80" cy="65" rx="28" ry="12" fill="#fff" opacity="0.8"/><ellipse cx="102" cy="58" rx="20" ry="10" fill="#fff" opacity="0.8"/><animateTransform attributeName="transform" type="translate" values="0 0;25 0;0 0" dur="14s" repeatCount="indefinite"/></g>
+<g fill="#5fb02f"><rect x="0" y="290" width="380" height="50"/></g>
+<g><g fill="#ff8fc8"><circle cx="60" cy="288" r="7"/></g><circle cx="60" cy="288" r="3" fill="#ffd24a"/><rect x="58" y="290" width="4" height="14" fill="#4a8a2a"/></g>
+<g><g fill="#c98aff"><circle cx="320" cy="288" r="7"/></g><circle cx="320" cy="288" r="3" fill="#ffd24a"/><rect x="318" y="290" width="4" height="14" fill="#4a8a2a"/></g>
+<g><g fill="#ffb3d0"><circle cx="200" cy="292" r="6"/></g><circle cx="200" cy="292" r="2.5" fill="#ffd24a"/><rect x="198" y="294" width="4" height="12" fill="#4a8a2a"/></g>
+<g>
+<animateTransform attributeName="transform" type="translate" values="0 0; 70 -50; 140 10; 50 -30; 0 0" dur="9s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1;0.4 0 0.6 1;0.4 0 0.6 1;0.4 0 0.6 1"/>
+<g transform="translate(120 130)">
+<g><animateTransform attributeName="transform" type="scale" values="1 1;0.35 1;1 1" dur="0.35s" repeatCount="indefinite"/>
+<path d="M0 0 Q-42 -34 -34 -8 Q-44 4 -30 14 Q-40 30 -20 30 Q-6 26 0 4 Z" fill="#ff6ba8"/>
+<path d="M0 4 Q-34 20 -26 36 Q-30 50 -12 46 Q-2 38 0 20 Z" fill="#ff9ac8"/>
+<circle cx="-24" cy="-6" r="5" fill="#fff" opacity="0.7"/><circle cx="-18" cy="30" r="4" fill="#fff" opacity="0.6"/>
+</g>
+<g><animateTransform attributeName="transform" type="scale" values="1 1;0.35 1;1 1" dur="0.35s" repeatCount="indefinite"/>
+<path d="M0 0 Q42 -34 34 -8 Q44 4 30 14 Q40 30 20 30 Q6 26 0 4 Z" fill="#c98aff"/>
+<path d="M0 4 Q34 20 26 36 Q30 50 12 46 Q2 38 0 20 Z" fill="#d8a8ff"/>
+<circle cx="24" cy="-6" r="5" fill="#fff" opacity="0.7"/><circle cx="18" cy="30" r="4" fill="#fff" opacity="0.6"/>
+</g>
+<ellipse cx="0" cy="8" rx="5" ry="22" fill="#3a2a3a"/>
+<circle cx="0" cy="-14" r="6" fill="#3a2a3a"/>
+<line x1="-2" y1="-18" x2="-8" y2="-30" stroke="#3a2a3a" stroke-width="1.5" stroke-linecap="round"/>
+<line x1="2" y1="-18" x2="8" y2="-30" stroke="#3a2a3a" stroke-width="1.5" stroke-linecap="round"/>
+<circle cx="-8" cy="-30" r="2.5" fill="#3a2a3a"/><circle cx="8" cy="-30" r="2.5" fill="#3a2a3a"/>
+</g>
+</g>
+</svg>
+<div id="hint">Mon papillon 🦋</div>
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Train</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { width: 100%; height: 100%; overflow: hidden; background: #bfe8ff; }
+  body { background: linear-gradient(to bottom, #cdeeff 0%, #bfe8ff 55%, #a8e0a8 100%); display: flex; align-items: center; justify-content: center; font-family: -apple-system, system-ui, sans-serif; -webkit-tap-highlight-color: transparent; }
+  svg { width: 94vw; max-width: 520px; height: auto; }
+  #hint { position: fixed; bottom: 22px; left: 0; right: 0; text-align: center; color: #b83a3a; font-size: 15px; opacity: 0.85; pointer-events: none; }
+</style>
+</head>
+<body>
+<svg id="scene" viewBox="0 0 380 340" xmlns="http://www.w3.org/2000/svg">
+<circle cx="315" cy="55" r="24" fill="#fff2a8"/>
+<g><ellipse cx="80" cy="70" rx="30" ry="13" fill="#fff" opacity="0.85"/><ellipse cx="105" cy="62" rx="22" ry="11" fill="#fff" opacity="0.85"/><animateTransform attributeName="transform" type="translate" values="0 0;30 0;0 0" dur="16s" repeatCount="indefinite"/></g>
+<!-- collines -->
+<ellipse cx="80" cy="270" rx="120" ry="50" fill="#8fd25a"/>
+<ellipse cx="300" cy="275" rx="130" ry="50" fill="#7bc04a"/>
+<!-- fumee -->
+<g fill="#dcdce4" opacity="0.8">
+<circle cx="120" cy="130" r="10"><animate attributeName="cy" values="135;90" dur="2s" repeatCount="indefinite"/><animate attributeName="r" values="8;18" dur="2s" repeatCount="indefinite"/><animate attributeName="opacity" values="0.8;0" dur="2s" repeatCount="indefinite"/></circle>
+<circle cx="130" cy="130" r="8"><animate attributeName="cy" values="135;100" dur="2.5s" repeatCount="indefinite"/><animate attributeName="r" values="6;15" dur="2.5s" repeatCount="indefinite"/><animate attributeName="opacity" values="0.8;0" dur="2.5s" repeatCount="indefinite"/></circle>
+</g>
+<!-- rails -->
+<rect x="0" y="290" width="380" height="6" fill="#8a6a4a"/>
+<g fill="#6a4a2a"><rect x="10" y="286" width="8" height="14"/><rect x="50" y="286" width="8" height="14"/><rect x="90" y="286" width="8" height="14"/><rect x="130" y="286" width="8" height="14"/><rect x="170" y="286" width="8" height="14"/><rect x="210" y="286" width="8" height="14"/><rect x="250" y="286" width="8" height="14"/><rect x="290" y="286" width="8" height="14"/><rect x="330" y="286" width="8" height="14"/><rect x="370" y="286" width="8" height="14"/>
+<animateTransform attributeName="transform" type="translate" values="0 0;-40 0" dur="0.5s" repeatCount="indefinite"/></g>
+<g>
+<animateTransform attributeName="transform" type="translate" values="0 0; 0 -2; 0 0" dur="0.3s" repeatCount="indefinite"/>
+<!-- wagon -->
+<rect x="240" y="240" width="70" height="44" rx="6" fill="#5a8fd0"/>
+<rect x="250" y="250" width="20" height="18" rx="3" fill="#cdeeff"/><rect x="280" y="250" width="20" height="18" rx="3" fill="#cdeeff"/>
+<!-- locomotive -->
+<rect x="120" y="220" width="110" height="64" rx="8" fill="#e05a5a"/>
+<rect x="120" y="220" width="110" height="16" rx="8" fill="#c94a4a"/>
+<rect x="180" y="200" width="44" height="24" rx="4" fill="#f4d0d0"/>
+<rect x="188" y="206" width="12" height="12" rx="2" fill="#5a8fd0"/><rect x="204" y="206" width="12" height="12" rx="2" fill="#5a8fd0"/>
+<rect x="132" y="180" width="18" height="42" fill="#4a3a3a"/>
+<rect x="128" y="176" width="26" height="8" rx="3" fill="#3a2a2a"/>
+<circle cx="222" cy="252" r="10" fill="#ffd24a"/>
+<!-- roues -->
+<g fill="#3a3a3a"><circle cx="145" cy="284" r="16"/><circle cx="200" cy="284" r="16"/><circle cx="258" cy="284" r="12"/><circle cx="295" cy="284" r="12"/></g>
+<g fill="#8a8a8a"><circle cx="145" cy="284" r="6"/><circle cx="200" cy="284" r="6"/><circle cx="258" cy="284" r="5"/><circle cx="295" cy="284" r="5"/></g>
+<g stroke="#5a5a5a" stroke-width="2"><line x1="145" y1="284" x2="200" y2="284"><animateTransform attributeName="transform" type="rotate" from="0 145 284" to="360 145 284" dur="0.5s" repeatCount="indefinite"/></line></g>
+</g>
+</svg>
+<div id="hint">Mon train 🚂</div>
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Tortue</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { width: 100%; height: 100%; overflow: hidden; background: #1a7a9a; }
+  body { background: linear-gradient(to bottom, #3aafd0 0%, #1a7a9a 55%, #0a5a78 100%); display: flex; align-items: center; justify-content: center; font-family: -apple-system, system-ui, sans-serif; -webkit-tap-highlight-color: transparent; }
+  svg { width: 92vw; max-width: 500px; height: auto; }
+  #hint { position: fixed; bottom: 22px; left: 0; right: 0; text-align: center; color: #cdeeff; font-size: 15px; opacity: 0.85; pointer-events: none; }
+</style>
+</head>
+<body>
+<svg id="scene" viewBox="0 0 380 340" xmlns="http://www.w3.org/2000/svg">
+<defs><radialGradient id="shell" cx="45%" cy="35%" r="65%"><stop offset="0%" stop-color="#7bc04a"/><stop offset="100%" stop-color="#3a7a2a"/></radialGradient></defs>
+<g fill="#ffffff" opacity="0.5">
+<circle cx="70" cy="300" r="5"><animate attributeName="cy" values="320;-20" dur="6s" repeatCount="indefinite"/></circle>
+<circle cx="300" cy="300" r="4"><animate attributeName="cy" values="330;-20" dur="7s" repeatCount="indefinite"/></circle>
+<circle cx="200" cy="300" r="3"><animate attributeName="cy" values="335;-20" dur="8s" repeatCount="indefinite"/></circle>
+</g>
+<g fill="#2a8a5a"><path d="M30 340 Q22 300 36 282 Q28 312 42 340 Z"><animate attributeName="d" values="M30 340 Q22 300 36 282 Q28 312 42 340 Z;M30 340 Q42 300 28 282 Q36 312 42 340 Z;M30 340 Q22 300 36 282 Q28 312 42 340 Z" dur="3s" repeatCount="indefinite"/></path></g>
+<g>
+<animateTransform attributeName="transform" type="translate" values="0 0; 0 -12; 0 0" dur="4s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1; 0.4 0 0.6 1"/>
+<g><animateTransform attributeName="transform" type="rotate" values="-15 150 200;15 150 200;-15 150 200" dur="1.5s" repeatCount="indefinite"/><ellipse cx="140" cy="205" rx="22" ry="12" fill="#7bc86a"/></g>
+<g><animateTransform attributeName="transform" type="rotate" values="15 240 200;-15 240 200;15 240 200" dur="1.5s" repeatCount="indefinite"/><ellipse cx="250" cy="205" rx="22" ry="12" fill="#7bc86a"/></g>
+<ellipse cx="150" cy="240" rx="16" ry="10" fill="#7bc86a"/><ellipse cx="230" cy="240" rx="16" ry="10" fill="#7bc86a"/>
+<ellipse cx="190" cy="200" rx="60" ry="48" fill="url(#shell)"/>
+<g fill="#5a9a3a" stroke="#3a7a2a" stroke-width="1.5">
+<path d="M190 160 L172 185 L190 200 L208 185 Z"/><path d="M172 185 L155 195 L165 218 L190 200 Z"/><path d="M208 185 L225 195 L215 218 L190 200 Z"/><path d="M190 200 L165 218 L190 240 L215 218 Z"/>
+</g>
+<g><animateTransform attributeName="transform" type="translate" values="0 0;3 0;0 0" dur="2s" repeatCount="indefinite"/>
+<ellipse cx="145" cy="180" rx="18" ry="15" fill="#7bc86a"/>
+<circle cx="138" cy="176" r="3.5" fill="#2e2e2e"/><circle cx="139" cy="175" r="1.2" fill="#fff"/>
+<ellipse cx="132" cy="184" rx="4" ry="3" fill="#ff9ac0" opacity="0.6"/>
+<path d="M130 182 Q126 182 124 185" stroke="#3a7a2a" stroke-width="1.5" fill="none" stroke-linecap="round"/></g>
+</g>
+</svg>
+<div id="hint">Ma tortue 🐢</div>
+</body>
+</html>
