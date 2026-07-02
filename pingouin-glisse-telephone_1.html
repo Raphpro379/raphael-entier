@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Pingouin qui glisse</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { width: 100%; height: 100%; overflow: hidden; background: #bfe9ff; }
+  body { background: linear-gradient(to bottom, #cdeeff 0%, #bfe9ff 55%, #e8f7ff 100%); display: flex; align-items: center; justify-content: center; font-family: -apple-system, system-ui, sans-serif; -webkit-tap-highlight-color: transparent; }
+  svg { width: 94vw; max-width: 520px; height: auto; }
+  #hint { position: fixed; bottom: 22px; left: 0; right: 0; text-align: center; color: #3a6f8f; font-size: 15px; opacity: 0.85; pointer-events: none; }
+</style>
+</head>
+<body>
+<svg id="scene" viewBox="0 0 380 340" xmlns="http://www.w3.org/2000/svg">
+<defs><radialGradient id="belly8" cx="50%" cy="40%" r="60%"><stop offset="0%" stop-color="#fff"/><stop offset="100%" stop-color="#e6eef2"/></radialGradient></defs>
+<circle cx="315" cy="55" r="24" fill="#fff7d6" opacity="0.85"/>
+<g fill="#ffffff">
+<circle cx="60" cy="40" r="3"><animate attributeName="cy" values="-10;350" dur="8s" repeatCount="indefinite"/></circle>
+<circle cx="200" cy="30" r="3"><animate attributeName="cy" values="-10;350" dur="7s" repeatCount="indefinite"/></circle>
+<circle cx="320" cy="120" r="3"><animate attributeName="cy" values="-10;350" dur="9s" repeatCount="indefinite"/></circle>
+</g>
+<polygon points="0,220 60,140 120,220" fill="#ffffff" opacity="0.8"/>
+<polygon points="260,220 330,150 380,220" fill="#ffffff" opacity="0.8"/>
+<path d="M0 240 Q190 220 380 240 L380 340 L0 340 Z" fill="#ffffff"/>
+<ellipse cx="190" cy="248" rx="120" ry="16" fill="#d6ecf5" opacity="0.6"/>
+<g>
+<animateTransform attributeName="transform" type="translate" values="-120 0; 480 0" dur="4s" repeatCount="indefinite"/>
+<g transform="rotate(8 190 260)">
+<ellipse cx="190" cy="278" rx="30" ry="8" fill="#c8d8e0" opacity="0.5"/>
+<ellipse cx="180" cy="262" rx="52" ry="26" fill="#3a4654"/>
+<ellipse cx="190" cy="266" rx="38" ry="18" fill="url(#belly8)"/>
+<path d="M160 250 Q130 238 116 244 Q128 256 154 260 Z" fill="#2e3946"/>
+<path d="M142 274 Q126 278 120 272" stroke="#ffb733" stroke-width="6" fill="none" stroke-linecap="round"/>
+<circle cx="222" cy="252" r="26" fill="#3a4654"/>
+<path d="M244 254 Q244 234 222 232 Q200 234 200 254 Q200 270 222 274 Q244 270 244 254 Z" fill="#ffffff"/>
+<circle cx="230" cy="248" r="4.5" fill="#2e3946"/>
+<circle cx="231.5" cy="246.5" r="1.5" fill="#fff"/>
+<path d="M248 252 L262 250 L248 258 Z" fill="#ffb733"/>
+<ellipse cx="234" cy="262" rx="6" ry="4" fill="#ffb6c8" opacity="0.6"/>
+</g>
+<g fill="#ffffff"><circle cx="140" cy="275" r="3"><animate attributeName="opacity" values="1;0;1" dur="0.5s" repeatCount="indefinite"/></circle><circle cx="130" cy="268" r="2"><animate attributeName="opacity" values="0;1;0" dur="0.5s" repeatCount="indefinite"/></circle><circle cx="135" cy="282" r="2.5"><animate attributeName="opacity" values="1;0;1" dur="0.6s" repeatCount="indefinite"/></circle></g>
+</g>
+</svg>
+<div id="hint">Mon pingouin glisseur 🐧</div>
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Chat d'Halloween</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { width: 100%; height: 100%; overflow: hidden; background: #2a1838; }
+  body { background: linear-gradient(to bottom, #3a2050 0%, #2a1838 55%, #4a2838 100%); display: flex; align-items: center; justify-content: center; font-family: -apple-system, system-ui, sans-serif; -webkit-tap-highlight-color: transparent; }
+  svg { width: 92vw; max-width: 500px; height: auto; }
+  #hint { position: fixed; bottom: 22px; left: 0; right: 0; text-align: center; color: #ffb84a; font-size: 15px; opacity: 0.85; pointer-events: none; }
+</style>
+</head>
+<body>
+<svg id="scene" viewBox="0 0 380 340" xmlns="http://www.w3.org/2000/svg">
+<!-- lune -->
+<circle cx="310" cy="65" r="34" fill="#ffe08a"/><circle cx="300" cy="58" r="7" fill="#e0c070" opacity="0.5"/><circle cx="318" cy="72" r="5" fill="#e0c070" opacity="0.5"/>
+<g fill="#ffffff"><circle cx="60" cy="50" r="1.4"><animate attributeName="opacity" values="0.3;1;0.3" dur="2.4s" repeatCount="indefinite"/></circle><circle cx="140" cy="40" r="1"><animate attributeName="opacity" values="1;0.3;1" dur="3s" repeatCount="indefinite"/></circle><circle cx="240" cy="120" r="1.2"><animate attributeName="opacity" values="0.4;1;0.4" dur="2s" repeatCount="indefinite"/></circle></g>
+<!-- chauve-souris -->
+<g fill="#1a1020"><g transform="translate(90 110)"><path d="M0 0 Q-14 -8 -22 0 Q-14 -2 -8 2 Q-4 -8 0 0 Q4 -8 8 2 Q14 -2 22 0 Q14 -8 0 0 Z"><animate attributeName="d" values="M0 0 Q-14 -8 -22 0 Q-14 -2 -8 2 Q-4 -8 0 0 Q4 -8 8 2 Q14 -2 22 0 Q14 -8 0 0 Z;M0 0 Q-14 2 -22 -4 Q-14 0 -8 2 Q-4 -6 0 0 Q4 -6 8 2 Q14 0 22 -4 Q14 2 0 0 Z;M0 0 Q-14 -8 -22 0 Q-14 -2 -8 2 Q-4 -8 0 0 Q4 -8 8 2 Q14 -2 22 0 Q14 -8 0 0 Z" dur="0.5s" repeatCount="indefinite"/></path><animateTransform attributeName="transform" type="translate" values="90 110;260 80;90 110" dur="12s" repeatCount="indefinite"/></g></g>
+<!-- sol -->
+<rect x="0" y="295" width="380" height="45" fill="#1a1020"/>
+<!-- citrouille -->
+<g transform="translate(270 275)">
+<ellipse cx="0" cy="0" rx="34" ry="28" fill="#ff8a1a"/>
+<ellipse cx="-16" cy="0" rx="12" ry="27" fill="#e0740a" opacity="0.5"/><ellipse cx="16" cy="0" rx="12" ry="27" fill="#e0740a" opacity="0.5"/>
+<rect x="-3" y="-32" width="6" height="10" fill="#5a7a2a"/>
+<g fill="#ffe08a"><polygon points="-16,-6 -6,-6 -11,3"/><polygon points="16,-6 6,-6 11,3"/><path d="M-16 12 Q0 22 16 12 Q10 8 0 12 Q-10 8 -16 12 Z"/></g>
+<animate attributeName="opacity" values="0.9;1;0.9" dur="1.5s" repeatCount="indefinite"/>
+</g>
+<g>
+<animateTransform attributeName="transform" type="translate" values="0 0; 0 -4; 0 0" dur="3s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1; 0.4 0 0.6 1"/>
+<!-- queue -->
+<path d="M150 285 Q110 285 108 250 Q108 234 120 240 Q112 250 118 262 Q126 276 152 278 Z" fill="#1a1020"><animate attributeName="d" values="M150 285 Q110 285 108 250 Q108 234 120 240 Q112 250 118 262 Q126 276 152 278 Z;M150 285 Q108 278 100 244 Q98 228 112 234 Q106 246 114 258 Q124 274 152 278 Z;M150 285 Q110 285 108 250 Q108 234 120 240 Q112 250 118 262 Q126 276 152 278 Z" dur="2s" repeatCount="indefinite"/></path>
+<!-- corps -->
+<ellipse cx="165" cy="255" rx="44" ry="40" fill="#1a1020"/>
+<!-- tete -->
+<circle cx="165" cy="205" r="40" fill="#1a1020"/>
+<polygon points="138,180 128,150 158,172" fill="#1a1020"/>
+<polygon points="192,180 202,150 172,172" fill="#1a1020"/>
+<polygon points="140,177 134,160 154,172" fill="#3a2838"/>
+<polygon points="190,177 196,160 170,172" fill="#3a2838"/>
+<!-- yeux -->
+<ellipse cx="150" cy="205" rx="10" ry="14" fill="#ffd24a"/>
+<ellipse cx="180" cy="205" rx="10" ry="14" fill="#ffd24a"/>
+<ellipse cx="150" cy="205" rx="3" ry="12" fill="#1a1020"><animate attributeName="rx" values="3;7;3" dur="3s" repeatCount="indefinite"/></ellipse>
+<ellipse cx="180" cy="205" rx="3" ry="12" fill="#1a1020"><animate attributeName="rx" values="3;7;3" dur="3s" repeatCount="indefinite"/></ellipse>
+<!-- nez + moustaches -->
+<path d="M162 218 L168 218 L165 223 Z" fill="#ff9ac0"/>
+<g stroke="#8a8a9a" stroke-width="1.2" stroke-linecap="round"><line x1="150" y1="220" x2="120" y2="216"/><line x1="150" y1="224" x2="122" y2="228"/><line x1="180" y1="220" x2="210" y2="216"/><line x1="180" y1="224" x2="208" y2="228"/></g>
+</g>
+</svg>
+<div id="hint">Mon chat d'Halloween 🎃</div>
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Méduse</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { width: 100%; height: 100%; overflow: hidden; background: #0a2a5a; }
+  body { background: linear-gradient(to bottom, #1a4a8a 0%, #0a2a5a 55%, #051a3a 100%); display: flex; align-items: center; justify-content: center; font-family: -apple-system, system-ui, sans-serif; -webkit-tap-highlight-color: transparent; }
+  svg { width: 90vw; max-width: 480px; height: auto; }
+  #hint { position: fixed; bottom: 22px; left: 0; right: 0; text-align: center; color: #d0b0ff; font-size: 15px; opacity: 0.85; pointer-events: none; }
+</style>
+</head>
+<body>
+<svg id="scene" viewBox="0 0 380 340" xmlns="http://www.w3.org/2000/svg">
+<defs><radialGradient id="jelly" cx="50%" cy="35%" r="65%"><stop offset="0%" stop-color="#ffb3ff"/><stop offset="100%" stop-color="#b060e0"/></radialGradient></defs>
+<g fill="#ffffff" opacity="0.35">
+<circle cx="70" cy="300" r="4"><animate attributeName="cy" values="320;-20" dur="7s" repeatCount="indefinite"/></circle>
+<circle cx="300" cy="300" r="3"><animate attributeName="cy" values="330;-20" dur="8s" repeatCount="indefinite"/></circle>
+<circle cx="200" cy="300" r="5"><animate attributeName="cy" values="335;-20" dur="6s" repeatCount="indefinite"/></circle>
+</g>
+<g>
+<animateTransform attributeName="transform" type="translate" values="0 -14; 0 14; 0 -14" dur="4s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1; 0.4 0 0.6 1"/>
+<!-- tentacules -->
+<g stroke="url(#jelly)" stroke-width="4" fill="none" stroke-linecap="round" opacity="0.85">
+<path d="M158 175 Q150 220 158 265"><animate attributeName="d" values="M158 175 Q150 220 158 265;M158 175 Q166 220 152 265;M158 175 Q150 220 158 265" dur="3s" repeatCount="indefinite"/></path>
+<path d="M175 180 Q168 230 176 280"><animate attributeName="d" values="M175 180 Q168 230 176 280;M175 180 Q182 230 170 280;M175 180 Q168 230 176 280" dur="3.4s" repeatCount="indefinite"/></path>
+<path d="M190 182 Q190 235 190 288"><animate attributeName="d" values="M190 182 Q190 235 190 288;M190 182 Q198 235 184 288;M190 182 Q190 235 190 288" dur="3.2s" repeatCount="indefinite"/></path>
+<path d="M205 180 Q212 230 204 280"><animate attributeName="d" values="M205 180 Q212 230 204 280;M205 180 Q198 230 210 280;M205 180 Q212 230 204 280" dur="3.6s" repeatCount="indefinite"/></path>
+<path d="M222 175 Q230 220 222 265"><animate attributeName="d" values="M222 175 Q230 220 222 265;M222 175 Q214 220 228 265;M222 175 Q230 220 222 265" dur="2.8s" repeatCount="indefinite"/></path>
+</g>
+<!-- petits bras -->
+<g stroke="#ffc9ff" stroke-width="2.5" fill="none" stroke-linecap="round" opacity="0.7">
+<path d="M165 176 Q162 200 168 220"/><path d="M215 176 Q218 200 212 220"/><path d="M182 178 Q180 205 186 228"/><path d="M198 178 Q200 205 194 228"/>
+</g>
+<!-- cloche -->
+<path d="M138 176 Q138 118 190 116 Q242 118 242 176 Q220 190 190 190 Q160 190 138 176 Z" fill="url(#jelly)" opacity="0.92"/>
+<ellipse cx="170" cy="150" rx="10" ry="20" fill="#fff" opacity="0.3"/>
+<g fill="#ffffff" opacity="0.5"><circle cx="165" cy="165" r="5"/><circle cx="190" cy="170" r="6"/><circle cx="215" cy="165" r="5"/></g>
+<!-- visage -->
+<circle cx="178" cy="158" r="4" fill="#5a2a6a"/><circle cx="202" cy="158" r="4" fill="#5a2a6a"/>
+<circle cx="179" cy="157" r="1.3" fill="#fff"/><circle cx="203" cy="157" r="1.3" fill="#fff"/>
+<path d="M184 166 Q190 171 196 166" stroke="#5a2a6a" stroke-width="2" fill="none" stroke-linecap="round"/>
+<ellipse cx="170" cy="164" rx="5" ry="3" fill="#ff9ad8" opacity="0.6"/><ellipse cx="210" cy="164" rx="5" ry="3" fill="#ff9ad8" opacity="0.6"/>
+</g>
+</svg>
+<div id="hint">Ma méduse 🪼</div>
+</body>
+</html>

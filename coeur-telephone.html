@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Cœur</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { width: 100%; height: 100%; overflow: hidden; background: #ffd9ec; }
+  body { background: radial-gradient(circle at 50% 40%, #ffe4f2 0%, #ffc2e0 60%, #ff9ac8 100%); display: flex; align-items: center; justify-content: center; font-family: -apple-system, system-ui, sans-serif; -webkit-tap-highlight-color: transparent; }
+  svg { width: 90vw; max-width: 480px; height: auto; }
+  #hint { position: fixed; bottom: 22px; left: 0; right: 0; text-align: center; color: #c8306a; font-size: 15px; opacity: 0.85; pointer-events: none; }
+</style>
+</head>
+<body>
+<svg id="scene" viewBox="0 0 380 340" xmlns="http://www.w3.org/2000/svg">
+<defs><radialGradient id="heartg" cx="40%" cy="30%" r="70%"><stop offset="0%" stop-color="#ff6b9a"/><stop offset="100%" stop-color="#e01a5a"/></radialGradient></defs>
+<!-- petits coeurs qui montent -->
+<g fill="#ff8ab0" opacity="0.7">
+<path d="M60 300 q0 -6 6 -6 q6 0 6 6 q0 -6 6 -6 q6 0 6 6 q0 8 -12 16 q-12 -8 -12 -16 Z"><animate attributeName="opacity" values="0.7;0" dur="4s" repeatCount="indefinite"/><animateTransform attributeName="transform" type="translate" values="0 0;-10 -300" dur="4s" repeatCount="indefinite"/></path>
+<path d="M300 310 q0 -5 5 -5 q5 0 5 5 q0 -5 5 -5 q5 0 5 5 q0 7 -10 13 q-10 -6 -10 -13 Z"><animate attributeName="opacity" values="0.7;0" dur="5s" repeatCount="indefinite"/><animateTransform attributeName="transform" type="translate" values="0 0;15 -320" dur="5s" repeatCount="indefinite"/></path>
+<path d="M200 320 q0 -5 5 -5 q5 0 5 5 q0 -5 5 -5 q5 0 5 5 q0 7 -10 13 q-10 -6 -10 -13 Z"><animate attributeName="opacity" values="0.7;0" dur="4.5s" repeatCount="indefinite"/><animateTransform attributeName="transform" type="translate" values="0 0;5 -340" dur="4.5s" repeatCount="indefinite"/></path>
+</g>
+<!-- coeur principal -->
+<g transform="translate(190 165)">
+<g>
+<animateTransform attributeName="transform" type="scale" values="1;1.15;1;1.08;1" dur="1s" repeatCount="indefinite" keyTimes="0;0.15;0.35;0.5;1"/>
+<circle cx="0" cy="0" r="100" fill="#ff8ab0" opacity="0.2"><animate attributeName="r" values="80;110;80" dur="1s" repeatCount="indefinite"/><animate attributeName="opacity" values="0.3;0;0.3" dur="1s" repeatCount="indefinite"/></circle>
+<path d="M0 55 C -60 5, -70 -45, -35 -55 C -12 -62, 0 -42, 0 -30 C 0 -42, 12 -62, 35 -55 C 70 -45, 60 5, 0 55 Z" fill="url(#heartg)"/>
+<ellipse cx="-22" cy="-30" rx="14" ry="10" fill="#ffffff" opacity="0.4"/>
+</g>
+</g>
+</svg>
+<div id="hint">Un cœur pour toi 💗</div>
+</body>
+</html>
