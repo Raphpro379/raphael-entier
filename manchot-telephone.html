@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Manchot empereur</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { width: 100%; height: 100%; overflow: hidden; background: #aec8e0; }
+  body { background: linear-gradient(to bottom, #cfe4f5 0%, #aec8e0 55%, #d8ecf5 100%); display: flex; align-items: center; justify-content: center; font-family: -apple-system, system-ui, sans-serif; -webkit-tap-highlight-color: transparent; }
+  svg { width: 90vw; max-width: 480px; height: auto; }
+  #hint { position: fixed; bottom: 22px; left: 0; right: 0; text-align: center; color: #3a6a9a; font-size: 15px; opacity: 0.85; pointer-events: none; }
+</style>
+</head>
+<body>
+<svg id="scene" viewBox="0 0 380 340" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<linearGradient id="peng" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#3a4654"/><stop offset="100%" stop-color="#2a3542"/></linearGradient>
+</defs>
+<circle cx="315" cy="55" r="22" fill="#fff7d6" opacity="0.85"/>
+<!-- neige qui tombe -->
+<g fill="#ffffff">
+<circle cx="50" cy="0" r="3"><animate attributeName="cy" values="-10;350" dur="8s" repeatCount="indefinite"/></circle>
+<circle cx="150" cy="0" r="2.5"><animate attributeName="cy" values="-10;350" dur="10s" repeatCount="indefinite"/></circle>
+<circle cx="280" cy="0" r="3"><animate attributeName="cy" values="-10;350" dur="7s" repeatCount="indefinite"/></circle>
+<circle cx="340" cy="0" r="2.5"><animate attributeName="cy" values="-10;350" dur="9s" repeatCount="indefinite"/></circle>
+</g>
+<!-- montagnes de glace -->
+<polygon points="0,210 70,150 140,210" fill="#ffffff" opacity="0.7"/>
+<polygon points="250,210 320,145 380,210" fill="#ffffff" opacity="0.7"/>
+<!-- sol -->
+<path d="M0 250 Q190 232 380 250 L380 340 L0 340 Z" fill="#ffffff"/>
+<ellipse cx="190" cy="300" rx="90" ry="14" fill="#c8dcea" opacity="0.5"/>
+<g>
+<animateTransform attributeName="transform" type="translate" values="0 0; 0 -4; 0 0" dur="3.5s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1; 0.4 0 0.6 1"/>
+<!-- papa manchot -->
+<ellipse cx="160" cy="215" rx="46" ry="58" fill="url(#peng)"/>
+<ellipse cx="160" cy="228" rx="30" ry="42" fill="#fff"/>
+<!-- taches oreilles orange -->
+<path d="M132 175 Q120 185 128 200 Q138 192 140 178 Z" fill="#ffb733"/>
+<path d="M188 175 Q200 185 192 200 Q182 192 180 178 Z" fill="#ffb733"/>
+<!-- tete -->
+<circle cx="160" cy="160" r="34" fill="url(#peng)"/>
+<path d="M160 138 Q138 145 138 168 Q140 185 160 188 Q180 185 182 168 Q182 145 160 138 Z" fill="#ffe8c0"/>
+<circle cx="150" cy="162" r="4.5" fill="#2e2e2e"/><circle cx="170" cy="162" r="4.5" fill="#2e2e2e"/>
+<circle cx="151.5" cy="160.5" r="1.5" fill="#fff"/><circle cx="171.5" cy="160.5" r="1.5" fill="#fff"/>
+<path d="M154 172 L166 172 L160 182 Z" fill="#ffb733"/>
+<!-- ailes -->
+<g><animateTransform attributeName="transform" type="rotate" values="0 118 210;-6 118 210;0 118 210" dur="2.5s" repeatCount="indefinite"/><ellipse cx="118" cy="215" rx="12" ry="34" fill="#2a3542"/></g>
+<ellipse cx="202" cy="215" rx="12" ry="34" fill="#2a3542"/>
+<!-- pieds -->
+<ellipse cx="148" cy="270" rx="13" ry="6" fill="#ffb733"/><ellipse cx="172" cy="270" rx="13" ry="6" fill="#ffb733"/>
+<!-- bebe manchot -->
+<g>
+<animateTransform attributeName="transform" type="translate" values="0 0; 0 -2; 0 0" dur="2s" repeatCount="indefinite"/>
+<ellipse cx="225" cy="250" rx="24" ry="30" fill="#8a9aa8"/>
+<ellipse cx="225" cy="258" rx="15" ry="20" fill="#e8eef2"/>
+<circle cx="225" cy="222" r="20" fill="#8a9aa8"/>
+<path d="M225 208 Q212 213 212 226 Q214 236 225 238 Q236 236 238 226 Q238 213 225 208 Z" fill="#c8d4dc"/>
+<circle cx="218" cy="222" r="3.5" fill="#2e2e2e"/><circle cx="232" cy="222" r="3.5" fill="#2e2e2e"/>
+<circle cx="219" cy="221" r="1.2" fill="#fff"/><circle cx="233" cy="221" r="1.2" fill="#fff"/>
+<path d="M221 230 L229 230 L225 236 Z" fill="#ffb733"/>
+<ellipse cx="214" cy="228" rx="4" ry="3" fill="#ff9ac0" opacity="0.5"/><ellipse cx="236" cy="228" rx="4" ry="3" fill="#ff9ac0" opacity="0.5"/>
+<ellipse cx="240" cy="252" rx="8" ry="20" fill="#8a9aa8"/>
+</g>
+</g>
+</svg>
+<div id="hint">Mes manchots 🐧</div>
+</body>
+</html>
