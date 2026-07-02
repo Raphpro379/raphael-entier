@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Cirque</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { width: 100%; height: 100%; overflow: hidden; background: #3a2a5a; }
+  body { background: linear-gradient(to bottom, #4a2a6a 0%, #3a2a5a 55%, #7a4a6a 100%); display: flex; align-items: center; justify-content: center; font-family: -apple-system, system-ui, sans-serif; -webkit-tap-highlight-color: transparent; }
+  svg { width: 92vw; max-width: 500px; height: auto; }
+  #hint { position: fixed; bottom: 22px; left: 0; right: 0; text-align: center; color: #ffd6a8; font-size: 15px; opacity: 0.85; pointer-events: none; }
+</style>
+</head>
+<body>
+<svg id="scene" viewBox="0 0 380 340" xmlns="http://www.w3.org/2000/svg">
+<g fill="#ffffff"><circle cx="50" cy="45" r="1.4"><animate attributeName="opacity" values="0.3;1;0.3" dur="2.4s" repeatCount="indefinite"/></circle><circle cx="150" cy="35" r="1"><animate attributeName="opacity" values="1;0.3;1" dur="3s" repeatCount="indefinite"/></circle><circle cx="320" cy="50" r="1.3"><animate attributeName="opacity" values="0.4;1;0.4" dur="2s" repeatCount="indefinite"/></circle><circle cx="280" cy="90" r="1"><animate attributeName="opacity" values="1;0.4;1" dur="2.7s" repeatCount="indefinite"/></circle></g>
+<circle cx="315" cy="55" r="20" fill="#fff7e0" opacity="0.9"/><circle cx="309" cy="50" r="4" fill="#e6dcc0" opacity="0.5"/>
+<rect x="0" y="295" width="380" height="45" fill="#4a3a2a"/>
+<ellipse cx="190" cy="298" rx="160" ry="14" fill="#ffd24a" opacity="0.15"/>
+<!-- guirlande lumineuse -->
+<path d="M0 130 Q95 160 190 130 Q285 100 380 130" fill="none" stroke="#8a6a4a" stroke-width="1.5"/>
+<g>
+<circle cx="50" cy="145" r="3"><animate attributeName="fill" values="#ff6b8a;#5fd0ff;#7be08a;#ff6b8a" dur="1.5s" repeatCount="indefinite"/></circle>
+<circle cx="120" cy="150" r="3"><animate attributeName="fill" values="#5fd0ff;#ffd24a;#ff6b8a;#5fd0ff" dur="1.5s" repeatCount="indefinite"/></circle>
+<circle cx="190" cy="132" r="3"><animate attributeName="fill" values="#7be08a;#ff6b8a;#5fd0ff;#7be08a" dur="1.5s" repeatCount="indefinite"/></circle>
+<circle cx="260" cy="150" r="3"><animate attributeName="fill" values="#ffd24a;#c98aff;#ff9a4a;#ffd24a" dur="1.5s" repeatCount="indefinite"/></circle>
+<circle cx="330" cy="145" r="3"><animate attributeName="fill" values="#ff9ad8;#7be08a;#ffd24a;#ff9ad8" dur="1.5s" repeatCount="indefinite"/></circle>
+</g>
+<!-- tente de cirque -->
+<g>
+<!-- toit raye -->
+<path d="M100 175 Q190 120 280 175 Z" fill="#e8e0e8"/>
+<g fill="#e05a5a">
+<path d="M190 138 Q190 138 200 175 L182 175 Z"/>
+<path d="M155 150 L168 175 L150 175 Z"/>
+<path d="M225 150 L212 175 L230 175 Z"/>
+<path d="M120 168 L134 175 L112 175 Z"/>
+<path d="M260 168 L246 175 L268 175 Z"/>
+</g>
+<!-- corps de la tente -->
+<path d="M110 175 L110 275 L270 275 L270 175 Z" fill="#f0e8f0"/>
+<g fill="#e05a5a"><rect x="110" y="175" width="16" height="100"/><rect x="254" y="175" width="16" height="100"/></g>
+<!-- entree -->
+<path d="M160 275 L160 210 Q190 195 220 210 L220 275 Z" fill="#c94a6a"/>
+<path d="M160 210 Q175 250 160 275 Z" fill="#a83a5a"/>
+<path d="M220 210 Q205 250 220 275 Z" fill="#a83a5a"/>
+<path d="M190 200 L190 275" stroke="#ffd24a" stroke-width="2"/>
+<!-- drapeau sommet -->
+<line x1="190" y1="138" x2="190" y2="118" stroke="#8a6a4a" stroke-width="2"/>
+<path d="M190 120 L208 125 L190 130 Z" fill="#ffd24a"><animate attributeName="d" values="M190 120 L208 125 L190 130 Z;M190 120 L210 122 L190 130 Z;M190 120 L208 125 L190 130 Z" dur="1s" repeatCount="indefinite"/></path>
+<!-- fanions -->
+<g><polygon points="126,180 138,180 132,190" fill="#5fd0ff"/><polygon points="146,180 158,180 152,190" fill="#ffd24a"/><polygon points="222,180 234,180 228,190" fill="#7be08a"/><polygon points="242,180 254,180 248,190" fill="#ff9ad8"/></g>
+</g>
+<!-- ballons qui flottent -->
+<g><animateTransform attributeName="transform" type="translate" values="0 0;0 -10;0 0" dur="3.4s" repeatCount="indefinite"/><ellipse cx="70" cy="210" rx="12" ry="15" fill="#ff6b8a"/><line x1="70" y1="225" x2="70" y2="255" stroke="#fff" stroke-width="1" opacity="0.5"/></g>
+<g><animateTransform attributeName="transform" type="translate" values="0 0;0 -12;0 0" dur="4s" repeatCount="indefinite"/><ellipse cx="310" cy="220" rx="12" ry="15" fill="#5fd0ff"/><line x1="310" y1="235" x2="310" y2="265" stroke="#fff" stroke-width="1" opacity="0.5"/></g>
+</svg>
+<div id="hint">Mon cirque 🎪</div>
+</body>
+</html>

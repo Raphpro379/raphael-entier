@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Ruche</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { width: 100%; height: 100%; overflow: hidden; background: #aee4ff; }
+  body { background: linear-gradient(to bottom, #cdeeff 0%, #aee4ff 50%, #a8e0a8 100%); display: flex; align-items: center; justify-content: center; font-family: -apple-system, system-ui, sans-serif; -webkit-tap-highlight-color: transparent; }
+  svg { width: 92vw; max-width: 500px; height: auto; }
+  #hint { position: fixed; bottom: 22px; left: 0; right: 0; text-align: center; color: #b8890a; font-size: 15px; opacity: 0.85; pointer-events: none; }
+</style>
+</head>
+<body>
+<svg id="scene" viewBox="0 0 380 340" xmlns="http://www.w3.org/2000/svg">
+<defs><linearGradient id="hive" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#ffd24a"/><stop offset="100%" stop-color="#e0a028"/></linearGradient></defs>
+<circle cx="315" cy="55" r="24" fill="#fff2a8"/>
+<g><ellipse cx="80" cy="65" rx="28" ry="12" fill="#fff" opacity="0.8"/><ellipse cx="102" cy="58" rx="20" ry="10" fill="#fff" opacity="0.8"/><animateTransform attributeName="transform" type="translate" values="0 0;25 0;0 0" dur="14s" repeatCount="indefinite"/></g>
+<rect x="0" y="295" width="380" height="45" fill="#5fb02f"/>
+<g fill="#4a8a2a"><path d="M60 295 Q56 283 54 294 Z"/><path d="M300 295 Q296 283 294 294 Z"/></g>
+<!-- fleurs -->
+<g><circle cx="55" cy="290" r="7" fill="#ff8fc8"/><circle cx="55" cy="290" r="3" fill="#ffd24a"/><rect x="53" y="292" width="4" height="10" fill="#4a8a2a"/></g>
+<g><circle cx="325" cy="290" r="7" fill="#c98aff"/><circle cx="325" cy="290" r="3" fill="#ffd24a"/><rect x="323" y="292" width="4" height="10" fill="#4a8a2a"/></g>
+<!-- branche -->
+<rect x="170" y="40" width="8" height="60" fill="#8a5a2a"/>
+<path d="M174 60 Q140 55 130 70" stroke="#8a5a2a" stroke-width="5" fill="none"/>
+<!-- ruche -->
+<g>
+<animateTransform attributeName="transform" type="rotate" values="-2 190 100; 2 190 100; -2 190 100" dur="3s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1; 0.4 0 0.6 1"/>
+<ellipse cx="190" cy="105" rx="52" ry="26" fill="url(#hive)"/>
+<ellipse cx="190" cy="140" rx="58" ry="28" fill="url(#hive)"/>
+<ellipse cx="190" cy="178" rx="60" ry="30" fill="url(#hive)"/>
+<ellipse cx="190" cy="212" rx="54" ry="28" fill="url(#hive)"/>
+<g stroke="#c98020" stroke-width="1.5" opacity="0.5" fill="none"><ellipse cx="190" cy="105" rx="52" ry="26"/><ellipse cx="190" cy="140" rx="58" ry="28"/><ellipse cx="190" cy="178" rx="60" ry="30"/></g>
+<!-- entree -->
+<ellipse cx="190" cy="185" rx="16" ry="18" fill="#6a4520"/>
+<ellipse cx="190" cy="182" rx="10" ry="11" fill="#3a2810"/>
+</g>
+<!-- abeilles qui tournent autour -->
+<g><g transform="translate(0 0)"><animateMotion dur="6s" repeatCount="indefinite" path="M190 120 Q280 140 250 200 Q220 250 190 200 Q160 150 190 120 Z"/>
+<g transform="translate(-8 -6)"><ellipse cx="0" cy="0" rx="8" ry="5" fill="#ffce3a"/><g fill="#2e2e2e"><rect x="-3" y="-5" width="2" height="10"/><rect x="1" y="-5" width="2" height="10"/></g><g fill="#cdeeff" opacity="0.8"><ellipse cx="-2" cy="-6" rx="5" ry="2.5"/><ellipse cx="2" cy="-6" rx="5" ry="2.5"/></g></g></g></g>
+<g><g transform="translate(0 0)"><animateMotion dur="7s" repeatCount="indefinite" path="M190 150 Q120 170 150 230 Q180 260 210 220 Q240 180 190 150 Z"/>
+<g transform="translate(-8 -6)"><ellipse cx="0" cy="0" rx="7" ry="4.5" fill="#ffce3a"/><g fill="#2e2e2e"><rect x="-3" y="-4" width="2" height="9"/><rect x="1" y="-4" width="2" height="9"/></g><g fill="#cdeeff" opacity="0.8"><ellipse cx="-2" cy="-5" rx="4.5" ry="2"/><ellipse cx="2" cy="-5" rx="4.5" ry="2"/></g></g></g></g>
+</svg>
+<div id="hint">Ma ruche 🐝</div>
+</body>
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Écureuil</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { width: 100%; height: 100%; overflow: hidden; background: #d0e4b0; }
+  body { background: linear-gradient(to bottom, #e0f0d0 0%, #d0e4b0 55%, #b8d890 100%); display: flex; align-items: center; justify-content: center; font-family: -apple-system, system-ui, sans-serif; -webkit-tap-highlight-color: transparent; }
+  svg { width: 90vw; max-width: 480px; height: auto; }
+  #hint { position: fixed; bottom: 22px; left: 0; right: 0; text-align: center; color: #a05a2a; font-size: 15px; opacity: 0.85; pointer-events: none; }
+</style>
+</head>
+<body>
+<svg id="scene" viewBox="0 0 380 340" xmlns="http://www.w3.org/2000/svg">
+<defs><linearGradient id="squi" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#e08a4a"/><stop offset="100%" stop-color="#c06a28"/></linearGradient></defs>
+<circle cx="320" cy="55" r="22" fill="#fff2c0" opacity="0.9"/>
+<g><ellipse cx="80" cy="62" rx="28" ry="12" fill="#fff" opacity="0.8"/><ellipse cx="102" cy="55" rx="20" ry="10" fill="#fff" opacity="0.8"/><animateTransform attributeName="transform" type="translate" values="0 0;25 0;0 0" dur="14s" repeatCount="indefinite"/></g>
+<!-- arbre a gauche -->
+<rect x="30" y="180" width="30" height="120" fill="#8a5a2a"/>
+<ellipse cx="45" cy="160" rx="55" ry="48" fill="#5aa03a"/>
+<ellipse cx="45" cy="160" rx="40" ry="34" fill="#6ab04a" opacity="0.6"/>
+<!-- sol + branche -->
+<rect x="0" y="298" width="380" height="42" fill="#8fc060"/>
+<rect x="150" y="255" width="200" height="16" rx="6" fill="#8a5a2a"/>
+<g>
+<animateTransform attributeName="transform" type="translate" values="0 0; 0 -3; 0 0" dur="2.5s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1; 0.4 0 0.6 1"/>
+<!-- grande queue touffue -->
+<g><animateTransform attributeName="transform" type="rotate" values="0 245 240;-8 245 240;0 245 240" dur="2s" repeatCount="indefinite"/>
+<path d="M248 250 Q300 250 306 195 Q308 165 285 172 Q300 185 292 210 Q282 240 246 244 Z" fill="url(#squi)"/>
+<path d="M258 244 Q298 240 302 200 Q303 178 288 182 Q298 196 290 216 Q280 238 256 240 Z" fill="#f0a868" opacity="0.7"/></g>
+<!-- corps -->
+<ellipse cx="215" cy="225" rx="34" ry="38" fill="url(#squi)"/>
+<ellipse cx="212" cy="235" rx="20" ry="24" fill="#ffe0c0"/>
+<!-- patte -->
+<ellipse cx="220" cy="258" rx="10" ry="6" fill="#c06a28"/>
+<!-- tete -->
+<circle cx="210" cy="180" r="26" fill="url(#squi)"/>
+<!-- oreilles avec touffes -->
+<path d="M192 160 L186 140 L202 154 Z" fill="#c06a28"/>
+<path d="M228 160 L234 140 L218 154 Z" fill="#c06a28"/>
+<path d="M191 152 L188 143 L198 151 Z" fill="#e08a4a"/>
+<path d="M229 152 L232 143 L222 151 Z" fill="#e08a4a"/>
+<!-- museau -->
+<ellipse cx="210" cy="190" rx="14" ry="11" fill="#ffe0c0"/>
+<!-- yeux -->
+<circle cx="201" cy="176" r="5" fill="#2e2e2e"/><circle cx="221" cy="176" r="5" fill="#2e2e2e"/>
+<circle cx="202.5" cy="174.5" r="1.6" fill="#fff"/><circle cx="222.5" cy="174.5" r="1.6" fill="#fff"/>
+<circle cx="210" cy="188" r="3" fill="#3a2a2a"/>
+<path d="M210 191 L210 196 M210 196 Q206 198 204 196 M210 196 Q214 198 216 196" stroke="#7a5a3a" stroke-width="1.2" fill="none" stroke-linecap="round"/>
+<ellipse cx="196" cy="186" rx="4" ry="3" fill="#ffb6a0" opacity="0.6"/><ellipse cx="224" cy="186" rx="4" ry="3" fill="#ffb6a0" opacity="0.6"/>
+<!-- petites mains + gland qu'il grignote -->
+<g><animateTransform attributeName="transform" type="rotate" values="0 200 200;-6 200 200;0 200 200" dur="0.4s" repeatCount="indefinite"/>
+<ellipse cx="198" cy="202" rx="6" ry="5" fill="#c06a28"/>
+<ellipse cx="190" cy="200" rx="8" ry="9" fill="#c89050"/>
+<path d="M182 196 Q190 190 198 196" fill="#8a6030"/>
+<rect x="188" y="188" width="4" height="6" fill="#6a4520"/></g>
+</g>
+</svg>
+<div id="hint">Mon écureuil 🐿️</div>
+</body>
+</html>
