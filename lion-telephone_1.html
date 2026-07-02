@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Lion</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { width: 100%; height: 100%; overflow: hidden; background: #ffd9a0; }
+  body { background: linear-gradient(to bottom, #ffe8b8 0%, #ffd9a0 55%, #e0b070 100%); display: flex; align-items: center; justify-content: center; font-family: -apple-system, system-ui, sans-serif; -webkit-tap-highlight-color: transparent; }
+  svg { width: 90vw; max-width: 480px; height: auto; }
+  #hint { position: fixed; bottom: 22px; left: 0; right: 0; text-align: center; color: #b8730a; font-size: 15px; opacity: 0.85; pointer-events: none; }
+</style>
+</head>
+<body>
+<svg id="scene" viewBox="0 0 380 340" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<radialGradient id="mane" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#e08a2a"/><stop offset="100%" stop-color="#b86018"/></radialGradient>
+<radialGradient id="face" cx="50%" cy="40%" r="60%"><stop offset="0%" stop-color="#ffcf7a"/><stop offset="100%" stop-color="#f0a84a"/></radialGradient>
+</defs>
+<circle cx="315" cy="55" r="24" fill="#fff2c0" opacity="0.9"/>
+<g><ellipse cx="80" cy="65" rx="28" ry="12" fill="#fff" opacity="0.7"/><ellipse cx="102" cy="58" rx="20" ry="10" fill="#fff" opacity="0.7"/><animateTransform attributeName="transform" type="translate" values="0 0;25 0;0 0" dur="15s" repeatCount="indefinite"/></g>
+<rect x="0" y="300" width="380" height="40" fill="#c99a5a"/>
+<g fill="#b8894a"><path d="M60 300 Q56 290 54 299 Z"/><path d="M300 300 Q296 290 294 299 Z"/></g>
+<g>
+<animateTransform attributeName="transform" type="translate" values="0 0; 0 -5; 0 0" dur="3.5s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1; 0.4 0 0.6 1"/>
+<!-- corps -->
+<ellipse cx="190" cy="255" rx="46" ry="38" fill="#f0b862"/>
+<ellipse cx="150" cy="285" rx="14" ry="9" fill="#e0a84a"/><ellipse cx="230" cy="285" rx="14" ry="9" fill="#e0a84a"/>
+<!-- queue -->
+<path d="M234 255 Q270 250 268 210" stroke="#f0b862" stroke-width="6" fill="none" stroke-linecap="round"/>
+<circle cx="268" cy="206" r="8" fill="#b86018"/>
+<!-- criniere (rayons) -->
+<g fill="url(#mane)">
+<g><animateTransform attributeName="transform" type="rotate" values="0 190 175;3 190 175;0 190 175" dur="4s" repeatCount="indefinite"/>
+<circle cx="190" cy="175" r="72"/>
+<g fill="#c96e1a"><circle cx="190" cy="103" r="14"/><circle cx="241" cy="124" r="14"/><circle cx="262" cy="175" r="14"/><circle cx="241" cy="226" r="14"/><circle cx="190" cy="247" r="14"/><circle cx="139" cy="226" r="14"/><circle cx="118" cy="175" r="14"/><circle cx="139" cy="124" r="14"/></g>
+</g>
+</g>
+<!-- visage -->
+<circle cx="190" cy="175" r="52" fill="url(#face)"/>
+<circle cx="164" cy="155" r="10" fill="#f0a84a"/><circle cx="216" cy="155" r="10" fill="#f0a84a"/>
+<!-- oreilles -->
+<circle cx="155" cy="130" r="12" fill="#f0b862"/><circle cx="225" cy="130" r="12" fill="#f0b862"/>
+<circle cx="155" cy="130" r="6" fill="#d88a3a"/><circle cx="225" cy="130" r="6" fill="#d88a3a"/>
+<!-- yeux -->
+<circle cx="170" cy="168" r="6" fill="#3a2a1a"/><circle cx="210" cy="168" r="6" fill="#3a2a1a"/>
+<circle cx="172" cy="166" r="2" fill="#fff"/><circle cx="212" cy="166" r="2" fill="#fff"/>
+<!-- museau -->
+<ellipse cx="190" cy="192" rx="20" ry="15" fill="#ffe0b0"/>
+<path d="M182 186 L198 186 L190 194 Z" fill="#c96a4a"/>
+<path d="M190 194 L190 200 M190 200 Q184 203 181 200 M190 200 Q196 203 199 200" stroke="#8a5a3a" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+<g stroke="#c9a060" stroke-width="1" stroke-linecap="round"><line x1="176" y1="192" x2="150" y2="188"/><line x1="176" y1="196" x2="152" y2="200"/><line x1="204" y1="192" x2="230" y2="188"/><line x1="204" y1="196" x2="228" y2="200"/></g>
+<ellipse cx="160" cy="182" rx="6" ry="4" fill="#ff9a6a" opacity="0.4"/><ellipse cx="220" cy="182" rx="6" ry="4" fill="#ff9a6a" opacity="0.4"/>
+</g>
+</svg>
+<div id="hint">Mon lion 🦁</div>
+</body>
+</html>

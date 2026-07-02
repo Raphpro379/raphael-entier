@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Grenouille</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { width: 100%; height: 100%; overflow: hidden; background: #7ec0d8; }
+  body { background: linear-gradient(to bottom, #bfe9ff 0%, #7ec0d8 50%, #4a9ab0 100%); display: flex; align-items: center; justify-content: center; font-family: -apple-system, system-ui, sans-serif; -webkit-tap-highlight-color: transparent; }
+  svg { width: 90vw; max-width: 480px; height: auto; }
+  #hint { position: fixed; bottom: 22px; left: 0; right: 0; text-align: center; color: #2a7a4a; font-size: 15px; opacity: 0.85; pointer-events: none; }
+</style>
+</head>
+<body>
+<svg id="scene" viewBox="0 0 380 340" xmlns="http://www.w3.org/2000/svg">
+<defs><radialGradient id="frog" cx="50%" cy="35%" r="65%"><stop offset="0%" stop-color="#8ad84a"/><stop offset="100%" stop-color="#5aa82a"/></radialGradient></defs>
+<circle cx="315" cy="55" r="24" fill="#fff2c0" opacity="0.9"/>
+<g><ellipse cx="80" cy="65" rx="28" ry="12" fill="#fff" opacity="0.7"/><ellipse cx="102" cy="58" rx="20" ry="10" fill="#fff" opacity="0.7"/><animateTransform attributeName="transform" type="translate" values="0 0;25 0;0 0" dur="15s" repeatCount="indefinite"/></g>
+<!-- eau -->
+<path d="M0 240 Q95 230 190 240 Q285 250 380 240 L380 340 L0 340 Z" fill="#4a9ab0"><animate attributeName="d" values="M0 240 Q95 230 190 240 Q285 250 380 240 L380 340 L0 340 Z;M0 240 Q95 250 190 240 Q285 230 380 240 L380 340 L0 340 Z;M0 240 Q95 230 190 240 Q285 250 380 240 L380 340 L0 340 Z" dur="3.5s" repeatCount="indefinite"/></path>
+<!-- petits nenuphars -->
+<g><ellipse cx="70" cy="270" rx="26" ry="10" fill="#4aa84a"/><path d="M70 270 L60 262" stroke="#3a8a3a" stroke-width="8"/></g>
+<g><ellipse cx="310" cy="285" rx="24" ry="9" fill="#4aa84a"/></g>
+<!-- nenuphar principal + fleur -->
+<ellipse cx="190" cy="285" rx="70" ry="20" fill="#3a9a3a"/>
+<ellipse cx="190" cy="282" rx="62" ry="16" fill="#4aba4a"/>
+<path d="M190 282 L172 270" stroke="#2a7a2a" stroke-width="3"/>
+<g><ellipse cx="240" cy="278" rx="12" ry="7" fill="#ff9ac8"/><ellipse cx="240" cy="278" rx="5" ry="4" fill="#ffd24a"/></g>
+<g>
+<animateTransform attributeName="transform" type="translate" values="0 0; 0 -6; 0 0" dur="2.5s" repeatCount="indefinite" calcMode="spline" keySplines="0.3 0 0.5 1; 0.5 0 0.7 1"/>
+<!-- pattes -->
+<ellipse cx="150" cy="262" rx="16" ry="8" fill="#5aa82a"/><ellipse cx="230" cy="262" rx="16" ry="8" fill="#5aa82a"/>
+<g stroke="#4a9a2a" stroke-width="3" stroke-linecap="round"><line x1="142" y1="262" x2="136" y2="268"/><line x1="150" y1="264" x2="148" y2="270"/><line x1="238" y1="262" x2="244" y2="268"/><line x1="230" y1="264" x2="232" y2="270"/></g>
+<!-- corps -->
+<ellipse cx="190" cy="235" rx="52" ry="42" fill="url(#frog)"/>
+<ellipse cx="190" cy="248" rx="34" ry="26" fill="#c8e89a"/>
+<!-- pattes avant -->
+<ellipse cx="168" cy="268" rx="10" ry="6" fill="#5aa82a"/><ellipse cx="212" cy="268" rx="10" ry="6" fill="#5aa82a"/>
+<!-- gros yeux -->
+<circle cx="165" cy="188" r="22" fill="url(#frog)"/>
+<circle cx="215" cy="188" r="22" fill="url(#frog)"/>
+<circle cx="165" cy="185" r="15" fill="#fff"/>
+<circle cx="215" cy="185" r="15" fill="#fff"/>
+<circle cx="167" cy="187" r="8" fill="#2e2e2e"/>
+<circle cx="213" cy="187" r="8" fill="#2e2e2e"/>
+<circle cx="169" cy="184" r="3" fill="#fff"/><circle cx="215" cy="184" r="3" fill="#fff"/>
+<!-- sourire -->
+<path d="M158 222 Q190 246 222 222" stroke="#2e6a2a" stroke-width="3" fill="none" stroke-linecap="round"/>
+<circle cx="176" cy="216" r="2.5" fill="#2e6a2a"/><circle cx="204" cy="216" r="2.5" fill="#2e6a2a"/>
+<ellipse cx="158" cy="212" rx="7" ry="5" fill="#ff9ac0" opacity="0.4"/><ellipse cx="222" cy="212" rx="7" ry="5" fill="#ff9ac0" opacity="0.4"/>
+</g>
+<!-- mouche qui vole -->
+<g><animateTransform attributeName="transform" type="translate" values="0 0;280 -40;0 0" dur="8s" repeatCount="indefinite"/><g transform="translate(50 120)"><ellipse cx="0" cy="0" rx="4" ry="3" fill="#3a3a3a"/><ellipse cx="-3" cy="-2" rx="3" ry="1.5" fill="#cdeeff" opacity="0.7"/><ellipse cx="3" cy="-2" rx="3" ry="1.5" fill="#cdeeff" opacity="0.7"/></g></g>
+</svg>
+<div id="hint">Ma grenouille 🐸</div>
+</body>
+</html>
