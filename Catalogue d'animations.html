@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<!-- saved from url=(0070)file:///C:/Users/RAPHAEL/Downloads/catalogue-dessins-interactif_2.html -->
+<html lang="fr"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Catalogue de dessins</title>
+<link rel="preconnect" href="https://fonts.googleapis.com/">
+<link href="./Catalogue d&#39;animations_files/css2" rel="stylesheet">
+<style>
+  :root{
+    --paper:#FFF9EF; --ink:#2B2D42;
+    --leaf:#3FA34D; --leaf-bg:#E3F6E5;
+    --sky:#2E86C1; --sky-bg:#E1F0FB;
+    --plum:#8E44AD; --plum-bg:#F1E4F8;
+    --sun:#F6B93B; --coral:#FF6B6B; --card:#FFFFFF;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{background:var(--paper);color:var(--ink);font-family:'Nunito',sans-serif;padding:24px 16px 48px;}
+  .page{max-width:960px;margin:0 auto;}
+
+  /* ===== BARRE D'OUTILS ===== */
+  .toolbar{
+    position:sticky;top:8px;z-index:50;
+    display:flex;flex-wrap:wrap;gap:8px;justify-content:center;
+    background:rgba(255,255,255,.92);backdrop-filter:blur(4px);
+    border:2px solid #F0E9DB;border-radius:16px;
+    padding:10px;margin-bottom:20px;
+    box-shadow:0 4px 14px rgba(0,0,0,.06);
+  }
+  .toolbar button{
+    font-family:'Nunito',sans-serif;font-weight:800;font-size:14px;
+    border:none;border-radius:999px;padding:9px 16px;cursor:pointer;
+    display:flex;align-items:center;gap:6px;
+  }
+  #saveBtn{background:var(--leaf);color:#fff;}
+  #lockBtn{background:var(--ink);color:#fff;}
+  #pwdBtn{background:#EDE7DA;color:var(--ink);}
+  .toolbar button:active{transform:scale(.96);}
+  #msg{width:100%;text-align:center;font-weight:800;font-size:13px;min-height:16px;color:var(--leaf);}
+
+  /* mode public : barre réduite */
+  body.locked #saveBtn, body.locked #pwdBtn{display:none;}
+
+  header{
+    text-align:center;padding:28px 16px 22px;
+    border:3px dashed var(--sun);border-radius:24px;
+    background:var(--card);margin-bottom:26px;
+  }
+  header .emojis{font-size:26px;letter-spacing:6px;}
+  h1{font-family:'Baloo 2',cursive;font-size:clamp(30px,6vw,46px);font-weight:800;margin:4px 0 2px;}
+  header p{font-weight:700;color:#6b6d85;font-size:15px;}
+
+  .legend{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-bottom:10px;}
+  .legend span{font-weight:800;font-size:14px;padding:6px 14px;border-radius:999px;}
+  .lg-a{background:#FFF3D6;color:#B9770E;}
+  .hint{
+    text-align:center;font-weight:800;font-size:13px;color:#B9770E;
+    background:#FFF3D6;border-radius:12px;padding:8px 12px;margin-bottom:18px;
+  }
+  body.locked .hint{display:none;}
+
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(168px,1fr));gap:12px;}
+  .item{
+    background:var(--card);border-radius:16px;padding:12px 12px 10px;
+    display:flex;align-items:center;gap:8px;flex-wrap:wrap;
+    border:2px solid #F0E9DB;position:relative;break-inside:avoid;
+    align-self:start;
+  }
+  .item .pic{font-size:26px;line-height:1;min-width:30px;max-width:36px;max-height:32px;overflow:hidden;text-align:center;}
+  .item .txt{flex:1;min-width:80px;}
+  .item .num{font-size:11px;font-weight:800;color:#A9A48F;letter-spacing:.5px;}
+  .item .name{font-weight:800;font-size:14.5px;line-height:1.15;}
+  .price{
+    font-family:'Baloo 2',cursive;font-weight:800;font-size:15px;
+    padding:3px 10px;border-radius:999px;white-space:nowrap;
+    background:var(--leaf-bg);color:var(--leaf);
+  }
+  .star{
+    position:absolute;top:-10px;right:-8px;
+    font-size:20px;cursor:pointer;user-select:none;
+    filter:grayscale(1) opacity(.35);
+    transition:transform .12s;
+  }
+  .star.on{filter:none;}
+  body:not(.locked) .star:hover{transform:scale(1.25);}
+  body.locked .star{cursor:default;}
+  body.locked .star:not(.on){display:none;}
+
+  /* champs éditables */
+  [contenteditable="true"]{
+    outline:none;border-radius:6px;
+    box-shadow:0 0 0 1.5px transparent;
+    transition:box-shadow .15s, background .15s;
+  }
+  [contenteditable="true"]:hover{background:#FFF7E0;}
+  [contenteditable="true"]:focus{background:#FFF7E0;box-shadow:0 0 0 1.5px var(--sun);}
+
+  h2{font-family:'Baloo 2',cursive;font-size:26px;font-weight:800;margin:36px 0 14px;display:flex;align-items:center;gap:10px;}
+  h2::after{content:"";flex:1;height:3px;border-radius:3px;background:repeating-linear-gradient(90deg,var(--sun) 0 14px,transparent 14px 24px);}
+
+  .supps{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;}
+  .supp{background:var(--card);border:2px solid #F0E9DB;border-radius:16px;padding:16px;display:flex;align-items:center;gap:12px;}
+  .supp .pic{font-size:30px;}
+  .supp .name{font-weight:800;font-size:15px;}
+  .supp .desc{font-size:13px;color:#6b6d85;font-weight:600;}
+  .supp .price{margin-left:auto;background:#FFE9E9;color:var(--coral);font-size:16px;}
+
+  .qrs{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;}
+  .qr{background:var(--card);border-radius:18px;padding:18px 16px;text-align:center;border:2px solid #F0E9DB;border-top:6px solid var(--sun);}
+  .qr:nth-child(2){border-top-color:var(--sky);}
+  .qr:nth-child(3){border-top-color:var(--plum);}
+  .qr .dots{font-size:22px;letter-spacing:4px;margin-bottom:6px;}
+  .qr h3{font-family:'Baloo 2',cursive;font-size:20px;font-weight:800;}
+  .qr div.lines{margin:8px 0 12px;font-size:13.5px;font-weight:700;color:#6b6d85;}
+  .qr .price{font-size:18px;background:#FFF3D6;color:#B9770E;}
+  .qr:nth-child(2) .price{background:var(--sky-bg);color:var(--sky);}
+  .qr:nth-child(3) .price{background:var(--plum-bg);color:var(--plum);}
+
+  .note{margin-top:18px;background:#FFF3D6;border-radius:14px;padding:14px 16px;font-weight:700;font-size:14px;color:#8a6510;}
+  footer{text-align:center;margin-top:34px;font-weight:800;color:#A9A48F;font-size:14px;}
+
+  @media print{
+    body{background:#fff;padding:0;}
+    .toolbar,.hint{display:none;}
+  }
+</style>
+</head>
+<body class="locked">
+<div class="page">
+
+  <div class="toolbar">
+    <button id="saveBtn" onclick="saveAll()">💾 Enregistrer</button>
+    <button id="lockBtn" onclick="toggleLock()">🔓 Déverrouiller</button>
+    <button id="pwdBtn" onclick="changePwd()">🔑 Mot de passe</button>
+    <div id="msg"></div>
+  </div>
+
+  <header>
+    <div class="emojis">🎨 ✏️ 🌈</div>
+    <h1 class="ed" data-k="titre" contenteditable="false">Mon catalogue d'animations</h1>
+    <p class="ed" data-k="soustitre" contenteditable="false">50 animations faits avec l'IA · choisis ton préféré par son numéro venez le dire à Raphaël</p>
+  </header>
+
+  <div class="legend">
+    <span class="lg-a">⭐ = déjà montré au public</span>
+  </div>
+  <div class="hint">✏️ Clique sur n'importe quel texte pour le modifier · Clique sur les ⭐ pour les allumer ou les éteindre · Pense à 💾 Enregistrer !</div>
+
+  <div class="grid" id="grid"><div class="item"><span class="star" onclick="toggleStar(0)" title="Montré au public">⭐</span><span class="pic">🗼</span><span class="txt"><span class="num f" data-i="0" data-f="1" contenteditable="false">N°1</span><br><span class="name f" data-i="0" data-f="2" contenteditable="false">Tour Eiffel</span></span><span class="price f" data-i="0" data-f="3" contenteditable="false">2 €</span></div><div class="item"><span class="star" onclick="toggleStar(1)" title="Montré au public">⭐</span><span class="pic">🤖</span><span class="txt"><span class="num f" data-i="1" data-f="1" contenteditable="false">N°2</span><br><span class="name f" data-i="1" data-f="2" contenteditable="false">Robot</span></span><span class="price f" data-i="1" data-f="3" contenteditable="false">2 €</span></div><div class="item"><span class="star" onclick="toggleStar(2)" title="Montré au public">⭐</span><span class="pic">🐧</span><span class="txt"><span class="num f" data-i="2" data-f="1" contenteditable="false">N°3</span><br><span class="name f" data-i="2" data-f="2" contenteditable="false">Pingouin</span></span><span class="price f" data-i="2" data-f="3" contenteditable="false">2 €</span></div><div class="item"><span class="star" onclick="toggleStar(3)" title="Montré au public">⭐</span><span class="pic">🦄</span><span class="txt"><span class="num f" data-i="3" data-f="1" contenteditable="false">N°4</span><br><span class="name f" data-i="3" data-f="2" contenteditable="false">Licorne</span></span><span class="price f" data-i="3" data-f="3" contenteditable="false">2 €</span></div><div class="item"><span class="star" onclick="toggleStar(4)" title="Montré au public">⭐</span><span class="pic">🎡</span><span class="txt"><span class="num f" data-i="4" data-f="1" contenteditable="false">N°5</span><br><span class="name f" data-i="4" data-f="2" contenteditable="false">Fête foraine</span></span><span class="price f" data-i="4" data-f="3" contenteditable="false">2 €</span></div><div class="item"><span class="star" onclick="toggleStar(5)" title="Montré au public">⭐</span><span class="pic">🚜</span><span class="txt"><span class="num f" data-i="5" data-f="1" contenteditable="false">N°6</span><br><span class="name f" data-i="5" data-f="2" contenteditable="false">Ferme</span></span><span class="price f" data-i="5" data-f="3" contenteditable="false">2 €</span></div><div class="item"><span class="star" onclick="toggleStar(6)" title="Montré au public">⭐</span><span class="pic">🌌</span><span class="txt"><span class="num f" data-i="6" data-f="1" contenteditable="false">N°7</span><br><span class="name f" data-i="6" data-f="2" contenteditable="false">Espace étoilé</span></span><span class="price f" data-i="6" data-f="3" contenteditable="false">2 €</span></div><div class="item"><span class="star" onclick="toggleStar(7)" title="Montré au public">⭐</span><span class="pic">🐉</span><span class="txt"><span class="num f" data-i="7" data-f="1" contenteditable="false">N°8</span><br><span class="name f" data-i="7" data-f="2" contenteditable="false">Dragon</span></span><span class="price f" data-i="7" data-f="3" contenteditable="false">2 €</span></div><div class="item"><span class="star on" onclick="toggleStar(8)" title="Montré au public">⭐</span><span class="pic">🦕</span><span class="txt"><span class="num f" data-i="8" data-f="1" contenteditable="false">N°9</span><br><span class="name f" data-i="8" data-f="2" contenteditable="false">Dino</span></span><span class="price f" data-i="8" data-f="3" contenteditable="false">2 €</span></div><div class="item"><span class="star" onclick="toggleStar(9)" title="Montré au public">⭐</span><span class="pic">🏰</span><span class="txt"><span class="num f" data-i="9" data-f="1" contenteditable="false">N°10</span><br><span class="name f" data-i="9" data-f="2" contenteditable="false">Château</span></span><span class="price f" data-i="9" data-f="3" contenteditable="false">3 €</span></div><div class="item"><span class="star" onclick="toggleStar(10)" title="Montré au public">⭐</span><span class="pic">🐼</span><span class="txt"><span class="num f" data-i="10" data-f="1" contenteditable="false">N°11</span><br><span class="name f" data-i="10" data-f="2" contenteditable="false">Panda</span></span><span class="price f" data-i="10" data-f="3" contenteditable="false">2,50 €</span></div><div class="item"><span class="star" onclick="toggleStar(11)" title="Montré au public">⭐</span><span class="pic">🐝</span><span class="txt"><span class="num f" data-i="11" data-f="1" contenteditable="false">N°12</span><br><span class="name f" data-i="11" data-f="2" contenteditable="false">Abeille</span></span><span class="price f" data-i="11" data-f="3" contenteditable="false">2,50 €</span></div><div class="item"><span class="star" onclick="toggleStar(12)" title="Montré au public">⭐</span><span class="pic">🌈</span><span class="txt"><span class="num f" data-i="12" data-f="1" contenteditable="false">N°13</span><br><span class="name f" data-i="12" data-f="2" contenteditable="false">Arc-en-ciel</span></span><span class="price f" data-i="12" data-f="3" contenteditable="false">2 €</span></div><div class="item"><span class="star" onclick="toggleStar(13)" title="Montré au public">⭐</span><span class="pic">🎈</span><span class="txt"><span class="num f" data-i="13" data-f="1" contenteditable="false">N°14</span><br><span class="name f" data-i="13" data-f="2" contenteditable="false">Montgolfière</span></span><span class="price f" data-i="13" data-f="3" contenteditable="false">3 €</span></div><div class="item"><span class="star" onclick="toggleStar(14)" title="Montré au public">⭐</span><span class="pic">🐙</span><span class="txt"><span class="num f" data-i="14" data-f="1" contenteditable="false">N°15</span><br><span class="name f" data-i="14" data-f="2" contenteditable="false">Poulpe</span></span><span class="price f" data-i="14" data-f="3" contenteditable="false">3 €</span></div><div class="item"><span class="star" onclick="toggleStar(15)" title="Montré au public">⭐</span><span class="pic">🌋</span><span class="txt"><span class="num f" data-i="15" data-f="1" contenteditable="false">N°16</span><br><span class="name f" data-i="15" data-f="2" contenteditable="false">Volcan</span></span><span class="price f" data-i="15" data-f="3" contenteditable="false">3 €</span></div><div class="item"><span class="star" onclick="toggleStar(16)" title="Montré au public">⭐</span><span class="pic">🐢</span><span class="txt"><span class="num f" data-i="16" data-f="1" contenteditable="false">N°17</span><br><span class="name f" data-i="16" data-f="2" contenteditable="false">Tortue</span></span><span class="price f" data-i="16" data-f="3" contenteditable="false">2 €</span></div><div class="item"><span class="star" onclick="toggleStar(17)" title="Montré au public">⭐</span><span class="pic">🦋</span><span class="txt"><span class="num f" data-i="17" data-f="1" contenteditable="false">N°18</span><br><span class="name f" data-i="17" data-f="2" contenteditable="false">Papillon</span></span><span class="price f" data-i="17" data-f="3" contenteditable="false">2 €</span></div><div class="item"><span class="star on" onclick="toggleStar(18)" title="Montré au public">⭐</span><span class="pic">⛵</span><span class="txt"><span class="num f" data-i="18" data-f="1" contenteditable="false">N°19</span><br><span class="name f" data-i="18" data-f="2" contenteditable="false">Bateau</span></span><span class="price f" data-i="18" data-f="3" contenteditable="false">2 €</span></div><div class="item"><span class="star" onclick="toggleStar(19)" title="Montré au public">⭐</span><span class="pic">🚂</span><span class="txt"><span class="num f" data-i="19" data-f="1" contenteditable="false">N°20</span><br><span class="name f" data-i="19" data-f="2" contenteditable="false">Train</span></span><span class="price f" data-i="19" data-f="3" contenteditable="false">2,50 €</span></div><div class="item"><span class="star" onclick="toggleStar(20)" title="Montré au public">⭐</span><span class="pic">🌸</span><span class="txt"><span class="num f" data-i="20" data-f="1" contenteditable="false">N°21</span><br><span class="name f" data-i="20" data-f="2" contenteditable="false">Fleur</span></span><span class="price f" data-i="20" data-f="3" contenteditable="false">2 €</span></div><div class="item"><span class="star" onclick="toggleStar(21)" title="Montré au public">⭐</span><span class="pic">🦉</span><span class="txt"><span class="num f" data-i="21" data-f="1" contenteditable="false">N°22</span><br><span class="name f" data-i="21" data-f="2" contenteditable="false">Hibou</span></span><span class="price f" data-i="21" data-f="3" contenteditable="false">2,50 €</span></div><div class="item"><span class="star" onclick="toggleStar(22)" title="Montré au public">⭐</span><span class="pic">🤿</span><span class="txt"><span class="num f" data-i="22" data-f="1" contenteditable="false">N°23</span><br><span class="name f" data-i="22" data-f="2" contenteditable="false">Sous-marin</span></span><span class="price f" data-i="22" data-f="3" contenteditable="false">3 €</span></div><div class="item"><span class="star" onclick="toggleStar(23)" title="Montré au public">⭐</span><span class="pic">⛄</span><span class="txt"><span class="num f" data-i="23" data-f="1" contenteditable="false">N°24</span><br><span class="name f" data-i="23" data-f="2" contenteditable="false">Bonhomme de neige</span></span><span class="price f" data-i="23" data-f="3" contenteditable="false">2,50 €</span></div><div class="item"><span class="star" onclick="toggleStar(24)" title="Montré au public">⭐</span><span class="pic">🎐</span><span class="txt"><span class="num f" data-i="24" data-f="1" contenteditable="false">N°25</span><br><span class="name f" data-i="24" data-f="2" contenteditable="false">Méduse</span></span><span class="price f" data-i="24" data-f="3" contenteditable="false">2,50 €</span></div><div class="item"><span class="star" onclick="toggleStar(25)" title="Montré au public">⭐</span><span class="pic">🚁</span><span class="txt"><span class="num f" data-i="25" data-f="1" contenteditable="false">N°26</span><br><span class="name f" data-i="25" data-f="2" contenteditable="false">Hélicoptère</span></span><span class="price f" data-i="25" data-f="3" contenteditable="false">2,50 €</span></div><div class="item"><span class="star" onclick="toggleStar(26)" title="Montré au public">⭐</span><span class="pic">🎃</span><span class="txt"><span class="num f" data-i="26" data-f="1" contenteditable="false">N°27</span><br><span class="name f" data-i="26" data-f="2" contenteditable="false">Chat Halloween</span></span><span class="price f" data-i="26" data-f="3" contenteditable="false">3 €</span></div><div class="item"><span class="star" onclick="toggleStar(27)" title="Montré au public">⭐</span><span class="pic">❤️</span><span class="txt"><span class="num f" data-i="27" data-f="1" contenteditable="false">N°28</span><br><span class="name f" data-i="27" data-f="2" contenteditable="false">Cœur</span></span><span class="price f" data-i="27" data-f="3" contenteditable="false">2 €</span></div><div class="item"><span class="star" onclick="toggleStar(28)" title="Montré au public">⭐</span><span class="pic">🦖</span><span class="txt"><span class="num f" data-i="28" data-f="1" contenteditable="false">N°29</span><br><span class="name f" data-i="28" data-f="2" contenteditable="false">T-Rex</span></span><span class="price f" data-i="28" data-f="3" contenteditable="false">3 €</span></div><div class="item"><span class="star" onclick="toggleStar(29)" title="Montré au public">⭐</span><span class="pic">🐋</span><span class="txt"><span class="num f" data-i="29" data-f="1" contenteditable="false">N°30</span><br><span class="name f" data-i="29" data-f="2" contenteditable="false">Baleine</span></span><span class="price f" data-i="29" data-f="3" contenteditable="false">3 €</span></div><div class="item"><span class="star" onclick="toggleStar(30)" title="Montré au public">⭐</span><span class="pic">🌻</span><span class="txt"><span class="num f" data-i="30" data-f="1" contenteditable="false">N°31</span><br><span class="name f" data-i="30" data-f="2" contenteditable="false">Tournesol</span></span><span class="price f" data-i="30" data-f="3" contenteditable="false">2 €</span></div><div class="item"><span class="star" onclick="toggleStar(31)" title="Montré au public">⭐</span><span class="pic">🦩</span><span class="txt"><span class="num f" data-i="31" data-f="1" contenteditable="false">N°32</span><br><span class="name f" data-i="31" data-f="2" contenteditable="false">Flamant rose</span></span><span class="price f" data-i="31" data-f="3" contenteditable="false">2 €</span></div><div class="item"><span class="star" onclick="toggleStar(32)" title="Montré au public">⭐</span><span class="pic">🍕</span><span class="txt"><span class="num f" data-i="32" data-f="1" contenteditable="false">N°33</span><br><span class="name f" data-i="32" data-f="2" contenteditable="false">Pizza</span></span><span class="price f" data-i="32" data-f="3" contenteditable="false">2,50 €</span></div><div class="item"><span class="star" onclick="toggleStar(33)" title="Montré au public">⭐</span><span class="pic">🦈</span><span class="txt"><span class="num f" data-i="33" data-f="1" contenteditable="false">N°34</span><br><span class="name f" data-i="33" data-f="2" contenteditable="false">Requin</span></span><span class="price f" data-i="33" data-f="3" contenteditable="false">2,50 €</span></div><div class="item"><span class="star" onclick="toggleStar(34)" title="Montré au public">⭐</span><span class="pic">🦇</span><span class="txt"><span class="num f" data-i="34" data-f="1" contenteditable="false">N°35</span><br><span class="name f" data-i="34" data-f="2" contenteditable="false">Chauve-souris</span></span><span class="price f" data-i="34" data-f="3" contenteditable="false">3 €</span></div><div class="item"><span class="star" onclick="toggleStar(35)" title="Montré au public">⭐</span><span class="pic">🌊</span><span class="txt"><span class="num f" data-i="35" data-f="1" contenteditable="false">N°36</span><br><span class="name f" data-i="35" data-f="2" contenteditable="false">Vague</span></span><span class="price f" data-i="35" data-f="3" contenteditable="false">2 €</span></div><div class="item"><span class="star" onclick="toggleStar(36)" title="Montré au public">⭐</span><span class="pic">🎉</span><span class="txt"><span class="num f" data-i="36" data-f="1" contenteditable="false">N°37</span><br><span class="name f" data-i="36" data-f="2" contenteditable="false">Ballons</span></span><span class="price f" data-i="36" data-f="3" contenteditable="false">2,50 €</span></div><div class="item"><span class="star" onclick="toggleStar(37)" title="Montré au public">⭐</span><span class="pic">🦑</span><span class="txt"><span class="num f" data-i="37" data-f="1" contenteditable="false">N°38</span><br><span class="name f" data-i="37" data-f="2" contenteditable="false">Pieuvre géante</span></span><span class="price f" data-i="37" data-f="3" contenteditable="false">3 €</span></div><div class="item"><span class="star" onclick="toggleStar(38)" title="Montré au public">⭐</span><span class="pic">🍯</span><span class="txt"><span class="num f" data-i="38" data-f="1" contenteditable="false">N°39</span><br><span class="name f" data-i="38" data-f="2" contenteditable="false">Ruche</span></span><span class="price f" data-i="38" data-f="3" contenteditable="false">3 €</span></div><div class="item"><span class="star" onclick="toggleStar(39)" title="Montré au public">⭐</span><span class="pic">🏯</span><span class="txt"><span class="num f" data-i="39" data-f="1" contenteditable="false">N°40</span><br><span class="name f" data-i="39" data-f="2" contenteditable="false">Château fort</span></span><span class="price f" data-i="39" data-f="3" contenteditable="false">3 €</span></div><div class="item"><span class="star" onclick="toggleStar(40)" title="Montré au public">⭐</span><span class="pic">🎪</span><span class="txt"><span class="num f" data-i="40" data-f="1" contenteditable="false">N°41</span><br><span class="name f" data-i="40" data-f="2" contenteditable="false">Cirque</span></span><span class="price f" data-i="40" data-f="3" contenteditable="false">2,50 €</span></div><div class="item"><span class="star" onclick="toggleStar(41)" title="Montré au public">⭐</span><span class="pic">🌵</span><span class="txt"><span class="num f" data-i="41" data-f="1" contenteditable="false">N°42</span><br><span class="name f" data-i="41" data-f="2" contenteditable="false">Cactus</span></span><span class="price f" data-i="41" data-f="3" contenteditable="false">2,50 €</span></div><div class="item"><span class="star" onclick="toggleStar(42)" title="Montré au public">⭐</span><span class="pic">🐸</span><span class="txt"><span class="num f" data-i="42" data-f="1" contenteditable="false">N°43</span><br><span class="name f" data-i="42" data-f="2" contenteditable="false">Grenouille</span></span><span class="price f" data-i="42" data-f="3" contenteditable="false">2,50 €</span></div><div class="item"><span class="star" onclick="toggleStar(43)" title="Montré au public">⭐</span><span class="pic">🏎️</span><span class="txt"><span class="num f" data-i="43" data-f="1" contenteditable="false">N°44</span><br><span class="name f" data-i="43" data-f="2" contenteditable="false">Voiture de course</span></span><span class="price f" data-i="43" data-f="3" contenteditable="false">3 €</span></div><div class="item"><span class="star" onclick="toggleStar(44)" title="Montré au public">⭐</span><span class="pic">🍄</span><span class="txt"><span class="num f" data-i="44" data-f="1" contenteditable="false">N°45</span><br><span class="name f" data-i="44" data-f="2" contenteditable="false">Champignon</span></span><span class="price f" data-i="44" data-f="3" contenteditable="false">2,50 €</span></div><div class="item"><span class="star" onclick="toggleStar(45)" title="Montré au public">⭐</span><span class="pic">🦁</span><span class="txt"><span class="num f" data-i="45" data-f="1" contenteditable="false">N°46</span><br><span class="name f" data-i="45" data-f="2" contenteditable="false">Lion</span></span><span class="price f" data-i="45" data-f="3" contenteditable="false">3 €</span></div><div class="item"><span class="star" onclick="toggleStar(46)" title="Montré au public">⭐</span><span class="pic">🌙</span><span class="txt"><span class="num f" data-i="46" data-f="1" contenteditable="false">N°47</span><br><span class="name f" data-i="46" data-f="2" contenteditable="false">Lune endormie</span></span><span class="price f" data-i="46" data-f="3" contenteditable="false">3 €</span></div><div class="item"><span class="star" onclick="toggleStar(47)" title="Montré au public">⭐</span><span class="pic">🐧</span><span class="txt"><span class="num f" data-i="47" data-f="1" contenteditable="false">N°48</span><br><span class="name f" data-i="47" data-f="2" contenteditable="false">Manchot</span></span><span class="price f" data-i="47" data-f="3" contenteditable="false">3 €</span></div><div class="item"><span class="star" onclick="toggleStar(48)" title="Montré au public">⭐</span><span class="pic">🦜</span><span class="txt"><span class="num f" data-i="48" data-f="1" contenteditable="false">N°49</span><br><span class="name f" data-i="48" data-f="2" contenteditable="false">Perroquet</span></span><span class="price f" data-i="48" data-f="3" contenteditable="false">3 €</span></div><div class="item"><span class="star" onclick="toggleStar(49)" title="Montré au public">⭐</span><span class="pic">🐌</span><span class="txt"><span class="num f" data-i="49" data-f="1" contenteditable="false">N°50</span><br><span class="name f" data-i="49" data-f="2" contenteditable="false">Escargot</span></span><span class="price f" data-i="49" data-f="3" contenteditable="false">2,50 €</span></div></div>
+
+  <h2 class="ed" data-k="titreSupp" contenteditable="false">✨ Suppléments</h2>
+  <div class="supps" id="supps"><div class="supp"><span class="pic">🖍️</span><span><span class="name sf" data-i="0" data-f="1" contenteditable="false">Couleurs, image…</span><br><span class="desc sf" data-i="0" data-f="2" contenteditable="false">Pour rendre ton dessin encore plus beau</span></span><span class="price sf" data-i="0" data-f="3" contenteditable="false">Voire les QR codes</span></div><div class="supp"><span class="pic">🎬</span><span><span class="name sf" data-i="1" data-f="1" contenteditable="false">Animation sur commande</span><br><span class="desc sf" data-i="1" data-f="2" contenteditable="false">Ton animations + ton QR code</span></span><span class="price sf" data-i="1" data-f="3" contenteditable="false">3 , 50 € pour le lien&nbsp;+ les QR code</span></div></div>
+
+  <h2 class="ed" data-k="titreQr" contenteditable="false">📱 Les QR codes</h2>
+  <div class="qrs" id="qrs"><div class="qr"><div class="dots">⬛⬜</div><h3 class="qf" data-i="0" data-f="1" contenteditable="false">2 couleurs</h3><div class="lines qf" data-i="0" data-f="2" contenteditable="false">1 couleur pour le QR code<br>1 couleur pour le fond</div><span class="price qf" data-i="0" data-f="3" contenteditable="false">+ 2 €</span></div><div class="qr"><div class="dots">🟦🟩⬜</div><h3 class="qf" data-i="1" data-f="1" contenteditable="false">3 couleurs</h3><div class="lines qf" data-i="1" data-f="2" contenteditable="false">2 couleurs pour le QR code<br>1 couleur pour le fond</div><span class="price qf" data-i="1" data-f="3" contenteditable="false">+ 3 €</span></div><div class="qr"><div class="dots">🟥🟨🟦🟩⬜</div><h3 class="qf" data-i="2" data-f="1" contenteditable="false">5 couleurs</h3><div class="lines qf" data-i="2" data-f="2" contenteditable="false">4 couleurs pour le QR code<br>1 couleur pour le fond</div><span class="price qf" data-i="2" data-f="3" contenteditable="false">+ 4 €</span></div></div>
+
+  <div class="note ed" data-k="note" contenteditable="false">💡 Chaque QR code est testé avant d'être donné, pour être sûr qu'il se scanne bien avec un téléphone !⚠ certains QR code pourrais êtres dur à scanner si c'est le cas veuiller nous en informer pour régler le problème ⚠&nbsp;</div>
+
+  <footer class="ed" data-k="footer" contenteditable="false">Merci et à bientôt ! 🎨✨</footer>
+
+</div>
+
+<script>
+/* ============ DONNÉES DE DÉPART ============ */
+const DEFAUT = {
+  textes:{},
+  items:[
+    ["🗼","N°1","Tour Eiffel","2 €",0],["🤖","N°2","Robot","2 €",0],["🐧","N°3","Pingouin","2 €",0],
+    ["🦄","N°4","Licorne","2 €",0],["🎡","N°5","Fête foraine","2 €",0],["🚜","N°6","Ferme","2 €",0],
+    ["🌌","N°7","Espace étoilé","2 €",0],["🐉","N°8","Dragon","2 €",0],["🦕","N°9","Dino","2 €",1],
+    ["🏰","N°10","Château","3 €",0],["🐼","N°11","Panda","2,50 €",0],["🐝","N°12","Abeille","2,50 €",0],
+    ["🌈","N°13","Arc-en-ciel","2 €",0],["🎈","N°14","Montgolfière","3 €",0],["🐙","N°15","Poulpe","3 €",0],
+    ["🌋","N°16","Volcan","3 €",0],["🐢","N°17","Tortue","2 €",0],["🦋","N°18","Papillon","2 €",0],
+    ["⛵","N°19","Bateau","2 €",1],["🚂","N°20","Train","2,50 €",0],["🌸","N°21","Fleur","2 €",0],
+    ["🦉","N°22","Hibou","2,50 €",0],["🤿","N°23","Sous-marin","3 €",0],["⛄","N°24","Bonhomme de neige","2,50 €",0],
+    ["🎐","N°25","Méduse","2,50 €",0],["🚁","N°26","Hélicoptère","2,50 €",0],["🎃","N°27","Chat Halloween","3 €",0],
+    ["❤️","N°28","Cœur","2 €",0],["🦖","N°29","T-Rex","3 €",0],["🐋","N°30","Baleine","3 €",0],
+    ["🌻","N°31","Tournesol","2 €",0],["🦩","N°32","Flamant rose","2 €",0],["🍕","N°33","Pizza","2,50 €",0],
+    ["🦈","N°34","Requin","2,50 €",0],["🦇","N°35","Chauve-souris","3 €",0],["🌊","N°36","Vague","2 €",0],
+    ["🎉","N°37","Ballons","2,50 €",0],["🦑","N°38","Pieuvre géante","3 €",0],["🍯","N°39","Ruche","3 €",0],
+    ["🏯","N°40","Château fort","3 €",0],["🎪","N°41","Cirque","2,50 €",0],["🌵","N°42","Cactus","2,50 €",0],
+    ["🐸","N°43","Grenouille","2,50 €",0],["🏎️","N°44","Voiture de course","3 €",0],["🍄","N°45","Champignon","2,50 €",0],
+    ["🦁","N°46","Lion","3 €",0],["🌙","N°47","Lune endormie","3 €",0],["🐧","N°48","Manchot","3 €",0],
+    ["🦜","N°49","Perroquet","3 €",0],["🐌","N°50","Escargot","2,50 €",0]
+  ],
+  supps:[
+    ["🖍️","Couleurs, image…","Pour rendre ton dessin encore plus beau","+ 2,50 €"],
+    ["🎬","Animation sur commande","Ton dessin prend vie + QR code inclus","5 €"]
+  ],
+  qrs:[
+    ["⬛⬜","2 couleurs","1 couleur pour le QR code\n1 couleur pour le fond","5 €"],
+    ["🟦🟩⬜","3 couleurs","2 couleurs pour le QR code\n1 couleur pour le fond","6 €"],
+    ["🟥🟨🟦🟩⬜","5 couleurs","4 couleurs pour le QR code\n1 couleur pour le fond","7,50 €"]
+  ],
+  verrou:false, pwd:""
+};
+
+const CLE = "catalogue-dessins-v1";
+let data = charger();
+
+function charger(){
+  try{
+    const s = localStorage.getItem(CLE);
+    if(s){
+      const d = Object.assign(JSON.parse(JSON.stringify(DEFAUT)), JSON.parse(s));
+      // réparation : remplacer les emojis trop récents ou combinés qui s'affichent mal
+      d.items.forEach(it=>{
+        if(it[0].includes('\u{1FABC}')) it[0]='🎐';        // méduse
+        if(it[0].includes('🐈')) it[0]='🎃';               // chat halloween
+      });
+      return d;
+    }
+  }catch(e){}
+  return JSON.parse(JSON.stringify(DEFAUT));
+}
+
+/* ============ AFFICHAGE ============ */
+function esc(t){const d=document.createElement('div');d.textContent=t;return d.innerHTML;}
+
+function render(){
+  // textes libres (titres, note, footer)
+  document.querySelectorAll('.ed').forEach(el=>{
+    const k=el.dataset.k;
+    if(data.textes[k]!==undefined) el.textContent=data.textes[k];
+  });
+
+  // grille des dessins
+  const g=document.getElementById('grid'); g.innerHTML='';
+  data.items.forEach((it,i)=>{
+    const d=document.createElement('div');
+    d.className='item';
+    d.innerHTML =
+      '<span class="star'+(it[4]?' on':'')+'" onclick="toggleStar('+i+')" title="Montré au public">⭐</span>'+
+      '<span class="pic">'+esc(it[0])+'</span>'+
+      '<span class="txt"><span class="num f" data-i="'+i+'" data-f="1">'+esc(it[1])+'</span><br>'+
+      '<span class="name f" data-i="'+i+'" data-f="2">'+esc(it[2])+'</span></span>'+
+      '<span class="price f" data-i="'+i+'" data-f="3">'+esc(it[3])+'</span>';
+    g.appendChild(d);
+  });
+
+  // suppléments
+  const s=document.getElementById('supps'); s.innerHTML='';
+  data.supps.forEach((it,i)=>{
+    const d=document.createElement('div');
+    d.className='supp';
+    d.innerHTML =
+      '<span class="pic">'+esc(it[0])+'</span>'+
+      '<span><span class="name sf" data-i="'+i+'" data-f="1">'+esc(it[1])+'</span><br>'+
+      '<span class="desc sf" data-i="'+i+'" data-f="2">'+esc(it[2])+'</span></span>'+
+      '<span class="price sf" data-i="'+i+'" data-f="3">'+esc(it[3])+'</span>';
+    s.appendChild(d);
+  });
+
+  // QR codes
+  const q=document.getElementById('qrs'); q.innerHTML='';
+  data.qrs.forEach((it,i)=>{
+    const d=document.createElement('div');
+    d.className='qr';
+    d.innerHTML =
+      '<div class="dots">'+esc(it[0])+'</div>'+
+      '<h3 class="qf" data-i="'+i+'" data-f="1">'+esc(it[1])+'</h3>'+
+      '<div class="lines qf" data-i="'+i+'" data-f="2">'+esc(it[2]).replace(/\n/g,'<br>')+'</div>'+
+      '<span class="price qf" data-i="'+i+'" data-f="3">'+esc(it[3])+'</span>';
+    q.appendChild(d);
+  });
+
+  appliquerVerrou();
+}
+
+/* ============ ÉDITION ============ */
+function appliquerVerrou(){
+  const editable = !data.verrou;
+  document.body.classList.toggle('locked', data.verrou);
+  document.querySelectorAll('.ed,.f,.sf,.qf').forEach(el=>{
+    el.setAttribute('contenteditable', editable ? 'true' : 'false');
+  });
+  document.getElementById('lockBtn').innerHTML = data.verrou ? '🔓 Déverrouiller' : '🔒 Mode public';
+}
+
+// mémoriser les modifications quand on quitte un champ
+document.addEventListener('focusout', e=>{
+  const el=e.target;
+  if(!(el instanceof HTMLElement)) return;
+  if(el.classList.contains('ed')) data.textes[el.dataset.k]=el.textContent;
+  if(el.classList.contains('f'))  data.items[el.dataset.i][el.dataset.f]=el.textContent;
+  if(el.classList.contains('sf')) data.supps[el.dataset.i][el.dataset.f]=el.textContent;
+  if(el.classList.contains('qf')) data.qrs[el.dataset.i][el.dataset.f]=el.textContent;
+});
+
+function toggleStar(i){
+  if(data.verrou) return;
+  data.items[i][4] = data.items[i][4] ? 0 : 1;
+  render();
+}
+
+/* ============ ENREGISTRER ============ */
+function saveAll(){
+  document.activeElement && document.activeElement.blur();
+  try{
+    localStorage.setItem(CLE, JSON.stringify(data));
+    flash('✅ Catalogue enregistré !');
+  }catch(e){
+    flash('⚠️ Impossible d\'enregistrer dans ce navigateur.', true);
+  }
+}
+
+/* ============ VERROU + MOT DE PASSE ============ */
+function toggleLock(){
+  if(!data.verrou){
+    // verrouiller
+    if(!data.pwd){
+      const p = prompt('Choisis un mot de passe pour pouvoir déverrouiller plus tard :');
+      if(!p){ flash('Verrouillage annulé.', true); return; }
+      data.pwd = btoa(unescape(encodeURIComponent(p)));
+    }
+    data.verrou = true;
+    saveAll();
+    render();
+    flash('🔒 Mode public activé : plus rien n\'est modifiable.');
+  }else{
+    // déverrouiller
+    const p = prompt('Mot de passe pour déverrouiller :');
+    if(p===null) return;
+    if(btoa(unescape(encodeURIComponent(p)))===data.pwd){
+      data.verrou = false;
+      saveAll();
+      render();
+      flash('🔓 Déverrouillé ! Tu peux tout modifier.');
+    }else{
+      flash('❌ Mauvais mot de passe.', true);
+    }
+  }
+}
+
+function changePwd(){
+  if(data.pwd){
+    const old = prompt('Mot de passe actuel :');
+    if(old===null) return;
+    if(btoa(unescape(encodeURIComponent(old)))!==data.pwd){ flash('❌ Mauvais mot de passe.', true); return; }
+  }
+  const p = prompt('Nouveau mot de passe :');
+  if(!p){ flash('Changement annulé.', true); return; }
+  data.pwd = btoa(unescape(encodeURIComponent(p)));
+  saveAll();
+  flash('🔑 Mot de passe changé !');
+}
+
+function flash(t, bad){
+  const m=document.getElementById('msg');
+  m.textContent=t;
+  m.style.color = bad ? 'var(--coral)' : 'var(--leaf)';
+  clearTimeout(flash.t);
+  flash.t=setTimeout(()=>{m.textContent='';},3500);
+}
+
+render();
+</script>
+
+
+</body></html>
