@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Galerie d'animations</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#FFF9EF; --ink:#2B2D42;
+    --leaf:#3FA34D; --leaf-bg:#E3F6E5;
+    --sky:#2E86C1; --sky-bg:#E1F0FB;
+    --plum:#8E44AD; --plum-bg:#F1E4F8;
+    --sun:#F6B93B; --coral:#FF6B6B; --card:#FFFFFF;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{background:var(--paper);color:var(--ink);font-family:'Nunito',sans-serif;padding:16px 12px 50px;}
+  .page{max-width:960px;margin:0 auto;}
+
+  header{
+    text-align:center;padding:24px 14px 20px;
+    border:3px dashed var(--sun);border-radius:24px;
+    background:var(--card);margin-bottom:22px;
+  }
+  header .emojis{font-size:24px;letter-spacing:6px;}
+  h1{font-family:'Baloo 2',cursive;font-size:clamp(26px,7vw,44px);font-weight:800;margin:4px 0 2px;}
+  header p{font-weight:700;color:#6b6d85;font-size:14px;}
+
+  h2{font-family:'Baloo 2',cursive;font-size:23px;font-weight:800;margin:26px 0 12px;display:flex;align-items:center;gap:10px;}
+  h2::after{content:"";flex:1;height:3px;border-radius:3px;background:repeating-linear-gradient(90deg,var(--sun) 0 14px,transparent 14px 24px);}
+
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px;}
+  @media(max-width:420px){.grid{grid-template-columns:1fr 1fr;gap:9px;}}
+
+  a.anim{
+    background:var(--card);border:2px solid #F0E9DB;border-radius:18px;
+    padding:16px 10px 14px;text-align:center;text-decoration:none;color:var(--ink);
+    display:flex;flex-direction:column;align-items:center;gap:8px;
+    transition:transform .12s, box-shadow .12s;
+  }
+  a.anim:active{transform:scale(.96);}
+  @media(hover:hover){
+    a.anim:hover{transform:translateY(-3px);box-shadow:0 8px 18px rgba(0,0,0,.08);border-color:var(--sun);}
+  }
+  a.anim .pic{font-size:40px;line-height:1;}
+  a.anim .name{font-weight:800;font-size:14px;line-height:1.2;}
+  a.anim .go{
+    font-family:'Baloo 2',cursive;font-weight:800;font-size:12.5px;
+    background:var(--leaf-bg);color:var(--leaf);
+    padding:4px 12px;border-radius:999px;
+  }
+  a.anim.cmd .go{background:var(--plum-bg);color:var(--plum);}
+  a.anim.cmd{border-color:#E8D8F5;}
+
+  .pitch{
+    margin-top:22px;background:#FFF3D6;border-radius:16px;
+    padding:14px 16px;font-weight:700;font-size:14px;color:#8a6510;text-align:center;
+  }
+  footer{text-align:center;margin-top:26px;font-weight:800;color:#A9A48F;font-size:13.5px;}
+</style>
+</head>
+<body>
+<div class="page">
+
+  <header>
+    <div class="emojis">🎬 ✨ 🎨</div>
+    <h1>Ma galerie d'animations</h1>
+    <p>Touche une carte pour voir l'animation bouger !</p>
+  </header>
+
+  <h2>🎬 Les animations</h2>
+  <div class="grid" id="galerie"></div>
+
+  <h2>💼 Commandes réalisées</h2>
+  <div class="grid" id="commandes"></div>
+
+  <div class="pitch">
+    ✨ Toi aussi, commande TON animation personnalisée avec son QR code magique ! ✨
+  </div>
+
+  <footer>Merci de ta visite ! 🎨✨</footer>
+
+</div>
+
+<script>
+const BASE = "https://raphpro379.github.io/animations-IA/";
+
+/* ===== LISTE DES ANIMATIONS =====
+   Pour ajouter une animation : ajoute une ligne ["emoji","Nom affiché","nom-du-fichier.html"] */
+const ANIMS = [
+  ["🎡","Fête foraine","Fête foraine.html"],
+  ["🌠","Espace étoilé","espace étoilé.html"],
+  ["🐉","Dragon","Dragon mignon.html"],
+  ["🦕","Dino","Mon dino.html"],
+  ["🌈","Arc-en-ciel","Arc-en-ciel.html"],
+  ["⛵","Bateau","bateau-telephone.html"],
+  ["🍕","Pizza","pizza-telephone.html"],
+  ["🌊","Vague","vague-telephone.html"]
+];
+
+const CMDS = [
+  ["⚖️","La Juge","Juge.html"],
+  ["💊","La Pharmacienne","pharmacienne.html"]
+];
+
+function carte(a, cmd){
+  const el = document.createElement('a');
+  el.className = 'anim' + (cmd ? ' cmd' : '');
+  el.href = BASE + encodeURIComponent(a[2]);
+  el.innerHTML =
+    '<span class="pic">'+a[0]+'</span>'+
+    '<span class="name">'+a[1]+'</span>'+
+    '<span class="go">'+(cmd ? '💼 Voir' : '▶ Voir')+'</span>';
+  return el;
+}
+
+const g = document.getElementById('galerie');
+ANIMS.forEach(a=>g.appendChild(carte(a,false)));
+
+const c = document.getElementById('commandes');
+CMDS.forEach(a=>c.appendChild(carte(a,true)));
+</script>
+</body>
+</html>
