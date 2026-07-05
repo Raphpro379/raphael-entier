@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<!-- saved from url=(0061)file:///C:/Users/RAPHAEL/Downloads/generateur-pass-vip_1.html -->
+<html lang="fr"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Générateur Pass VIP — Entreprise R</title>
+<link href="./Générateur Pass VIP — Entreprise R_files/css2" rel="stylesheet">
+<style>
+:root{--r1:#FF3366;--r2:#FF9900;--r3:#FFDD00;--r4:#00CC66;--r5:#0099FF;--r6:#9933FF;--dark:#0D0D0D;--card:#1A1A1A}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Nunito',sans-serif;background:var(--dark);color:#fff;min-height:100vh;padding:2rem 1rem}
+h1{font-family:'Bebas Neue',sans-serif;font-size:3rem;text-align:center;letter-spacing:.05em;background:linear-gradient(90deg,var(--r1),var(--r2),var(--r3),var(--r4),var(--r5),var(--r6));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:.5rem}
+.subtitle{text-align:center;color:#888;font-size:14px;margin-bottom:2rem}
+.layout{max-width:1000px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:2rem}
+.panel{background:var(--card);border-radius:16px;padding:1.5rem;border:1px solid #2a2a2a}
+.panel h2{font-family:'Bebas Neue',sans-serif;font-size:1.5rem;margin-bottom:1.2rem;letter-spacing:.05em}
+
+/* FIELDS */
+.field{margin-bottom:12px}
+.field label{display:block;font-size:11px;font-weight:700;color:#888;text-transform:uppercase;letter-spacing:.08em;margin-bottom:5px}
+.field input,.field select{width:100%;padding:9px 12px;background:#111;border:1.5px solid #333;border-radius:10px;color:#fff;font-family:'Nunito',sans-serif;font-size:14px;outline:none;transition:border-color .15s}
+.field input:focus{border-color:var(--r2)}
+
+/* NIVEAUX */
+.niveau-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;margin-bottom:12px}
+.niv-btn{padding:8px 4px;border:2px solid #333;border-radius:10px;background:none;color:#888;font-family:'Nunito',sans-serif;font-size:11px;font-weight:700;cursor:pointer;text-align:center;transition:all .15s;line-height:1.3}
+.niv-btn.active{color:#000}
+.niv-btn.n0.active{background:#CD7F32;border-color:#CD7F32;color:#fff}
+.niv-btn.n1.active{background:linear-gradient(135deg,#C0C0C0,#E8E8E8);border-color:#C0C0C0}
+.niv-btn.n2.active{background:linear-gradient(135deg,#FFD700,#FFF176);border-color:#FFD700}
+.niv-btn.n3.active{background:linear-gradient(135deg,#E5E4E2,#F5F5F5);border-color:#E5E4E2}
+.niv-btn.n4.active{background:linear-gradient(135deg,#FF3366,#FF9900,#FFDD00,#00CC66,#0099FF,#9933FF);border-color:#FF3366;color:#fff}
+.niv-btn.n5.active{background:linear-gradient(135deg,#FF3366,#FF6B9D);border-color:#FF3366;color:#fff}
+.niv-btn.n6.active{background:linear-gradient(135deg,#00CC66,#00FF88);border-color:#00CC66}
+.niv-btn.n7.active{background:linear-gradient(135deg,#9933FF,#CC66FF);border-color:#9933FF;color:#fff}
+
+/* BOUTONS */
+.gen-btn{width:100%;padding:13px;font-family:'Bebas Neue',sans-serif;font-size:1.4rem;letter-spacing:.08em;background:linear-gradient(90deg,var(--r1),var(--r2),var(--r3),var(--r4),var(--r5),var(--r6));color:#000;border:none;border-radius:12px;cursor:pointer;transition:opacity .15s;margin-top:8px}
+.gen-btn:hover{opacity:.88}
+.save-btn{width:100%;padding:11px;font-family:'Bebas Neue',sans-serif;font-size:1.2rem;letter-spacing:.05em;background:#1a3a2a;border:1.5px solid var(--r4);color:var(--r4);border-radius:12px;cursor:pointer;transition:all .15s;margin-top:6px}
+.save-btn:hover{background:var(--r4);color:#000}
+
+/* PASS CARD */
+.pass{width:100%;aspect-ratio:85.6/54;border-radius:12px;position:relative;overflow:hidden;font-family:'Bebas Neue',sans-serif;cursor:pointer;transition:transform .2s;box-shadow:0 8px 24px rgba(0,0,0,.4)}
+.pass:hover{transform:scale(1.03)}
+.pass-bg{position:absolute;inset:0}
+.pass-shine{position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,255,255,.2) 0%,transparent 50%,rgba(255,255,255,.05) 100%)}
+.pass-pattern{position:absolute;inset:0;opacity:.06;background-image:repeating-linear-gradient(45deg,#fff 0,#fff 1px,transparent 0,transparent 50%);background-size:8px 8px}
+.pass-content{position:relative;z-index:1;height:100%;display:flex;flex-direction:column;justify-content:space-between;padding:8px 12px}
+.pass-top{display:flex;justify-content:space-between;align-items:flex-start}
+.pass-logo{font-size:1.5rem;line-height:1;filter:drop-shadow(0 2px 4px rgba(0,0,0,.3))}
+.pass-badge{font-size:.48rem;padding:2px 7px;border-radius:20px;background:rgba(0,0,0,.35);color:#fff;letter-spacing:.12em;font-family:'Nunito',sans-serif;font-weight:700;text-transform:uppercase;margin-top:4px}
+.pass-mid{text-align:center}
+.pass-name{font-size:1.3rem;letter-spacing:.05em;color:#fff;line-height:1;text-shadow:0 2px 6px rgba(0,0,0,.5)}
+.pass-subtitle{font-size:.52rem;color:rgba(255,255,255,.75);letter-spacing:.15em;margin-top:2px;font-family:'Nunito',sans-serif;font-weight:700;text-transform:uppercase}
+.pass-bottom{display:flex;justify-content:space-between;align-items:flex-end}
+.pass-num{font-size:.48rem;color:rgba(255,255,255,.65);letter-spacing:.1em;font-family:monospace}
+.pass-date{font-size:.45rem;color:rgba(255,255,255,.65);font-family:'Nunito',sans-serif}
+.pass-stars{font-size:.75rem}
+
+/* LISTE */
+.passes-section{max-width:1000px;margin:2rem auto 0}
+.passes-section h2{font-family:'Bebas Neue',sans-serif;font-size:1.8rem;color:var(--r3);letter-spacing:.05em;margin-bottom:1rem;display:flex;align-items:center;justify-content:space-between}
+.print-all-btn{font-size:13px;padding:8px 16px;background:var(--r2);color:#000;border:none;border-radius:8px;cursor:pointer;font-family:'Nunito',sans-serif;font-weight:700}
+.passes-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px}
+.pass-wrapper{background:#1a1a1a;border-radius:14px;padding:12px;border:1px solid #2a2a2a}
+.pass-wrapper-actions{display:flex;gap:6px;margin-top:8px}
+.pw-btn{flex:1;padding:6px;font-size:11px;font-weight:700;border:1px solid #333;border-radius:8px;cursor:pointer;background:none;color:#888;font-family:'Nunito',sans-serif;transition:all .12s}
+.pw-btn:hover{background:#222;color:#fff}
+.pw-btn.del:hover{background:#3a1a1a;color:var(--r1);border-color:var(--r1)}
+.empty{text-align:center;color:#555;padding:2rem;font-size:14px}
+
+@media print{
+  body{background:#fff;padding:0;color:#000}
+  h1,.subtitle,.layout,.passes-section h2,.pass-wrapper-actions,.save-btn,.gen-btn{display:none!important}
+  .passes-section{margin:0}
+  .passes-grid{grid-template-columns:repeat(2,1fr);gap:8px}
+  .pass-wrapper{background:none;border:none;padding:4px}
+  .pass{box-shadow:none}
+  .pass:hover{transform:none}
+}
+@media(max-width:650px){.layout{grid-template-columns:1fr}.niveau-grid{grid-template-columns:1fr 1fr}}
+</style>
+</head>
+<body>
+
+<h1>Pass VIP Generator</h1>
+<p class="subtitle">Entreprise R — Créez, sauvegardez et imprimez vos passes</p>
+
+<div class="layout">
+  <!-- FORMULAIRE -->
+  <div class="panel">
+    <h2 style="color:var(--r2)">✏️ Créer un Pass</h2>
+
+    <div class="field">
+      <label>Nom du titulaire</label>
+      <input type="text" id="inp-nom" placeholder="Ex : Marie, Jean, Sonia..." oninput="updatePreview()">
+    </div>
+
+    <div class="field">
+      <label>Niveau du pass</label>
+      <div class="niveau-grid">
+        <button class="niv-btn n0 active" onclick="setNiveau(0)">🥉<br>Bronze</button>
+        <button class="niv-btn n1" onclick="setNiveau(1)">🥈<br>Argent</button>
+        <button class="niv-btn n2" onclick="setNiveau(2)">🥇<br>Gold</button>
+        <button class="niv-btn n3" onclick="setNiveau(3)">💎<br>Platine</button>
+        <button class="niv-btn n4" onclick="setNiveau(4)">🌈<br>Ultra</button>
+        <button class="niv-btn n5" onclick="setNiveau(5)">🎟<br>Événement</button>
+        <button class="niv-btn n6" onclick="setNiveau(6)">📻<br>R-Radio</button>
+        <button class="niv-btn n7" onclick="setNiveau(7)">🌸<br>Fleur de Joie</button>
+      </div>
+    </div>
+
+    <div class="field">
+      <label>Validité</label>
+      <input type="text" id="inp-date" placeholder="Ex : 2025, À vie, Mai 2025..." oninput="updatePreview()">
+    </div>
+
+    <div class="field">
+      <label>Numéro du pass</label>
+      <input type="text" id="inp-num" placeholder="Ex : 001, VIP-01..." oninput="updatePreview()">
+    </div>
+
+    <div class="field">
+      <label>Avantages (optionnel)</label>
+      <input type="text" id="inp-avantages" placeholder="Ex : Accès prioritaire, -20%..." oninput="updatePreview()">
+    </div>
+
+    <button class="gen-btn" onclick="addPass()">+ Créer ce pass</button>
+    <button class="save-btn" onclick="saveAll()">💾 Sauvegarder tous les passes</button>
+  </div>
+
+  <!-- APERÇU -->
+  <div class="panel">
+    <h2 style="color:var(--r5)">👁 Aperçu en direct</h2>
+    <div id="pass-preview"><div class="pass">
+    <div class="pass-bg" style="background:linear-gradient(135deg,#8B4513,#CD7F32,#A0522D)"></div>
+    <div class="pass-shine"></div>
+    <div class="pass-pattern"></div>
+    <div class="pass-content">
+      <div class="pass-top">
+        <span class="pass-logo">🥉</span>
+        <div style="text-align:right">
+          <div class="pass-badge">ENTREPRISE R</div>
+          <div class="pass-badge" style="margin-top:3px">PASS BRONZE</div>
+        </div>
+      </div>
+      <div class="pass-mid">
+        <div class="pass-name" style="color:#fff">VOTRE NOM</div>
+        <div class="pass-subtitle" style="color:rgba(255,255,255,.75)">droit à des activitées V.I.P Niveau bronze</div>
+      </div>
+      <div class="pass-bottom">
+        <span class="pass-num" style="color:rgba(255,255,255,.65)">#0001</span>
+        <span class="pass-stars">🥉</span>
+        <span class="pass-date" style="color:rgba(255,255,255,.65)">Valide : 2025</span>
+      </div>
+    </div>
+  </div></div>
+    <div id="preview-info" style="margin-top:12px;font-size:12px;color:#555;text-align:center">Entrez un nom pour personnaliser</div>
+  </div>
+</div>
+
+<!-- LISTE DES PASSES -->
+<div class="passes-section">
+  <h2 id="list-title" style="display:none">
+    🎟 Passes créés (<span id="pass-count">0</span>)
+    <button class="print-all-btn" onclick="window.print()">🖨 Imprimer tout</button>
+  </h2>
+  <div class="passes-grid" id="passes-grid"><div class="empty" id="empty-msg" style="display: block;">Aucun pass créé pour l'instant.<br>Remplissez le formulaire et cliquez sur "Créer ce pass" !</div></div>
+</div>
+
+<script>
+const NIVEAUX = [
+  {label:'BRONZE',     emoji:'🥉', stars:'🥉',    bg:'linear-gradient(135deg,#8B4513,#CD7F32,#A0522D)', textColor:'#fff'},
+  {label:'ARGENT',     emoji:'🥈', stars:'🥈🥈',  bg:'linear-gradient(135deg,#808080,#C0C0C0,#E8E8E8)', textColor:'#111'},
+  {label:'GOLD',       emoji:'🥇', stars:'⭐⭐⭐', bg:'linear-gradient(135deg,#B8860B,#FFD700,#DAA520)', textColor:'#111'},
+  {label:'PLATINE',    emoji:'💎', stars:'💎💎💎', bg:'linear-gradient(135deg,#B0C4DE,#E5E4E2,#F0F0F0)', textColor:'#111'},
+  {label:'ULTRA',      emoji:'🌈', stars:'🌟🌟🌟🌟🌟', bg:'linear-gradient(135deg,#FF3366,#FF9900,#FFDD00,#00CC66,#0099FF,#9933FF)', textColor:'#fff'},
+  {label:'ÉVÉNEMENT',  emoji:'🎟', stars:'🎉🎉',  bg:'linear-gradient(135deg,#FF3366,#FF6B9D,#CC1A4F)', textColor:'#fff'},
+  {label:'R-RADIO',    emoji:'📻', stars:'🎙🎙',  bg:'linear-gradient(135deg,#006633,#00CC66,#00FF88)', textColor:'#fff'},
+  {label:'FLEUR DE JOIE',emoji:'🌸',stars:'🌸🌸', bg:'linear-gradient(135deg,#6600CC,#9933FF,#CC66FF)', textColor:'#fff'},
+];
+
+let currentNiveau = 2;
+let passes = JSON.parse(localStorage.getItem('passes_vip_v2') || '[]');
+
+function setNiveau(i) {
+  currentNiveau = i;
+  document.querySelectorAll('.niv-btn').forEach((b, j) => b.classList.toggle('active', j === i));
+  updatePreview();
+}
+
+function genNum() {
+  return '#' + String(Math.floor(Math.random() * 999) + 1).padStart(3, '0');
+}
+
+function buildPassHTML(nom, niveau, date, num, avantages) {
+  const n = NIVEAUX[niveau];
+  const name = (nom || 'Votre Nom').toUpperCase();
+  const d = date || '2025';
+  const nb = num || genNum();
+  return `<div class="pass">
+    <div class="pass-bg" style="background:${n.bg}"></div>
+    <div class="pass-shine"></div>
+    <div class="pass-pattern"></div>
+    <div class="pass-content">
+      <div class="pass-top">
+        <span class="pass-logo">${n.emoji}</span>
+        <div style="text-align:right">
+          <div class="pass-badge">ENTREPRISE R</div>
+          <div class="pass-badge" style="margin-top:3px">PASS ${n.label}</div>
+        </div>
+      </div>
+      <div class="pass-mid">
+        <div class="pass-name" style="color:${n.textColor}">${name}</div>
+        <div class="pass-subtitle" style="color:${n.textColor === '#fff' ? 'rgba(255,255,255,.75)' : 'rgba(0,0,0,.6)'}">${avantages || 'Accès officiel · Entreprise R'}</div>
+      </div>
+      <div class="pass-bottom">
+        <span class="pass-num" style="color:${n.textColor === '#fff' ? 'rgba(255,255,255,.65)' : 'rgba(0,0,0,.5)'}">${nb}</span>
+        <span class="pass-stars">${n.stars}</span>
+        <span class="pass-date" style="color:${n.textColor === '#fff' ? 'rgba(255,255,255,.65)' : 'rgba(0,0,0,.5)'}">Valide : ${d}</span>
+      </div>
+    </div>
+  </div>`;
+}
+
+function updatePreview() {
+  const nom = document.getElementById('inp-nom').value;
+  const date = document.getElementById('inp-date').value;
+  const num = document.getElementById('inp-num').value;
+  const avantages = document.getElementById('inp-avantages').value;
+  document.getElementById('pass-preview').innerHTML = buildPassHTML(nom, currentNiveau, date, num, avantages);
+  document.getElementById('preview-info').textContent = nom ? `Pass ${NIVEAUX[currentNiveau].label} pour ${nom}` : 'Entrez un nom pour personnaliser';
+}
+
+function addPass() {
+  const nom = document.getElementById('inp-nom').value.trim();
+  if (!nom) { alert('Entrez un nom !'); return; }
+  const p = {
+    id: Date.now(),
+    nom, niveau: currentNiveau,
+    date: document.getElementById('inp-date').value.trim(),
+    num: document.getElementById('inp-num').value.trim() || genNum(),
+    avantages: document.getElementById('inp-avantages').value.trim()
+  };
+  passes.push(p);
+  saveAll();
+  renderPasses();
+  document.getElementById('inp-nom').value = '';
+  document.getElementById('inp-num').value = '';
+  updatePreview();
+  alert(`✅ Pass ${NIVEAUX[p.niveau].label} créé pour ${nom} !`);
+}
+
+function saveAll() {
+  localStorage.setItem('passes_vip_v2', JSON.stringify(passes));
+}
+
+function deletePass(id) {
+  if (!confirm('Supprimer ce pass ?')) return;
+  passes = passes.filter(p => p.id !== id);
+  saveAll();
+  renderPasses();
+}
+
+function dupliquerPass(id) {
+  const p = passes.find(x => x.id === id);
+  if (!p) return;
+  const copy = { ...p, id: Date.now(), num: genNum() };
+  passes.push(copy);
+  saveAll();
+  renderPasses();
+}
+
+function renderPasses() {
+  const grid = document.getElementById('passes-grid');
+  const title = document.getElementById('list-title');
+  const empty = document.getElementById('empty-msg');
+  document.getElementById('pass-count').textContent = passes.length;
+
+  if (!passes.length) {
+    title.style.display = 'none';
+    empty.style.display = 'block';
+    grid.innerHTML = '';
+    grid.appendChild(empty);
+    return;
+  }
+
+  title.style.display = 'flex';
+  grid.innerHTML = '';
+
+  passes.forEach(p => {
+    const wrap = document.createElement('div');
+    wrap.className = 'pass-wrapper';
+    wrap.innerHTML = buildPassHTML(p.nom, p.niveau, p.date, p.num, p.avantages);
+    const acts = document.createElement('div');
+    acts.className = 'pass-wrapper-actions';
+    acts.innerHTML = `
+      <button class="pw-btn" onclick="dupliquerPass(${p.id})">📋 Dupliquer</button>
+      <button class="pw-btn del" onclick="deletePass(${p.id})">✕ Supprimer</button>
+    `;
+    wrap.appendChild(acts);
+    grid.appendChild(wrap);
+  });
+}
+
+// Init
+setNiveau(2);
+renderPasses();
+</script>
+
+
+</body></html>
