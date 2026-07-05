@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<!-- saved from url=(0055)file:///C:/Users/RAPHAEL/Downloads/argent-de-poche.html -->
+<html lang="fr"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>💰 Argent de Poche — Raphaël</title>
+<link href="./💰 Argent de Poche — Raphaël_files/css2" rel="stylesheet">
+<style>
+:root{--r1:#FF3366;--r2:#FF9900;--r3:#FFDD00;--r4:#00CC66;--r5:#0099FF;--r6:#9933FF;--dark:#0D0D0D;--card:#1A1A1A;--border:#2a2a2a}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Nunito',sans-serif;background:var(--dark);color:#fff;min-height:100vh;padding:2rem 1rem}
+h1{font-family:'Bebas Neue',sans-serif;font-size:3rem;text-align:center;letter-spacing:.05em;background:linear-gradient(90deg,var(--r1),var(--r2),var(--r3),var(--r4),var(--r5),var(--r6));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:.5rem}
+.subtitle{text-align:center;color:#888;font-size:14px;margin-bottom:2rem}
+.layout{max-width:800px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:1.5rem}
+.card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:1.5rem}
+.card h2{font-family:'Bebas Neue',sans-serif;font-size:1.5rem;letter-spacing:.05em;margin-bottom:1.2rem}
+
+/* SOLDE */
+.solde-display{
+  text-align:center;padding:1.5rem;
+  background:linear-gradient(135deg,#0a2a1a,#0d3d20);
+  border:1px solid var(--r4);border-radius:14px;margin-bottom:1.5rem;
+}
+.solde-label{font-size:12px;font-weight:700;color:var(--r4);text-transform:uppercase;letter-spacing:.1em;margin-bottom:4px}
+.solde-montant{font-family:'Bebas Neue',sans-serif;font-size:4rem;letter-spacing:.05em;line-height:1}
+.solde-montant.positif{color:var(--r4)}
+.solde-montant.negatif{color:var(--r1)}
+
+/* FORM */
+.field{margin-bottom:12px}
+.field label{display:block;font-size:11px;font-weight:700;color:#888;text-transform:uppercase;letter-spacing:.08em;margin-bottom:5px}
+.field input,.field select{width:100%;padding:10px 12px;background:#111;border:1.5px solid #333;border-radius:10px;color:#fff;font-family:'Nunito',sans-serif;font-size:15px;outline:none;transition:border-color .15s}
+.field input:focus,.field select:focus{border-color:var(--r2)}
+
+.type-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:14px}
+.type-btn{padding:10px;border:2px solid #333;border-radius:10px;background:none;color:#888;font-family:'Nunito',sans-serif;font-size:13px;font-weight:700;cursor:pointer;transition:all .15s;text-align:center}
+.type-btn.recette.active{background:var(--r4);border-color:var(--r4);color:#000}
+.type-btn.depense.active{background:var(--r1);border-color:var(--r1);color:#fff}
+
+.add-btn{width:100%;padding:12px;font-family:'Bebas Neue',sans-serif;font-size:1.3rem;letter-spacing:.08em;border:none;border-radius:12px;cursor:pointer;transition:all .2s;margin-top:4px}
+.add-btn:hover{transform:translateY(-1px);opacity:.9}
+.add-btn.recette{background:var(--r4);color:#000}
+.add-btn.depense{background:var(--r1);color:#fff}
+
+/* STATS */
+.stats-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:1rem}
+.stat-card{padding:12px;border-radius:10px;text-align:center}
+.stat-card.revenus{background:rgba(0,204,102,.1);border:1px solid rgba(0,204,102,.3)}
+.stat-card.depenses{background:rgba(255,51,102,.1);border:1px solid rgba(255,51,102,.3)}
+.stat-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;margin-bottom:4px}
+.stat-label.rev{color:var(--r4)} .stat-label.dep{color:var(--r1)}
+.stat-val{font-family:'Bebas Neue',sans-serif;font-size:1.6rem;letter-spacing:.05em}
+.stat-val.rev{color:var(--r4)} .stat-val.dep{color:var(--r1)}
+
+/* OBJECTIF */
+.objectif-wrap{background:#111;border:1px solid var(--border);border-radius:12px;padding:12px;margin-bottom:1rem}
+.objectif-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+.objectif-titre{font-size:13px;font-weight:700}
+.objectif-pct{font-family:'Bebas Neue',sans-serif;font-size:1.2rem;color:var(--r2)}
+.progress-bar{height:10px;background:#222;border-radius:5px;overflow:hidden}
+.progress-fill{height:100%;border-radius:5px;background:linear-gradient(90deg,var(--r2),var(--r3));transition:width .5s ease}
+.objectif-info{display:flex;justify-content:space-between;font-size:11px;color:#666;margin-top:4px}
+
+/* HISTORIQUE */
+.full-card{max-width:800px;margin:1.5rem auto 0;background:var(--card);border:1px solid var(--border);border-radius:16px;padding:1.5rem}
+.full-card h2{font-family:'Bebas Neue',sans-serif;font-size:1.5rem;letter-spacing:.05em;margin-bottom:1rem;display:flex;align-items:center;justify-content:space-between}
+.clear-btn{font-size:12px;padding:5px 12px;background:#3a1a1a;border:1px solid var(--r1);color:var(--r1);border-radius:8px;cursor:pointer;font-family:'Nunito',sans-serif;font-weight:700}
+.transaction-list{display:flex;flex-direction:column;gap:6px;max-height:300px;overflow-y:auto}
+.transaction{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:10px;background:#111;border:1px solid var(--border)}
+.transaction.recette{border-left:3px solid var(--r4)}
+.transaction.depense{border-left:3px solid var(--r1)}
+.t-emoji{font-size:1.3rem;flex-shrink:0}
+.t-info{flex:1;min-width:0}
+.t-desc{font-weight:700;font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.t-date{font-size:11px;color:#555;margin-top:2px}
+.t-montant{font-family:'Bebas Neue',sans-serif;font-size:1.3rem;flex-shrink:0}
+.t-montant.rec{color:var(--r4)} .t-montant.dep{color:var(--r1)}
+.t-del{background:none;border:none;color:#555;cursor:pointer;font-size:16px;padding:4px;transition:color .15s}
+.t-del:hover{color:var(--r1)}
+.empty-msg{text-align:center;color:#555;padding:2rem;font-size:14px}
+
+/* TOAST */
+.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(20px);background:var(--r2);color:#000;padding:10px 20px;border-radius:10px;font-size:14px;font-weight:700;opacity:0;transition:all .25s;z-index:999;pointer-events:none;white-space:nowrap}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+@media(max-width:600px){.layout{grid-template-columns:1fr}.stats-grid{grid-template-columns:1fr 1fr}}
+</style>
+</head>
+<body>
+
+<h1>💰 Argent de Poche</h1>
+<p class="subtitle">Suis tes revenus, dépenses et objectifs d'épargne</p>
+
+<div style="max-width:800px;margin:0 auto 1.5rem">
+  <div class="solde-display">
+    <div class="solde-label">💼 Mon solde actuel</div>
+    <div class="solde-montant positif" id="solde">+100.00 CHF</div>
+  </div>
+
+  <div class="stats-grid">
+    <div class="stat-card revenus">
+      <div class="stat-label rev">✅ Total revenus</div>
+      <div class="stat-val rev" id="total-rev">+100.00 CHF</div>
+    </div>
+    <div class="stat-card depenses">
+      <div class="stat-label dep">💸 Total dépenses</div>
+      <div class="stat-val dep" id="total-dep">-0.00 CHF</div>
+    </div>
+  </div>
+
+  <!-- OBJECTIF -->
+  <div class="objectif-wrap">
+    <div class="objectif-header">
+      <span class="objectif-titre">🎯 Objectif d'épargne</span>
+      <span class="objectif-pct" id="obj-pct">33%</span>
+    </div>
+    <div class="progress-bar">
+      <div class="progress-fill" id="obj-fill" style="width: 33%;"></div>
+    </div>
+    <div class="objectif-info">
+      <span id="obj-actuel">100.00 CHF épargnés</span>
+      <span id="obj-total">Objectif : Faire augmenter éormément l'entreprise R — 300 CHF</span>
+    </div>
+  </div>
+</div>
+
+<div class="layout">
+  <!-- AJOUTER RECETTE / DÉPENSE -->
+  <div class="card">
+    <h2 style="color:var(--r2)">➕ Ajouter</h2>
+
+    <div class="type-grid">
+      <button class="type-btn recette active" id="btn-rec" onclick="setType(&#39;recette&#39;)">💚 Recette</button>
+      <button class="type-btn depense" id="btn-dep" onclick="setType(&#39;depense&#39;)">❤️ Dépense</button>
+    </div>
+
+    <div class="field">
+      <label>Description</label>
+      <input type="text" id="inp-desc" placeholder="Ex : Argent de poche, Comics...">
+    </div>
+    <div class="field">
+      <label>Montant (CHF)</label>
+      <input type="number" id="inp-montant" placeholder="0.00" min="0" step="0.05">
+    </div>
+    <div class="field">
+      <label>Catégorie</label>
+      <select id="inp-cat">
+        <option>💰 Argent de poche</option>
+        <option>🎁 Cadeau reçu</option>
+        <option>💼 Travail / Service</option>
+        <option>📚 Comics / BD</option>
+        <option>🍭 Bonbons / Nourriture</option>
+        <option>🎮 Jeux</option>
+        <option>🌸 Fleurs</option>
+        <option>🎟 Événement</option>
+        <option>💾 Épargne</option>
+        <option>🛒 Achat divers</option>
+      </select>
+    </div>
+    <button class="add-btn recette" id="add-btn" onclick="ajouter()">+ Ajouter recette</button>
+  </div>
+
+  <!-- OBJECTIF CONFIG -->
+  <div class="card">
+    <h2 style="color:var(--r3)">🎯 Mon Objectif</h2>
+
+    <div class="field">
+      <label>Je veux économiser pour...</label>
+      <input type="text" id="obj-nom" placeholder="Ex : Nouveau comics, Cadeau..." value="">
+    </div>
+    <div class="field">
+      <label>Montant objectif (CHF)</label>
+      <input type="number" id="obj-montant" placeholder="20.00" min="0" step="0.5">
+    </div>
+    <button class="add-btn" style="background:var(--r3);color:#000" onclick="sauverObjectif()">💾 Sauvegarder l'objectif</button>
+
+    <div style="margin-top:1.5rem;padding-top:1.5rem;border-top:1px solid var(--border)">
+      <h2 style="color:var(--r5);margin-bottom:1rem">📊 Résumé rapide</h2>
+      <div id="resume" style="display:flex;flex-direction:column;gap:6px;font-size:13px;color:#888"><div>Aucune dépense pour l'instant 🎉</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- HISTORIQUE -->
+<div class="full-card">
+  <h2 style="color:var(--r5)">
+    📋 Historique (<span id="nb-trans">1</span>)
+    <button class="clear-btn" onclick="clearAll()">🗑 Tout effacer</button>
+  </h2>
+  <div class="transaction-list" id="trans-list">
+    <div class="transaction recette">
+      <span class="t-emoji">💾</span>
+      <div class="t-info">
+        <div class="t-desc">Ce que je peut dépenser</div>
+        <div class="t-date">💾 Épargne · 10.05.2026</div>
+      </div>
+      <div class="t-montant rec">+100.00 CHF</div>
+      <button class="t-del" onclick="supprimer(1778435283170)" title="Supprimer">✕</button>
+    </div></div>
+</div>
+
+<div class="toast" id="toast">💚 +100.00 CHF ajouté !</div>
+
+<script>
+const EMOJIS = {recette:'💚',depense:'❤️'};
+let currentType = 'recette';
+
+function get(k){try{return JSON.parse(localStorage.getItem('argent_'+k))||[]}catch(e){return[]}}
+function set(k,v){localStorage.setItem('argent_'+k,JSON.stringify(v))}
+function getObj(){try{return JSON.parse(localStorage.getItem('argent_obj'))||{nom:'',montant:20}}catch(e){return{nom:'',montant:20}}}
+
+function setType(t){
+  currentType=t;
+  document.getElementById('btn-rec').classList.toggle('active',t==='recette');
+  document.getElementById('btn-dep').classList.toggle('active',t==='depense');
+  const btn=document.getElementById('add-btn');
+  btn.className='add-btn '+t;
+  btn.textContent=t==='recette'?'+ Ajouter recette':'- Ajouter dépense';
+}
+
+function ajouter(){
+  const desc=document.getElementById('inp-desc').value.trim();
+  const montant=parseFloat(document.getElementById('inp-montant').value);
+  const cat=document.getElementById('inp-cat').value;
+  if(!desc){showToast('Entre une description !');return;}
+  if(!montant||montant<=0){showToast('Entre un montant valide !');return;}
+  const trans=get('trans');
+  trans.unshift({
+    id:Date.now(),type:currentType,desc,montant,cat,
+    date:new Date().toLocaleDateString('fr-CH')
+  });
+  set('trans',trans);
+  document.getElementById('inp-desc').value='';
+  document.getElementById('inp-montant').value='';
+  render();
+  showToast(currentType==='recette'?'💚 +'+montant.toFixed(2)+' CHF ajouté !':'❤️ -'+montant.toFixed(2)+' CHF dépensé !');
+}
+
+function sauverObjectif(){
+  const nom=document.getElementById('obj-nom').value.trim();
+  const montant=parseFloat(document.getElementById('obj-montant').value);
+  if(!montant||montant<=0){showToast('Entre un montant objectif !');return;}
+  localStorage.setItem('argent_obj',JSON.stringify({nom,montant}));
+  render();
+  showToast('🎯 Objectif sauvegardé !');
+}
+
+function supprimer(id){
+  set('trans',get('trans').filter(t=>t.id!==id));
+  render();
+  showToast('Transaction supprimée');
+}
+
+function clearAll(){
+  if(!confirm('Effacer tout l\'historique ?'))return;
+  set('trans',[]);
+  render();
+  showToast('🗑 Historique effacé');
+}
+
+function render(){
+  const trans=get('trans');
+  const obj=getObj();
+
+  // Calculs
+  const rev=trans.filter(t=>t.type==='recette').reduce((s,t)=>s+t.montant,0);
+  const dep=trans.filter(t=>t.type==='depense').reduce((s,t)=>s+t.montant,0);
+  const solde=rev-dep;
+
+  // Solde
+  const soldeEl=document.getElementById('solde');
+  soldeEl.textContent=(solde>=0?'+':'')+solde.toFixed(2)+' CHF';
+  soldeEl.className='solde-montant '+(solde>=0?'positif':'negatif');
+
+  // Stats
+  document.getElementById('total-rev').textContent='+'+rev.toFixed(2)+' CHF';
+  document.getElementById('total-dep').textContent='-'+dep.toFixed(2)+' CHF';
+
+  // Objectif
+  const pct=Math.min(100,Math.round((solde/obj.montant)*100));
+  document.getElementById('obj-pct').textContent=Math.max(0,pct)+'%';
+  document.getElementById('obj-fill').style.width=Math.max(0,pct)+'%';
+  document.getElementById('obj-actuel').textContent=solde.toFixed(2)+' CHF épargnés';
+  document.getElementById('obj-total').textContent='Objectif : '+(obj.nom?obj.nom+' — ':'')+obj.montant+' CHF';
+
+  // Résumé
+  const cat={};
+  trans.filter(t=>t.type==='depense').forEach(t=>{
+    cat[t.cat]=(cat[t.cat]||0)+t.montant;
+  });
+  const top=Object.entries(cat).sort((a,b)=>b[1]-a[1]).slice(0,3);
+  document.getElementById('resume').innerHTML=top.length?
+    top.map(([c,v])=>`<div style="display:flex;justify-content:space-between"><span>${c}</span><span style="color:var(--r1)">-${v.toFixed(2)} CHF</span></div>`).join('')
+    :'<div>Aucune dépense pour l\'instant 🎉</div>';
+
+  // Objectif form
+  if(obj.nom) document.getElementById('obj-nom').value=obj.nom;
+  if(obj.montant) document.getElementById('obj-montant').value=obj.montant;
+
+  // Historique
+  document.getElementById('nb-trans').textContent=trans.length;
+  const list=document.getElementById('trans-list');
+  if(!trans.length){
+    list.innerHTML='<div class="empty-msg">Aucune transaction pour l\'instant.<br>Ajoute ta première recette ou dépense !</div>';
+    return;
+  }
+  list.innerHTML=trans.map(t=>`
+    <div class="transaction ${t.type}">
+      <span class="t-emoji">${t.cat.split(' ')[0]}</span>
+      <div class="t-info">
+        <div class="t-desc">${t.desc}</div>
+        <div class="t-date">${t.cat} · ${t.date}</div>
+      </div>
+      <div class="t-montant ${t.type==='recette'?'rec':'dep'}">${t.type==='recette'?'+':'-'}${t.montant.toFixed(2)} CHF</div>
+      <button class="t-del" onclick="supprimer(${t.id})" title="Supprimer">✕</button>
+    </div>`).join('');
+}
+
+function showToast(msg){
+  const t=document.getElementById('toast');
+  t.textContent=msg;t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),2500);
+}
+
+render();
+</script>
+
+
+</body></html>
