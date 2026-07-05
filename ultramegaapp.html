@@ -1,0 +1,1835 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MonApp Ultimate</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.44.0/tabler-icons.min.css">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#f8f7f4;--bg2:#fff;--bg3:#f1efe8;
+  --text:#1a1a1a;--text2:#555;--text3:#999;
+  --border:rgba(0,0,0,0.1);--border2:rgba(0,0,0,0.18);
+  --radius:10px;--radius-lg:14px;
+  --cp:#7F77DD;--cpl:#EEEDFE;--cpd:#3C3489;
+  --ct:#1D9E75;--ctl:#E1F5EE;--ctd:#085041;
+  --cc:#D85A30;--ccl:#FAECE7;--ccd:#712B13;
+  --ck:#D4537E;--ckl:#FBEAF0;--ckd:#4B1528;
+  --ca:#BA7517;--cal:#FAEEDA;--cad:#412402;
+  --cb:#378ADD;--cbl:#E6F1FB;--cbd:#042C53;
+  --cr:#E24B4A;--crl:#FCEBEB;--crd:#501313;
+  --cg:#888780;--cgl:#F1EFE8;--cgd:#2C2C2A;
+  --shadow:0 2px 12px rgba(0,0,0,0.06);
+}
+[data-theme="dark"]{
+  --bg:#1a1a1a;--bg2:#242424;--bg3:#2c2c2a;
+  --text:#f0ede8;--text2:#aaa;--text3:#666;
+  --border:rgba(255,255,255,0.1);--border2:rgba(255,255,255,0.18);
+  --cpl:#26215C;--cpd:#EEEDFE;
+  --ctl:#04342C;--ctd:#E1F5EE;
+  --ccl:#4A1B0C;--ccd:#FAECE7;
+  --ckl:#4B1528;--ckd:#FBEAF0;
+  --cal:#412402;--cad:#FAEEDA;
+  --cbl:#042C53;--cbd:#E6F1FB;
+  --crl:#501313;--crd:#FCEBEB;
+  --cgl:#2C2C2A;--cgd:#F1EFE8;
+  --shadow:0 2px 12px rgba(0,0,0,0.3);
+}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;font-size:14px;line-height:1.5;transition:background 0.3s,color 0.3s}
+
+/* Layout */
+.app-shell{display:flex;height:100vh;overflow:hidden}
+.sidebar{width:220px;flex-shrink:0;background:var(--bg2);border-right:0.5px solid var(--border);display:flex;flex-direction:column;transition:width 0.25s}
+.sidebar.collapsed{width:60px}
+.sidebar-header{display:flex;align-items:center;gap:10px;padding:16px;border-bottom:0.5px solid var(--border);min-height:60px}
+.app-logo{width:32px;height:32px;border-radius:8px;background:var(--cp);display:flex;align-items:center;justify-content:center;color:#fff;font-size:16px;flex-shrink:0}
+.app-logo-text{font-size:14px;font-weight:500;white-space:nowrap;overflow:hidden}
+.sidebar-section{padding:8px;flex:1;overflow-y:auto}
+.nav-group-label{font-size:11px;color:var(--text3);padding:6px 8px 4px;text-transform:uppercase;letter-spacing:0.05em;white-space:nowrap;overflow:hidden}
+.collapsed .nav-group-label{opacity:0;height:0;padding:0}
+.nav-item{display:flex;align-items:center;gap:10px;padding:8px 10px;border-radius:var(--radius);cursor:pointer;transition:all 0.15s;color:var(--text2);border:none;background:transparent;width:100%;text-align:left;font-size:13px;font-family:inherit;white-space:nowrap;overflow:hidden;position:relative}
+.nav-item i{font-size:18px;flex-shrink:0}
+.nav-item:hover{background:var(--bg3);color:var(--text)}
+.nav-item.active{background:var(--cbl);color:var(--cb)}
+.nav-item.active.kid{background:var(--cpl);color:var(--cp)}
+.nav-item .badge-count{position:absolute;right:8px;top:50%;transform:translateY(-50%);background:var(--cr);color:#fff;font-size:10px;padding:1px 5px;border-radius:10px;font-weight:500}
+.collapsed .nav-item span{display:none}
+.collapsed .badge-count{right:4px;top:6px;transform:none}
+.sidebar-footer{padding:8px;border-top:0.5px solid var(--border)}
+.main{flex:1;display:flex;flex-direction:column;overflow:hidden}
+.topbar{display:flex;align-items:center;gap:12px;padding:0 20px;height:56px;border-bottom:0.5px solid var(--border);background:var(--bg2);flex-shrink:0}
+.topbar-title{font-size:15px;font-weight:500;flex:1}
+.topbar-actions{display:flex;gap:6px;align-items:center}
+.mode-pills{display:flex;border-radius:20px;overflow:hidden;border:0.5px solid var(--border2)}
+.mode-pill{padding:4px 14px;font-size:12px;font-weight:500;cursor:pointer;border:none;background:transparent;color:var(--text2);font-family:inherit;transition:all 0.15s}
+.mode-pill.active-pro{background:var(--cb);color:#fff}
+.mode-pill.active-kid{background:var(--cp);color:#fff}
+.icon-btn{width:34px;height:34px;border-radius:var(--radius);border:0.5px solid var(--border);background:transparent;cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--text2);transition:all 0.15s;font-size:18px}
+.icon-btn:hover{background:var(--bg3);color:var(--text)}
+.page{flex:1;overflow-y:auto;padding:20px}
+.page-section{display:none}
+.page-section.active{display:block}
+
+/* Cards & grids */
+.card{background:var(--bg2);border:0.5px solid var(--border);border-radius:var(--radius-lg);padding:16px;margin-bottom:14px}
+.card-title{font-size:13px;font-weight:500;color:var(--text2);margin-bottom:12px;display:flex;align-items:center;gap:6px}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px}
+.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:14px}
+.grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:14px}
+.stat-card{background:var(--bg3);border-radius:var(--radius);padding:14px;text-align:center}
+.stat-label{font-size:11px;color:var(--text3);margin-bottom:4px}
+.stat-val{font-size:22px;font-weight:500;color:var(--text)}
+.stat-sub{font-size:11px;margin-top:3px}
+
+/* Forms */
+input,select,textarea{border:0.5px solid var(--border2);border-radius:var(--radius);padding:8px 10px;font-size:13px;background:var(--bg2);color:var(--text);font-family:inherit;outline:none;width:100%;transition:border 0.15s}
+input:focus,select:focus,textarea:focus{border-color:var(--cb)}
+textarea{resize:vertical;min-height:80px}
+.inp-row{display:flex;gap:8px;margin-bottom:12px;align-items:flex-end}
+.inp-row input,.inp-row select{flex:1}
+label{font-size:12px;color:var(--text2);display:block;margin-bottom:4px}
+.form-group{margin-bottom:12px}
+
+/* Buttons */
+.btn{padding:7px 14px;border-radius:var(--radius);border:0.5px solid var(--border2);background:var(--bg3);color:var(--text);font-size:13px;cursor:pointer;font-weight:500;font-family:inherit;transition:all 0.15s;display:inline-flex;align-items:center;gap:6px;white-space:nowrap}
+.btn:hover{background:var(--border);filter:brightness(0.97)}
+.btn-primary{background:var(--cb);border-color:var(--cb);color:#fff}
+.btn-primary:hover{opacity:0.9}
+.btn-success{background:var(--ct);border-color:var(--ct);color:#fff}
+.btn-danger{background:var(--cr);border-color:var(--cr);color:#fff}
+.btn-kid{background:var(--cp);border-color:var(--cp);color:#fff}
+.btn-sm{padding:4px 10px;font-size:12px}
+.btn-icon{width:32px;height:32px;padding:0;justify-content:center;font-size:16px}
+
+/* Table */
+.tbl{width:100%;border-collapse:collapse;font-size:13px}
+.tbl th{text-align:left;padding:7px 10px;font-size:12px;font-weight:500;color:var(--text2);border-bottom:0.5px solid var(--border);background:var(--bg3)}
+.tbl td{padding:9px 10px;border-bottom:0.5px solid var(--border);color:var(--text);vertical-align:middle}
+.tbl tr:last-child td{border-bottom:none}
+.tbl tr:hover td{background:var(--bg3)}
+.tbl .actions{display:flex;gap:4px}
+
+/* Badges */
+.badge{font-size:11px;padding:3px 8px;border-radius:20px;font-weight:500;display:inline-block;white-space:nowrap}
+.badge-blue{background:var(--cbl);color:var(--cbd)}
+.badge-green{background:var(--ctl);color:var(--ctd)}
+.badge-red{background:var(--crl);color:var(--crd)}
+.badge-amber{background:var(--cal);color:var(--cad)}
+.badge-gray{background:var(--cgl);color:var(--cgd)}
+.badge-purple{background:var(--cpl);color:var(--cpd)}
+.badge-pink{background:var(--ckl);color:var(--ckd)}
+.badge-coral{background:var(--ccl);color:var(--ccd)}
+
+/* Progress */
+.progress{height:8px;background:var(--bg3);border-radius:4px;overflow:hidden}
+.progress-fill{height:100%;border-radius:4px;transition:width 0.4s}
+
+/* Row items */
+.list-row{display:flex;align-items:center;gap:10px;padding:9px 0;border-bottom:0.5px solid var(--border)}
+.list-row:last-child{border-bottom:none}
+.avatar{width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:500;flex-shrink:0;color:#fff}
+
+/* Charts */
+.bar-chart{display:flex;align-items:flex-end;gap:4px;height:80px;padding-top:8px}
+.bar-chart .bar{flex:1;border-radius:3px 3px 0 0;min-height:4px;transition:height 0.3s}
+.chart-labels{display:flex;gap:4px;margin-top:4px}
+.chart-label{flex:1;text-align:center;font-size:10px;color:var(--text3)}
+
+/* Inline editable */
+.editable{cursor:text;border-bottom:1px dashed transparent;transition:border 0.15s;display:inline}
+.editable:hover{border-bottom-color:var(--border2)}
+.editable:focus{outline:none;border-bottom-color:var(--cb)}
+
+/* Notifications toast */
+.toast-container{position:fixed;bottom:20px;right:20px;display:flex;flex-direction:column;gap:8px;z-index:9999;pointer-events:none}
+.toast{background:var(--bg2);border:0.5px solid var(--border);border-radius:var(--radius);padding:10px 14px;font-size:13px;box-shadow:var(--shadow);display:flex;align-items:center;gap:8px;pointer-events:all;min-width:220px;transform:translateX(120%);transition:transform 0.3s}
+.toast.show{transform:translateX(0)}
+.toast i{font-size:16px}
+
+/* Modal */
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.45);display:flex;align-items:center;justify-content:center;z-index:1000;display:none}
+.modal-overlay.open{display:flex}
+.modal{background:var(--bg2);border-radius:var(--radius-lg);padding:20px;width:90%;max-width:480px;border:0.5px solid var(--border);box-shadow:var(--shadow)}
+.modal-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
+.modal-title{font-size:15px;font-weight:500}
+
+/* Kanban */
+.kanban{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
+.kanban-col{background:var(--bg3);border-radius:var(--radius-lg);padding:10px;min-height:160px}
+.kanban-header{font-size:12px;font-weight:500;color:var(--text2);margin-bottom:8px;display:flex;align-items:center;justify-content:space-between}
+.kanban-card{background:var(--bg2);border:0.5px solid var(--border);border-radius:var(--radius);padding:10px;margin-bottom:7px;cursor:pointer;transition:border 0.15s;font-size:13px}
+.kanban-card:hover{border-color:var(--border2)}
+
+/* Weather */
+.weather-icon{font-size:48px;text-align:center;display:block;margin:8px 0}
+
+/* Kid specific */
+.pet-emoji{font-size:72px;display:block;text-align:center;cursor:pointer;user-select:none;transition:transform 0.15s}
+.pet-emoji:active{transform:scale(0.9)}
+.star-count{color:var(--ca);font-weight:500}
+.xp-bar{height:10px;background:var(--bg3);border-radius:5px;overflow:hidden}
+.xp-fill{height:100%;border-radius:5px;background:var(--cp);transition:width 0.4s}
+.mood-face{font-size:36px;cursor:pointer;padding:8px;border-radius:50%;transition:all 0.15s;display:inline-block}
+.mood-face:hover,.mood-face.selected{background:var(--cpl);transform:scale(1.15)}
+.shop-item{border:0.5px solid var(--border);border-radius:var(--radius-lg);padding:12px;text-align:center;transition:border 0.15s}
+.shop-item.owned{border-color:var(--ct);background:var(--ctl)}
+.quiz-opt{display:block;width:100%;padding:10px 14px;border-radius:var(--radius);border:0.5px solid var(--border2);background:var(--bg2);color:var(--text);font-size:13px;cursor:pointer;text-align:left;font-family:inherit;transition:all 0.15s;margin-bottom:7px}
+.quiz-opt:hover{border-color:var(--cp);background:var(--cpl)}
+.quiz-opt.correct{border-color:var(--ct);background:var(--ctl);color:var(--ctd)}
+.quiz-opt.wrong{border-color:var(--cr);background:var(--crl);color:var(--crd)}
+.trophy-card{border-radius:var(--radius-lg);padding:12px;display:flex;align-items:center;gap:12px;margin-bottom:8px;border:0.5px solid var(--border)}
+.trophy-card.unlocked{background:var(--cal);border-color:var(--ca)}
+
+/* Responsive tabs for sub-sections */
+.tab-bar{display:flex;gap:4px;border-bottom:0.5px solid var(--border);margin-bottom:16px}
+.tab{padding:8px 14px;font-size:13px;cursor:pointer;border-bottom:2px solid transparent;color:var(--text2);transition:all 0.15s;border:none;background:transparent;font-family:inherit}
+.tab.active{color:var(--cb);border-bottom-color:var(--cb)}
+.tab-content{display:none}
+.tab-content.active{display:block}
+.tab.active.kid-tab{color:var(--cp);border-bottom-color:var(--cp)}
+
+/* Notification bell bubble */
+.notif-dot{width:7px;height:7px;background:var(--cr);border-radius:50%;position:absolute;top:4px;right:4px}
+
+/* Search highlight */
+.highlight{background:var(--cal);border-radius:3px}
+
+/* Dark/light toggle icon swap */
+.icon-sun,.icon-moon{transition:opacity 0.2s}
+[data-theme="dark"] .icon-sun{display:none}
+[data-theme="light"] .icon-moon{display:none}
+.icon-moon{display:none}
+[data-theme="dark"] .icon-moon{display:flex}
+
+/* Scrollbar */
+::-webkit-scrollbar{width:5px;height:5px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:var(--border2);border-radius:3px}
+</style>
+</head>
+<body data-theme="light">
+
+<!-- Toast container -->
+<div class="toast-container" id="toasts"></div>
+
+<!-- Modal générique -->
+<div class="modal-overlay" id="modal-overlay">
+  <div class="modal">
+    <div class="modal-header">
+      <span class="modal-title" id="modal-title">Titre</span>
+      <button class="btn btn-icon" onclick="closeModal()"><i class="ti ti-x"></i></button>
+    </div>
+    <div id="modal-body"></div>
+  </div>
+</div>
+
+<!-- App Shell -->
+<div class="app-shell">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <div class="app-logo"><i class="ti ti-rocket"></i></div>
+      <span class="app-logo-text">MonApp Ultimate</span>
+    </div>
+    <div class="sidebar-section" id="sidebar-nav"></div>
+    <div class="sidebar-footer">
+      <button class="nav-item" onclick="toggleSidebar()"><i class="ti ti-layout-sidebar"></i><span>Réduire</span></button>
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <div class="main">
+    <!-- TOPBAR -->
+    <div class="topbar">
+      <h1 class="topbar-title" id="topbar-title">Dashboard</h1>
+      <div class="topbar-actions">
+        <div style="position:relative">
+          <input id="global-search" style="width:200px;padding:6px 10px 6px 32px;font-size:13px" placeholder="Rechercher...">
+          <i class="ti ti-search" style="position:absolute;left:9px;top:50%;transform:translateY(-50%);font-size:15px;color:var(--text3);pointer-events:none"></i>
+        </div>
+        <div class="mode-pills">
+          <button class="mode-pill active-pro" id="pill-pro" onclick="switchMode('pro')">Entreprise</button>
+          <button class="mode-pill" id="pill-kid" onclick="switchMode('kid')">Enfant</button>
+        </div>
+        <button class="icon-btn icon-sun" onclick="toggleTheme()" title="Thème sombre"><i class="ti ti-moon"></i></button>
+        <button class="icon-btn icon-moon" onclick="toggleTheme()" title="Thème clair"><i class="ti ti-sun"></i></button>
+        <div style="position:relative">
+          <button class="icon-btn" onclick="showNotifs()"><i class="ti ti-bell"></i></button>
+          <div class="notif-dot" id="notif-dot"></div>
+        </div>
+        <button class="icon-btn" onclick="openSettings()" title="Paramètres"><i class="ti ti-settings"></i></button>
+      </div>
+    </div>
+
+    <!-- PAGE CONTENT -->
+    <div class="page" id="page"></div>
+  </div>
+</div>
+
+<script>
+'use strict';
+
+/* ===== STATE ===== */
+const S = {
+  mode: 'pro',
+  currentSection: 'dashboard',
+  stars: 12,
+  xp: 62,
+  level: 3,
+  petIdx: 0,
+  hunger: 80,
+  happy: 75,
+  energy: 90,
+  qIdx: 0,
+  qScore: 0,
+  qAnswered: false,
+  timerSec: 25*60,
+  timerInit: 25*60,
+  timerRunning: false,
+  timerIv: null,
+  noteColor: 0,
+  selectedMood: -1,
+  sidebarCollapsed: false,
+  notifsSeen: false,
+  shopItems: [
+    {name:'Autocollant arc-en-ciel',prix:5,icon:'🌈',owned:false},
+    {name:'Avatar ninja',prix:10,icon:'🥷',owned:false},
+    {name:'Fond étoilé',prix:15,icon:'🌟',owned:true},
+    {name:'Badge champion',prix:8,icon:'🏆',owned:false},
+    {name:'Dragon bonus',prix:20,icon:'🐉',owned:false},
+    {name:'Super cape',prix:12,icon:'🦸',owned:false},
+  ],
+  tasks: [
+    {id:1,text:'Faire mes devoirs',done:false,priority:'haute',due:'2026-05-16'},
+    {id:2,text:'Ranger ma chambre',done:false,priority:'normale',due:''},
+    {id:3,text:'Lire 20 minutes',done:true,priority:'basse',due:''},
+    {id:4,text:'Faire du sport',done:false,priority:'haute',due:'2026-05-15'},
+  ],
+  kidNotes: [],
+  moodHistory: [2,1,1,0,2,0],
+  clients: [
+    {id:1,nom:'Sophie Martin',email:'s.martin@mail.fr',tel:'06 12 34 56 78',statut:'Actif',ca:2340,avatar:'SM',color:'var(--cp)',notes:'Cliente VIP'},
+    {id:2,nom:'Pierre Dupont',email:'p.dupont@mail.fr',tel:'06 98 76 54 32',statut:'Prospect',ca:0,avatar:'PD',color:'var(--cb)',notes:'À relancer'},
+    {id:3,nom:'Lina Rousseau',email:'l.rousseau@mail.fr',tel:'07 11 22 33 44',statut:'Actif',ca:4120,avatar:'LR',color:'var(--ct)',notes:''},
+    {id:4,nom:'Marc Leblanc',email:'m.leblanc@mail.fr',tel:'06 55 44 33 22',statut:'Inactif',ca:890,avatar:'ML',color:'var(--ca)',notes:'Inactif depuis 3 mois'},
+  ],
+  stocks: [
+    {id:1,nom:'Chaussures running',ref:'CHR-001',stock:42,min:20,max:100,prix:89,categorie:'Chaussures'},
+    {id:2,nom:'T-shirt sport',ref:'TSP-002',stock:8,min:15,max:80,prix:29,categorie:'Textile'},
+    {id:3,nom:'Veste imperméable',ref:'VIM-003',stock:25,min:10,max:50,prix:149,categorie:'Textile'},
+    {id:4,nom:'Short entraînement',ref:'SEN-004',stock:3,min:10,max:60,prix:39,categorie:'Textile'},
+    {id:5,nom:'Casquette été',ref:'CAE-005',stock:67,min:20,max:80,prix:19,categorie:'Accessoires'},
+  ],
+  invoices: [
+    {id:1,num:'FAC-2026-042',client:'Sophie Martin',date:'2026-05-10',montant:2340,statut:'Payée'},
+    {id:2,num:'FAC-2026-041',client:'Lina Rousseau',date:'2026-05-08',montant:1890,statut:'En attente'},
+    {id:3,num:'FAC-2026-040',client:'Marc Leblanc',date:'2026-05-05',montant:450,statut:'Payée'},
+    {id:4,num:'FAC-2026-039',client:'Pierre Dupont',date:'2026-05-02',montant:780,statut:'En retard'},
+  ],
+  team: [
+    {id:1,nom:'Alice Morel',role:'Vendeuse',statut:'Présent',perf:88,avatar:'AM',color:'var(--ck)',heures:35},
+    {id:2,nom:'Tom Garcia',role:'Vendeur',statut:'Présent',perf:74,avatar:'TG',color:'var(--cb)',heures:35},
+    {id:3,nom:'Eva Chen',role:'Caissière',statut:'Congé',perf:95,avatar:'EC',color:'var(--ct)',heures:0},
+    {id:4,nom:'Noa Petit',role:'Logistique',statut:'Présent',perf:81,avatar:'NP',color:'var(--ca)',heures:35},
+  ],
+  kanban: {
+    todo:['Relancer Pierre Dupont','Créer promo juin','Réassort T-shirts','Mise à jour vitrine'],
+    doing:['Inventaire stock','Former Noa Petit'],
+    done:['Facturer Sophie Martin','Planifier réunion équipe']
+  },
+  agenda: [
+    {id:1,titre:'Réunion équipe',date:'2026-05-15',heure:'09:00',type:'team',duree:60},
+    {id:2,titre:'RDV Sophie Martin',date:'2026-05-15',heure:'14:00',type:'client',duree:30},
+    {id:3,titre:'Livraison fournisseur',date:'2026-05-16',heure:'10:30',type:'stock',duree:120},
+    {id:4,titre:'Démo nouveau produit',date:'2026-05-17',heure:'11:00',type:'client',duree:45},
+    {id:5,titre:'Formation Noa',date:'2026-05-19',heure:'09:00',type:'team',duree:180},
+  ],
+  caisse: {items:[], total:0},
+  lastSales: [
+    {id:1,heure:'10h14',client:'Sophie M.',articles:'2 articles',montant:187,paiement:'Carte'},
+    {id:2,heure:'09h52',client:'Anonyme',articles:'1 article',montant:149,paiement:'Espèces'},
+    {id:3,heure:'09h31',client:'Lina R.',articles:'4 articles',montant:312,paiement:'CB'},
+  ],
+  expenses: [
+    {id:1,libelle:'Supermarché Bio',montant:62,cat:'Alimentation',date:'2026-05-13'},
+    {id:2,libelle:'Netflix',montant:17,cat:'Loisirs',date:'2026-05-10'},
+    {id:3,libelle:'Restaurant',montant:45,cat:'Sorties',date:'2026-05-09'},
+    {id:4,libelle:'Essence',montant:60,cat:'Transport',date:'2026-05-08'},
+  ],
+  passwords: [
+    {id:1,site:'Netflix',user:'alice@mail.fr',password:'*****',color:'var(--cr)'},
+    {id:2,site:'Gmail',user:'alice@mail.fr',password:'*****',color:'var(--cb)'},
+    {id:3,site:'Amazon',user:'alice@mail.fr',password:'*****',color:'var(--ca)'},
+  ],
+  habits: [
+    {id:1,nom:'Boire 2L d\'eau',icon:'ti-droplet',streak:5,done:false},
+    {id:2,nom:'Méditer 10 min',icon:'ti-brain',streak:3,done:true},
+    {id:3,nom:'Marcher 30 min',icon:'ti-run',streak:8,done:false},
+    {id:4,nom:'Lire 20 min',icon:'ti-book',streak:12,done:true},
+  ],
+  goals: [
+    {id:1,titre:'Chiffre d\'affaires mai',target:20000,current:18420,unit:'€'},
+    {id:2,titre:'Nouveaux clients',target:10,current:6,unit:''},
+    {id:3,titre:'Satisfaction client',target:95,current:88,unit:'%'},
+  ],
+  quizData: [
+    {q:'Quelle est la capitale de la France ?',opts:['Lyon','Marseille','Paris','Bordeaux'],a:2,cat:'Géo'},
+    {q:'Combien font 8 × 7 ?',opts:['54','56','48','63'],a:1,cat:'Maths'},
+    {q:'Quel animal est le plus grand du monde ?',opts:['Éléphant','Girafe','Baleine bleue','Requin baleine'],a:2,cat:'Sciences'},
+    {q:'En quelle année a commencé la Révolution française ?',opts:['1789','1799','1776','1815'],a:0,cat:'Histoire'},
+    {q:'Quel est le plus grand océan ?',opts:['Atlantique','Indien','Arctique','Pacifique'],a:3,cat:'Géo'},
+    {q:'Combien de côtés a un hexagone ?',opts:['5','6','7','8'],a:1,cat:'Maths'},
+    {q:'Quelle planète est la plus proche du Soleil ?',opts:['Vénus','Terre','Mercure','Mars'],a:2,cat:'Sciences'},
+  ],
+  pets: ['🐱','🐶','🐰','🦊','🐼','🦄','🐸','🦋'],
+  noteColors: [
+    {bg:'var(--ckl)',b:'var(--ck)',t:'var(--ckd)'},
+    {bg:'var(--cpl)',b:'var(--cp)',t:'var(--cpd)'},
+    {bg:'var(--ctl)',b:'var(--ct)',t:'var(--ctd)'},
+    {bg:'var(--cal)',b:'var(--ca)',t:'var(--cad)'},
+  ],
+  moods: ['😄','😊','😐','😢','😡'],
+  moodNames: ['Super !','Bien','Bof','Triste','En colère'],
+  nextId: 100,
+  promos: [],
+  recipes: [
+    {nom:'Ratatouille',temps:45,pers:4,tag:'Végétarien',icon:'🥘'},
+    {nom:'Pâtes carbonara',temps:20,pers:2,tag:'Rapide',icon:'🍝'},
+    {nom:'Salade niçoise',temps:15,pers:2,tag:'Léger',icon:'🥗'},
+    {nom:'Soupe à l\'oignon',temps:60,pers:4,tag:'Hiver',icon:'🍲'},
+  ],
+  workouts: [
+    {nom:'Squats',sets:'4×12',done:true,cat:'Jambes'},
+    {nom:'Pompes',sets:'3×15',done:true,cat:'Pectoraux'},
+    {nom:'Rowing',sets:'4×10',done:false,cat:'Dos'},
+    {nom:'Planche',sets:'3×45s',done:false,cat:'Abdos'},
+    {nom:'Course',sets:'20 min',done:false,cat:'Cardio'},
+  ],
+};
+
+/* ===== NAV CONFIG ===== */
+const PRO_NAV = [
+  {group:'Principal'},
+  {id:'dashboard',icon:'ti-chart-bar',label:'Dashboard'},
+  {id:'crm',icon:'ti-users',label:'Clients CRM'},
+  {id:'invoices',icon:'ti-file-invoice',label:'Factures'},
+  {group:'Opérations'},
+  {id:'stock',icon:'ti-package',label:'Stocks'},
+  {id:'caisse',icon:'ti-cash',label:'Caisse'},
+  {id:'kanban',icon:'ti-layout-kanban',label:'Projets',badge:3},
+  {group:'RH & Analyse'},
+  {id:'team',icon:'ti-id-badge',label:'Équipe'},
+  {id:'agenda',icon:'ti-calendar',label:'Agenda'},
+  {id:'stats',icon:'ti-trending-up',label:'Statistiques'},
+  {group:'Outils'},
+  {id:'budget',icon:'ti-coin',label:'Budget perso'},
+  {id:'habits',icon:'ti-repeat',label:'Habitudes'},
+  {id:'goals',icon:'ti-target',label:'Objectifs'},
+  {id:'passwords',icon:'ti-lock',label:'Mots de passe'},
+  {id:'notes_pro',icon:'ti-notes',label:'Notes pro'},
+];
+
+const KID_NAV = [
+  {group:'Mon espace'},
+  {id:'khome',icon:'ti-home',label:'Accueil'},
+  {id:'ktasks',icon:'ti-checkbox',label:'Missions'},
+  {id:'kquiz',icon:'ti-brain',label:'Quiz'},
+  {id:'kpet',icon:'ti-heart',label:'Animal virtuel'},
+  {group:'Activités'},
+  {id:'ktimer',icon:'ti-clock',label:'Minuteur'},
+  {id:'knotes',icon:'ti-notes',label:'Journal secret'},
+  {id:'kshop',icon:'ti-shopping-cart',label:'Boutique'},
+  {id:'kmood',icon:'ti-mood-smile',label:'Mon humeur'},
+  {id:'krecipes',icon:'ti-chef-hat',label:'Recettes'},
+  {id:'kfitness',icon:'ti-run',label:'Sport'},
+  {group:'Récompenses'},
+  {id:'ktrophees',icon:'ti-trophy',label:'Trophées'},
+  {id:'kstats',icon:'ti-chart-line',label:'Mes stats'},
+];
+
+/* ===== UTILS ===== */
+function fmtEur(n){return new Intl.NumberFormat('fr-FR',{style:'currency',currency:'EUR',maximumFractionDigits:0}).format(n)}
+function fmtDate(d){return new Date(d).toLocaleDateString('fr-FR',{day:'numeric',month:'short',year:'numeric'})}
+function fmtTimer(s){const m=Math.floor(s/60),sc=s%60;return(m<10?'0':'')+m+':'+(sc<10?'0':'')+sc}
+function uid(){return++S.nextId}
+function pct(a,b){return b?Math.round(a/b*100):0}
+function clamp(v,a,b){return Math.max(a,Math.min(b,v))}
+function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;')}
+
+/* ===== TOAST ===== */
+function toast(msg, type='info'){
+  const colors={info:'var(--cb)',success:'var(--ct)',warning:'var(--ca)',error:'var(--cr)'};
+  const icons={info:'ti-info-circle',success:'ti-circle-check',warning:'ti-alert-triangle',error:'ti-alert-circle'};
+  const el=document.createElement('div');
+  el.className='toast';
+  el.innerHTML=`<i class="ti ${icons[type]}" style="color:${colors[type]}"></i><span>${esc(msg)}</span><button class="btn btn-sm btn-icon" style="margin-left:auto;flex-shrink:0" onclick="this.parentElement.remove()"><i class="ti ti-x"></i></button>`;
+  document.getElementById('toasts').appendChild(el);
+  requestAnimationFrame(()=>el.classList.add('show'));
+  setTimeout(()=>{el.classList.remove('show');setTimeout(()=>el.remove(),400)},3500);
+}
+
+/* ===== MODAL ===== */
+function openModal(title, html){
+  document.getElementById('modal-title').textContent=title;
+  document.getElementById('modal-body').innerHTML=html;
+  document.getElementById('modal-overlay').classList.add('open');
+}
+function closeModal(){document.getElementById('modal-overlay').classList.remove('open')}
+
+/* ===== THEME ===== */
+function toggleTheme(){
+  const t=document.body.dataset.theme==='dark'?'light':'dark';
+  document.body.dataset.theme=t;
+  const sun=document.querySelector('.icon-sun');
+  const moon=document.querySelector('.icon-moon');
+  if(t==='dark'){sun.style.display='none';moon.style.display='flex';}
+  else{sun.style.display='flex';moon.style.display='none';}
+  toast(t==='dark'?'Mode sombre activé':'Mode clair activé','info');
+}
+
+/* ===== SIDEBAR ===== */
+function toggleSidebar(){
+  S.sidebarCollapsed=!S.sidebarCollapsed;
+  document.getElementById('sidebar').classList.toggle('collapsed',S.sidebarCollapsed);
+}
+
+/* ===== NAV ===== */
+function buildNav(){
+  const nav=S.mode==='pro'?PRO_NAV:KID_NAV;
+  const isKid=S.mode==='kid';
+  const html=nav.map(item=>{
+    if(item.group) return `<div class="nav-group-label">${item.group}</div>`;
+    const active=S.currentSection===item.id?'active'+(isKid?' kid':''):'';
+    const badge=item.badge?`<span class="badge-count">${item.badge}</span>`:'';
+    return `<button class="nav-item ${active}" onclick="navigateTo('${item.id}')"><i class="ti ${item.icon}" aria-hidden="true"></i><span>${item.label}</span>${badge}</button>`;
+  }).join('');
+  document.getElementById('sidebar-nav').innerHTML=html;
+}
+
+/* ===== NAVIGATION ===== */
+function navigateTo(id){
+  S.currentSection=id;
+  buildNav();
+  renderPage();
+  const allNav=[...PRO_NAV,...KID_NAV];
+  const item=allNav.find(n=>n.id===id);
+  if(item) document.getElementById('topbar-title').textContent=item.label;
+}
+
+/* ===== MODE SWITCH ===== */
+function switchMode(m){
+  S.mode=m;
+  document.getElementById('pill-pro').className='mode-pill'+(m==='pro'?' active-pro':'');
+  document.getElementById('pill-kid').className='mode-pill'+(m==='kid'?' active-kid':'');
+  S.currentSection=m==='pro'?'dashboard':'khome';
+  buildNav();
+  renderPage();
+  document.getElementById('topbar-title').textContent=m==='pro'?'Dashboard':'Accueil';
+}
+
+/* ===== NOTIFICATIONS ===== */
+function showNotifs(){
+  const notifs=[
+    {msg:'Stock T-shirt sport critique (8 unités)',type:'error'},
+    {msg:'Facture FAC-2026-039 en retard',type:'warning'},
+    {msg:'Réunion dans 1 heure',type:'info'},
+  ];
+  openModal('Notifications',notifs.map(n=>`<div class="list-row"><span>${n.msg}</span><span class="badge badge-${n.type==='error'?'red':n.type==='warning'?'amber':'blue'}">${n.type==='error'?'Urgent':n.type==='warning'?'Attention':'Info'}</span></div>`).join('')+'<div style="margin-top:12px"><button class="btn btn-sm" onclick="closeModal()">Fermer</button></div>');
+  document.getElementById('notif-dot').style.display='none';
+  S.notifsSeen=true;
+}
+
+/* ===== SETTINGS ===== */
+function openSettings(){
+  openModal('Paramètres',`
+  <div class="form-group"><label>Nom de l'entreprise</label><input value="MonApp Commerce" oninput="S.appName=this.value"></div>
+  <div class="form-group"><label>Thème</label><select onchange="if(this.value!==document.body.dataset.theme)toggleTheme()">
+    <option value="light">Clair</option><option value="dark">Sombre</option>
+  </select></div>
+  <div class="form-group"><label>Langue</label><select><option>Français</option><option>English</option></select></div>
+  <div style="margin-top:16px;display:flex;gap:8px;justify-content:flex-end">
+    <button class="btn" onclick="closeModal()">Annuler</button>
+    <button class="btn btn-primary" onclick="closeModal();toast('Paramètres sauvegardés','success')"><i class="ti ti-check"></i> Sauvegarder</button>
+  </div>`);
+}
+
+/* ===== INLINE EDIT ===== */
+function makeEditable(el){
+  const oldText=el.textContent;
+  el.contentEditable='true';
+  el.focus();
+  el.addEventListener('blur',function done(){
+    el.contentEditable='false';
+    el.removeEventListener('blur',done);
+    if(el.textContent!==oldText) toast('Modifié avec succès','success');
+  },{once:true});
+  el.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();el.blur();}});
+}
+document.addEventListener('click',e=>{
+  if(e.target.classList.contains('editable')) makeEditable(e.target);
+});
+
+/* ===== GLOBAL SEARCH ===== */
+document.getElementById('global-search').addEventListener('input',function(){
+  const q=this.value.trim().toLowerCase();
+  if(!q)return;
+  const results=[];
+  S.clients.forEach(c=>{if(c.nom.toLowerCase().includes(q))results.push({label:c.nom,section:'crm'})});
+  S.stocks.forEach(st=>{if(st.nom.toLowerCase().includes(q))results.push({label:st.nom,section:'stock'})});
+  if(results.length) toast(`${results.length} résultat(s) pour "${q}"... navigue vers la section !`,'info');
+});
+
+/* ===== RENDER PAGE ===== */
+function renderPage(){
+  const p=document.getElementById('page');
+  const fns={
+    dashboard:renderDashboard, crm:renderCRM, invoices:renderInvoices,
+    stock:renderStock, caisse:renderCaisse, kanban:renderKanban,
+    team:renderTeam, agenda:renderAgenda, stats:renderStats,
+    budget:renderBudget, habits:renderHabits, goals:renderGoals,
+    passwords:renderPasswords, notes_pro:renderNotesPro,
+    khome:renderKHome, ktasks:renderKTasks, kquiz:renderKQuiz,
+    kpet:renderKPet, ktimer:renderKTimer, knotes:renderKNotes,
+    kshop:renderKShop, kmood:renderKMood, krecipes:renderKRecipes,
+    kfitness:renderKFitness, ktrophees:renderKTrophees, kstats:renderKStats,
+  };
+  const fn=fns[S.currentSection];
+  p.innerHTML=fn?fn():'<p style="color:var(--text2)">Section en cours de développement.</p>';
+  afterRender();
+}
+
+function afterRender(){
+  document.querySelectorAll('[data-editable]').forEach(el=>{
+    el.classList.add('editable');
+    el.title='Cliquez pour modifier';
+  });
+}
+
+/* ===== PRO SECTIONS ===== */
+function renderDashboard(){
+  const alertStock=S.stocks.filter(s=>s.stock<s.min).length;
+  const caTotal=S.clients.reduce((a,c)=>a+c.ca,0);
+  const pendingInv=S.invoices.filter(i=>i.statut==='En attente').reduce((a,i)=>a+i.montant,0);
+  const bars=[40,65,50,80,72,90,85];
+  const jours=['L','M','M','J','V','S','D'];
+  return `
+  <div class="grid-4">
+    <div class="stat-card">
+      <div class="stat-label">CA clients total</div>
+      <div class="stat-val" data-editable>${fmtEur(caTotal)}</div>
+      <div class="stat-sub" style="color:var(--ct)">+12 % vs avril</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">Factures en attente</div>
+      <div class="stat-val">${fmtEur(pendingInv)}</div>
+      <div class="stat-sub" style="color:var(--ca)">${S.invoices.filter(i=>i.statut!=='Payée').length} factures</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">Membres actifs</div>
+      <div class="stat-val">${S.team.filter(m=>m.statut==='Présent').length} / ${S.team.length}</div>
+      <div class="stat-sub" style="color:var(--ct)">Présents aujourd'hui</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">Alertes stock</div>
+      <div class="stat-val" style="${alertStock>0?'color:var(--cr)':''}">${alertStock}</div>
+      <div class="stat-sub" style="color:${alertStock>0?'var(--cr)':'var(--ct)'}">${alertStock>0?'À réapprovisionner':'Tout est ok'}</div>
+    </div>
+  </div>
+  <div class="grid-2">
+    <div class="card">
+      <div class="card-title"><i class="ti ti-chart-bar" aria-hidden="true"></i>Ventes 7 derniers jours</div>
+      <div class="bar-chart">
+        ${bars.map((v,i)=>`<div class="bar" style="height:${v}%;background:${i===6?'var(--ct)':'var(--cb)'}"></div>`).join('')}
+      </div>
+      <div class="chart-labels">${jours.map(j=>`<div class="chart-label">${j}</div>`).join('')}</div>
+    </div>
+    <div class="card">
+      <div class="card-title"><i class="ti ti-trending-up" aria-hidden="true"></i>Top produits</div>
+      ${[['T-shirt sport','142 ventes',82,'var(--cb)'],['Chaussures running','98 ventes',60,'var(--ct)'],['Short','67 ventes',41,'var(--ca)']].map(([n,v,p,c])=>`
+      <div style="margin-bottom:10px">
+        <div style="display:flex;justify-content:space-between;font-size:13px;margin-bottom:3px"><span data-editable>${n}</span><span style="color:var(--text2)">${v}</span></div>
+        <div class="progress"><div class="progress-fill" style="width:${p}%;background:${c}"></div></div>
+      </div>`).join('')}
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-title"><i class="ti ti-bell" aria-hidden="true"></i>Activité récente</div>
+    <div class="list-row"><i class="ti ti-circle-check" style="color:var(--ct)" aria-hidden="true"></i><span style="flex:1">Facture FAC-042 payée par Sophie Martin</span><span class="badge badge-green">Payée</span><span style="font-size:12px;color:var(--text3);margin-left:8px">il y a 2h</span></div>
+    <div class="list-row"><i class="ti ti-alert-triangle" style="color:var(--ca)" aria-hidden="true"></i><span style="flex:1">Stock T-shirt sport critique</span><span class="badge badge-red">Urgent</span><span style="font-size:12px;color:var(--text3);margin-left:8px">il y a 3h</span></div>
+    <div class="list-row"><i class="ti ti-user-plus" style="color:var(--cb)" aria-hidden="true"></i><span style="flex:1">Nouveau prospect : Pierre Dupont</span><span class="badge badge-blue">Nouveau</span><span style="font-size:12px;color:var(--text3);margin-left:8px">hier</span></div>
+    <div class="list-row"><i class="ti ti-package" style="color:var(--cp)" aria-hidden="true"></i><span style="flex:1">Livraison reçue : 50 paires chaussures</span><span class="badge badge-gray">Stock</span><span style="font-size:12px;color:var(--text3);margin-left:8px">hier</span></div>
+  </div>`;
+}
+
+function renderCRM(){
+  return `
+  <div style="display:flex;gap:8px;margin-bottom:14px;flex-wrap:wrap;align-items:center">
+    <input style="flex:1;min-width:180px" placeholder="Rechercher un client..." oninput="filterClients(this.value)">
+    <select style="width:auto" onchange="toast('Filtre appliqué','info')">
+      <option value="">Tous les statuts</option>
+      <option>Actif</option><option>Prospect</option><option>Inactif</option>
+    </select>
+    <button class="btn btn-primary" onclick="addClientModal()"><i class="ti ti-plus"></i> Nouveau client</button>
+    <button class="btn" onclick="toast('Export CSV en cours...','info')"><i class="ti ti-download"></i> Exporter</button>
+  </div>
+  <div class="card" style="padding:0;overflow:hidden">
+    <table class="tbl" id="clients-table">
+      <thead><tr><th>Client</th><th>Email</th><th>Téléphone</th><th>Statut</th><th>CA total</th><th>Notes</th><th>Actions</th></tr></thead>
+      <tbody>${S.clients.map(c=>clientRow(c)).join('')}</tbody>
+    </table>
+  </div>`;
+}
+
+function clientRow(c){
+  const sc=c.statut==='Actif'?'badge-green':c.statut==='Prospect'?'badge-blue':'badge-gray';
+  return `<tr id="client-row-${c.id}">
+    <td><div style="display:flex;align-items:center;gap:8px">
+      <div class="avatar" style="background:${c.color}">${c.avatar}</div>
+      <span data-editable>${esc(c.nom)}</span>
+    </div></td>
+    <td style="color:var(--text2);font-size:12px" data-editable>${esc(c.email)}</td>
+    <td style="font-size:12px" data-editable>${esc(c.tel)}</td>
+    <td><span class="badge ${sc}">${c.statut}</span></td>
+    <td style="font-weight:500">${c.ca?fmtEur(c.ca):'—'}</td>
+    <td style="font-size:12px;color:var(--text2)" data-editable>${esc(c.notes)}</td>
+    <td><div class="actions">
+      <button class="btn btn-sm btn-icon" onclick="viewClient(${c.id})" title="Voir"><i class="ti ti-eye"></i></button>
+      <button class="btn btn-sm btn-icon" onclick="deleteClient(${c.id})" title="Supprimer" style="color:var(--cr)"><i class="ti ti-trash"></i></button>
+    </div></td>
+  </tr>`;
+}
+
+function filterClients(q){
+  const rows=document.querySelectorAll('#clients-table tbody tr');
+  rows.forEach(r=>{r.style.display=r.textContent.toLowerCase().includes(q.toLowerCase())?'':'none'});
+}
+
+function addClientModal(){
+  openModal('Nouveau client',`
+  <div class="form-group"><label>Nom complet</label><input id="nc-nom" placeholder="Sophie Martin"></div>
+  <div class="form-group"><label>Email</label><input id="nc-email" type="email" placeholder="sophie@mail.fr"></div>
+  <div class="form-group"><label>Téléphone</label><input id="nc-tel" placeholder="06 XX XX XX XX"></div>
+  <div class="form-group"><label>Statut</label><select id="nc-statut"><option>Prospect</option><option>Actif</option><option>Inactif</option></select></div>
+  <div style="display:flex;gap:8px;justify-content:flex-end;margin-top:16px">
+    <button class="btn" onclick="closeModal()">Annuler</button>
+    <button class="btn btn-primary" onclick="saveClient()"><i class="ti ti-check"></i> Créer</button>
+  </div>`);
+}
+
+function saveClient(){
+  const nom=document.getElementById('nc-nom').value.trim();
+  if(!nom){toast('Le nom est requis','error');return;}
+  const colors=['var(--cp)','var(--cb)','var(--ct)','var(--ca)','var(--ck)'];
+  const initials=nom.split(' ').map(w=>w[0]).join('').toUpperCase().slice(0,2);
+  S.clients.push({id:uid(),nom,email:document.getElementById('nc-email').value,tel:document.getElementById('nc-tel').value,statut:document.getElementById('nc-statut').value,ca:0,avatar:initials,color:colors[S.clients.length%colors.length],notes:''});
+  closeModal();
+  navigateTo('crm');
+  toast(`Client "${nom}" créé !`,'success');
+}
+
+function deleteClient(id){
+  if(!confirm('Supprimer ce client ?'))return;
+  S.clients=S.clients.filter(c=>c.id!==id);
+  navigateTo('crm');
+  toast('Client supprimé','success');
+}
+
+function viewClient(id){
+  const c=S.clients.find(x=>x.id===id);
+  openModal(`Client — ${c.nom}`,`
+  <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px">
+    <div class="avatar" style="background:${c.color};width:50px;height:50px;font-size:16px">${c.avatar}</div>
+    <div><div style="font-size:15px;font-weight:500">${esc(c.nom)}</div><span class="badge ${c.statut==='Actif'?'badge-green':c.statut==='Prospect'?'badge-blue':'badge-gray'}">${c.statut}</span></div>
+  </div>
+  <div class="list-row"><i class="ti ti-mail" aria-hidden="true"></i><span>${esc(c.email)}</span></div>
+  <div class="list-row"><i class="ti ti-phone" aria-hidden="true"></i><span>${esc(c.tel)}</span></div>
+  <div class="list-row"><i class="ti ti-coin" aria-hidden="true"></i><span>CA total : <strong>${c.ca?fmtEur(c.ca):'Aucun'}</strong></span></div>
+  ${c.notes?`<div style="margin-top:12px;padding:10px;background:var(--bg3);border-radius:var(--radius);font-size:13px;color:var(--text2)">${esc(c.notes)}</div>`:''}
+  <div style="margin-top:16px;display:flex;gap:8px;justify-content:flex-end">
+    <button class="btn" onclick="closeModal()">Fermer</button>
+    <button class="btn btn-primary" onclick="toast('Email envoyé à ${esc(c.nom)}','success');closeModal()"><i class="ti ti-mail"></i> Envoyer email</button>
+  </div>`);
+}
+
+function renderInvoices(){
+  const paid=S.invoices.filter(i=>i.statut==='Payée').reduce((a,i)=>a+i.montant,0);
+  const pending=S.invoices.filter(i=>i.statut!=='Payée').reduce((a,i)=>a+i.montant,0);
+  return `
+  <div class="grid-3" style="margin-bottom:14px">
+    <div class="stat-card"><div class="stat-label">Encaissé</div><div class="stat-val" style="color:var(--ct)">${fmtEur(paid)}</div></div>
+    <div class="stat-card"><div class="stat-label">En attente</div><div class="stat-val" style="color:var(--ca)">${fmtEur(pending)}</div></div>
+    <div class="stat-card"><div class="stat-label">Total factures</div><div class="stat-val">${S.invoices.length}</div></div>
+  </div>
+  <div style="display:flex;gap:8px;margin-bottom:12px;flex-wrap:wrap">
+    <input style="flex:1;min-width:160px" placeholder="Rechercher une facture...">
+    <button class="btn btn-primary" onclick="addInvoiceModal()"><i class="ti ti-plus"></i> Nouvelle facture</button>
+    <button class="btn" onclick="toast('Export PDF en cours...','info')"><i class="ti ti-download"></i> Exporter</button>
+  </div>
+  <div class="card" style="padding:0;overflow:hidden">
+    <table class="tbl">
+      <thead><tr><th>N°</th><th>Client</th><th>Date</th><th>Montant</th><th>Statut</th><th>Actions</th></tr></thead>
+      <tbody>
+        ${S.invoices.map(inv=>{
+          const sc=inv.statut==='Payée'?'badge-green':inv.statut==='En attente'?'badge-amber':'badge-red';
+          return `<tr>
+            <td style="font-size:12px;color:var(--text2)" data-editable>${esc(inv.num)}</td>
+            <td data-editable>${esc(inv.client)}</td>
+            <td style="font-size:12px">${fmtDate(inv.date)}</td>
+            <td style="font-weight:500">${fmtEur(inv.montant)}</td>
+            <td><span class="badge ${sc}">${inv.statut}</span></td>
+            <td><div class="actions">
+              <button class="btn btn-sm btn-icon" onclick="markPaid(${inv.id})" title="Marquer payée"><i class="ti ti-check"></i></button>
+              <button class="btn btn-sm btn-icon" onclick="toast('PDF généré','info')" title="PDF"><i class="ti ti-file-invoice"></i></button>
+              <button class="btn btn-sm btn-icon" style="color:var(--cr)" onclick="deleteInvoice(${inv.id})" title="Supprimer"><i class="ti ti-trash"></i></button>
+            </div></td>
+          </tr>`;
+        }).join('')}
+      </tbody>
+    </table>
+  </div>`;
+}
+
+function markPaid(id){
+  const inv=S.invoices.find(i=>i.id===id);
+  if(inv&&inv.statut!=='Payée'){inv.statut='Payée';navigateTo('invoices');toast(`${inv.num} marquée payée !`,'success');}
+}
+function deleteInvoice(id){
+  if(!confirm('Supprimer cette facture ?'))return;
+  S.invoices=S.invoices.filter(i=>i.id!==id);
+  navigateTo('invoices');
+  toast('Facture supprimée','success');
+}
+function addInvoiceModal(){
+  openModal('Nouvelle facture',`
+  <div class="form-group"><label>Client</label><select id="ni-client">${S.clients.map(c=>`<option>${esc(c.nom)}</option>`).join('')}</select></div>
+  <div class="form-group"><label>Montant (€)</label><input id="ni-montant" type="number" placeholder="0"></div>
+  <div class="form-group"><label>Date</label><input id="ni-date" type="date" value="2026-05-15"></div>
+  <div style="display:flex;gap:8px;justify-content:flex-end;margin-top:16px">
+    <button class="btn" onclick="closeModal()">Annuler</button>
+    <button class="btn btn-primary" onclick="saveInvoice()"><i class="ti ti-check"></i> Créer</button>
+  </div>`);
+}
+function saveInvoice(){
+  const client=document.getElementById('ni-client').value;
+  const montant=parseFloat(document.getElementById('ni-montant').value)||0;
+  const date=document.getElementById('ni-date').value;
+  const num='FAC-2026-0'+String(S.invoices.length+43);
+  S.invoices.unshift({id:uid(),num,client,date,montant,statut:'En attente'});
+  closeModal();navigateTo('invoices');toast(`Facture ${num} créée !`,'success');
+}
+
+function renderStock(){
+  const alerts=S.stocks.filter(s=>s.stock<s.min);
+  return `
+  <div class="grid-3">
+    <div class="stat-card"><div class="stat-label">Articles en stock</div><div class="stat-val">${S.stocks.reduce((a,s)=>a+s.stock,0)}</div></div>
+    <div class="stat-card"><div class="stat-label">Valeur estimée</div><div class="stat-val">${fmtEur(S.stocks.reduce((a,s)=>a+s.stock*s.prix,0))}</div></div>
+    <div class="stat-card"><div class="stat-label">Alertes</div><div class="stat-val" style="${alerts.length?'color:var(--cr)':''}">${alerts.length}</div></div>
+  </div>
+  ${alerts.length?`<div style="background:var(--crl);border:0.5px solid var(--cr);border-radius:var(--radius);padding:10px 14px;margin-bottom:12px;font-size:13px;color:var(--crd)"><i class="ti ti-alert-triangle" aria-hidden="true"></i> Stock critique : ${alerts.map(a=>a.nom).join(', ')}</div>`:''}
+  <div style="display:flex;gap:8px;margin-bottom:12px;flex-wrap:wrap">
+    <input style="flex:1;min-width:160px" placeholder="Rechercher un produit..." oninput="filterStock(this.value)">
+    <select style="width:auto"><option>Toutes catégories</option><option>Chaussures</option><option>Textile</option><option>Accessoires</option></select>
+    <button class="btn btn-primary" onclick="addStockModal()"><i class="ti ti-plus"></i> Ajouter produit</button>
+  </div>
+  <div class="card" style="padding:0;overflow:hidden">
+    <table class="tbl" id="stock-table">
+      <thead><tr><th>Produit</th><th>Référence</th><th>Stock</th><th>Prix unitaire</th><th>Valeur</th><th>Statut</th><th>Actions</th></tr></thead>
+      <tbody>${S.stocks.map(s=>{
+        const pct2=pct(s.stock,s.max);
+        const alerte=s.stock<s.min;
+        return `<tr>
+          <td data-editable>${esc(s.nom)}</td>
+          <td style="font-size:12px;color:var(--text2)">${s.ref}</td>
+          <td>
+            <div style="display:flex;align-items:center;gap:8px">
+              <span style="font-weight:500;color:${alerte?'var(--cr)':''}">${s.stock}</span>
+              <div class="progress" style="width:60px"><div class="progress-fill" style="width:${pct2}%;background:${alerte?'var(--cr)':'var(--ct)'}"></div></div>
+            </div>
+          </td>
+          <td>${fmtEur(s.prix)}</td>
+          <td style="font-weight:500">${fmtEur(s.stock*s.prix)}</td>
+          <td><span class="badge ${alerte?'badge-red':'badge-green'}">${alerte?'Alerte':'OK'}</span></td>
+          <td><div class="actions">
+            <button class="btn btn-sm btn-icon" title="Ajouter 10" onclick="adjustStock(${s.id},10)"><i class="ti ti-plus"></i></button>
+            <button class="btn btn-sm btn-icon" title="Retirer 1" onclick="adjustStock(${s.id},-1)"><i class="ti ti-minus"></i></button>
+            <button class="btn btn-sm btn-icon" title="Supprimer le produit" style="color:var(--cr)" onclick="deleteStock(${s.id})"><i class="ti ti-trash"></i></button>
+          </div></td>
+        </tr>`;
+      }).join('')}</tbody>
+    </table>
+  </div>`;
+}
+function filterStock(q){document.querySelectorAll('#stock-table tbody tr').forEach(r=>{r.style.display=r.textContent.toLowerCase().includes(q.toLowerCase())?'':'none'});}
+function adjustStock(id,delta){
+  const s=S.stocks.find(x=>x.id===id);
+  if(s){s.stock=clamp(s.stock+delta,0,999);navigateTo('stock');toast(`Stock de ${s.nom} : ${s.stock} unités`,'info');}
+}
+function deleteStock(id){
+  const s=S.stocks.find(x=>x.id===id);
+  if(!s)return;
+  if(!confirm(`Supprimer "${s.nom}" du stock ?`))return;
+  S.stocks=S.stocks.filter(x=>x.id!==id);
+  navigateTo('stock');
+  toast(`"${s.nom}" supprimé du stock`,'success');
+}
+function addStockModal(){
+  openModal('Nouveau produit',`
+  <div class="form-group"><label>Nom du produit</label><input id="ns-nom" placeholder="Ex: Veste running"></div>
+  <div class="form-group"><label>Référence</label><input id="ns-ref" placeholder="REF-001"></div>
+  <div class="grid-2" style="margin-bottom:0">
+    <div class="form-group"><label>Prix unitaire (€)</label><input id="ns-prix" type="number" placeholder="0"></div>
+    <div class="form-group"><label>Stock initial</label><input id="ns-stock" type="number" placeholder="0"></div>
+  </div>
+  <div class="grid-2" style="margin-bottom:0">
+    <div class="form-group"><label>Stock minimum</label><input id="ns-min" type="number" placeholder="10"></div>
+    <div class="form-group"><label>Catégorie</label><select id="ns-cat"><option>Chaussures</option><option>Textile</option><option>Accessoires</option></select></div>
+  </div>
+  <div style="display:flex;gap:8px;justify-content:flex-end;margin-top:16px">
+    <button class="btn" onclick="closeModal()">Annuler</button>
+    <button class="btn btn-primary" onclick="saveStock()"><i class="ti ti-check"></i> Créer</button>
+  </div>`);
+}
+function saveStock(){
+  const nom=document.getElementById('ns-nom').value.trim();
+  if(!nom){toast('Nom requis','error');return;}
+  S.stocks.push({id:uid(),nom,ref:document.getElementById('ns-ref').value,stock:parseInt(document.getElementById('ns-stock').value)||0,min:parseInt(document.getElementById('ns-min').value)||10,max:100,prix:parseFloat(document.getElementById('ns-prix').value)||0,categorie:document.getElementById('ns-cat').value});
+  closeModal();navigateTo('stock');toast(`Produit "${nom}" créé !`,'success');
+}
+
+function renderCaisse(){
+  const total=S.caisse.items.reduce((a,i)=>a+i.prix*i.qte,0);
+  return `
+  <div class="grid-2">
+    <div class="card">
+      <div class="card-title"><i class="ti ti-cash" aria-hidden="true"></i>Vente en cours</div>
+      ${S.caisse.items.length===0
+        ? '<div style="text-align:center;padding:18px 0;color:var(--text3);font-size:13px"><i class=\"ti ti-shopping-cart\" style=\"font-size:28px;display:block;margin-bottom:8px\"></i>Panier vide — ajoutez un produit ci-dessous</div>'
+        : S.caisse.items.map((it,i)=>`
+      <div class="list-row">
+        <span style="flex:1;font-size:13px" data-editable>${esc(it.nom)}</span>
+        <div style="display:flex;align-items:center;gap:6px">
+          <button class="btn btn-sm btn-icon" onclick="caisseQte(${i},-1)"><i class="ti ti-minus"></i></button>
+          <span style="min-width:20px;text-align:center;font-size:13px">${it.qte}</span>
+          <button class="btn btn-sm btn-icon" onclick="caisseQte(${i},1)"><i class="ti ti-plus"></i></button>
+        </div>
+        <span style="font-weight:500;min-width:50px;text-align:right">${fmtEur(it.prix*it.qte)}</span>
+        <button class="btn btn-sm btn-icon" style="color:var(--cr)" onclick="caisseRemove(${i})" title="Supprimer"><i class="ti ti-trash"></i></button>
+      </div>`).join('')
+      }
+      <div class="inp-row" style="margin-top:10px">
+        <select id="caisse-prod" style="flex:1">${S.stocks.map(s=>`<option value="${s.id}">${esc(s.nom)} — ${fmtEur(s.prix)}</option>`).join('')}</select>
+        <button class="btn btn-primary" onclick="caisseAdd()"><i class="ti ti-plus"></i> Ajouter</button>
+      </div>
+      <div style="margin-top:12px;padding-top:12px;border-top:0.5px solid var(--border);display:flex;justify-content:space-between;align-items:center">
+        <span style="font-size:14px;font-weight:500">Total</span>
+        <span style="font-size:22px;font-weight:500;color:var(--ct)">${fmtEur(total)}</span>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title"><i class="ti ti-credit-card" aria-hidden="true"></i>Paiement</div>
+      ${[['ti-cash','Espèces','cash'],['ti-credit-card','Carte bancaire','card'],['ti-device-mobile','Sans contact','nfc']].map(([ic,lab,val])=>`
+      <div class="list-row" style="cursor:pointer" onclick="validatePayment('${val}',${total})">
+        <i class="ti ${ic}" style="font-size:20px;color:var(--cb)" aria-hidden="true"></i>
+        <span style="flex:1;font-size:14px">${lab}</span>
+        <i class="ti ti-chevron-right" style="color:var(--text3)" aria-hidden="true"></i>
+      </div>`).join('')}
+      <button class="btn btn-success" style="width:100%;padding:12px;margin-top:14px;font-size:14px" onclick="validatePayment('card',${total})"><i class="ti ti-check"></i> Valider — ${fmtEur(total)}</button>
+      <button class="btn" style="width:100%;margin-top:6px" onclick="S.caisse.items=[];navigateTo('caisse')"><i class="ti ti-trash"></i> Vider le panier</button>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-title"><i class="ti ti-history" aria-hidden="true"></i>Dernières ventes</div>
+    ${S.lastSales.length===0
+      ? '<div style="text-align:center;padding:16px;color:var(--text3);font-size:13px">Aucune vente enregistrée</div>'
+      : S.lastSales.map(v=>`
+    <div class="list-row">
+      <span style="font-size:12px;color:var(--text3);width:40px">${v.heure}</span>
+      <span style="flex:1;font-size:13px">${v.client} · ${v.articles}</span>
+      <span style="font-weight:500">${fmtEur(v.montant)}</span>
+      <span class="badge badge-green" style="margin-left:8px">${v.paiement}</span>
+      <button class="btn btn-sm btn-icon" style="color:var(--cr);margin-left:6px" onclick="deleteSale(${v.id})" title="Supprimer"><i class="ti ti-trash"></i></button>
+    </div>`).join('')}
+  </div>`;
+}
+function caisseQte(i,delta){S.caisse.items[i].qte=clamp(S.caisse.items[i].qte+delta,1,99);navigateTo('caisse');}
+function caisseRemove(i){S.caisse.items.splice(i,1);navigateTo('caisse');}
+function deleteSale(id){S.lastSales=S.lastSales.filter(v=>v.id!==id);navigateTo('caisse');toast('Vente supprimée','success');}
+function caisseAdd(){
+  const id=parseInt(document.getElementById('caisse-prod').value);
+  const s=S.stocks.find(x=>x.id===id);
+  if(!s)return;
+  const existing=S.caisse.items.find(x=>x.nom===s.nom);
+  if(existing)existing.qte++;
+  else S.caisse.items.push({nom:s.nom,prix:s.prix,qte:1});
+  navigateTo('caisse');
+}
+function validatePayment(method,total){
+  S.caisse.items=[];
+  navigateTo('caisse');
+  toast(`Paiement de ${fmtEur(total)} validé par ${method==='cash'?'espèces':method==='card'?'carte':'sans contact'} !`,'success');
+}
+
+function renderKanban(){
+  return `
+  <div style="margin-bottom:12px;display:flex;justify-content:space-between;align-items:center">
+    <span style="font-size:13px;color:var(--text2)">${S.kanban.todo.length+S.kanban.doing.length+S.kanban.done.length} tâches au total</span>
+    <button class="btn btn-primary" onclick="addKanbanModal()"><i class="ti ti-plus"></i> Nouvelle tâche</button>
+  </div>
+  <div class="kanban">
+    ${[['todo','À faire','badge-gray'],['doing','En cours','badge-blue'],['done','Terminé','badge-green']].map(([col,label,badgeClass])=>`
+    <div class="kanban-col">
+      <div class="kanban-header">${label}<span class="badge ${badgeClass}">${S.kanban[col].length}</span></div>
+      ${S.kanban[col].map((t,i)=>`
+      <div class="kanban-card" onclick="moveKanban('${col}',${i})">
+        <div style="font-size:13px" data-editable>${esc(t)}</div>
+        <div style="font-size:11px;color:var(--text3);margin-top:4px">Cliquer pour avancer</div>
+      </div>`).join('')}
+    </div>`).join('')}
+  </div>`;
+}
+function moveKanban(col,idx){
+  const task=S.kanban[col].splice(idx,1)[0];
+  const next={todo:'doing',doing:'done',done:'todo'};
+  S.kanban[next[col]].push(task);
+  navigateTo('kanban');
+  toast(`Tâche déplacée vers "${next[col]==='doing'?'En cours':next[col]==='done'?'Terminé':'À faire'}"`, 'success');
+}
+function addKanbanModal(){
+  openModal('Nouvelle tâche',`
+  <div class="form-group"><label>Description</label><input id="nk-task" placeholder="Ex: Appeler le fournisseur"></div>
+  <div class="form-group"><label>Colonne</label><select id="nk-col"><option value="todo">À faire</option><option value="doing">En cours</option></select></div>
+  <div style="display:flex;gap:8px;justify-content:flex-end;margin-top:16px">
+    <button class="btn" onclick="closeModal()">Annuler</button>
+    <button class="btn btn-primary" onclick="saveKanban()"><i class="ti ti-check"></i> Ajouter</button>
+  </div>`);
+}
+function saveKanban(){
+  const t=document.getElementById('nk-task').value.trim();
+  const col=document.getElementById('nk-col').value;
+  if(!t){toast('Description requise','error');return;}
+  S.kanban[col].push(t);closeModal();navigateTo('kanban');toast('Tâche ajoutée !','success');
+}
+
+function renderTeam(){
+  const present=S.team.filter(m=>m.statut==='Présent').length;
+  return `
+  <div class="grid-3" style="margin-bottom:14px">
+    <div class="stat-card"><div class="stat-label">Présents</div><div class="stat-val">${present} / ${S.team.length}</div></div>
+    <div class="stat-card"><div class="stat-label">Perf. moyenne</div><div class="stat-val">${Math.round(S.team.reduce((a,m)=>a+m.perf,0)/S.team.length)} %</div></div>
+    <div class="stat-card"><div class="stat-label">Heures planifiées</div><div class="stat-val">${S.team.filter(m=>m.statut==='Présent').reduce((a,m)=>a+m.heures,0)} h</div></div>
+  </div>
+  <div style="display:flex;gap:8px;margin-bottom:12px">
+    <button class="btn btn-primary" onclick="addTeamModal()"><i class="ti ti-plus"></i> Ajouter membre</button>
+    <button class="btn" onclick="toast('Planning exporté','info')"><i class="ti ti-calendar"></i> Planning</button>
+  </div>
+  <div class="card">
+    <div class="card-title"><i class="ti ti-id-badge" aria-hidden="true"></i>Équipe</div>
+    ${S.team.map(m=>`
+    <div class="list-row">
+      <div class="avatar" style="background:${m.color}">${m.avatar}</div>
+      <div style="flex:1">
+        <div style="font-size:13px;font-weight:500" data-editable>${esc(m.nom)}</div>
+        <div style="font-size:12px;color:var(--text2)" data-editable>${esc(m.role)}</div>
+        <div class="progress" style="margin-top:4px;width:120px"><div class="progress-fill" style="width:${m.perf}%;background:${m.perf>=85?'var(--ct)':m.perf>=70?'var(--ca)':'var(--cr)'}"></div></div>
+      </div>
+      <div style="text-align:right">
+        <span class="badge ${m.statut==='Présent'?'badge-green':'badge-amber'}">${m.statut}</span>
+        <div style="font-size:12px;color:var(--text2);margin-top:4px">${m.perf} % perf.</div>
+      </div>
+      <button class="btn btn-sm btn-icon" style="color:var(--cr);margin-left:8px" onclick="deleteTeamMember(${m.id})" title="Supprimer"><i class="ti ti-trash"></i></button>
+    </div>`).join('')}
+  </div>`;
+}
+function deleteTeamMember(id){if(!confirm('Supprimer ce membre de l\'équipe ?'))return;S.team=S.team.filter(m=>m.id!==id);navigateTo('team');toast('Membre supprimé','success');}
+function addTeamModal(){
+  openModal('Nouveau membre',`
+  <div class="form-group"><label>Nom complet</label><input id="nt-nom" placeholder="Prénom Nom"></div>
+  <div class="form-group"><label>Rôle</label><input id="nt-role" placeholder="Ex: Vendeur"></div>
+  <div style="display:flex;gap:8px;justify-content:flex-end;margin-top:16px">
+    <button class="btn" onclick="closeModal()">Annuler</button>
+    <button class="btn btn-primary" onclick="saveTeam()"><i class="ti ti-check"></i> Créer</button>
+  </div>`);
+}
+function saveTeam(){
+  const nom=document.getElementById('nt-nom').value.trim();
+  if(!nom){toast('Nom requis','error');return;}
+  const colors=['var(--cp)','var(--cb)','var(--ct)','var(--ca)','var(--ck)'];
+  const initials=nom.split(' ').map(w=>w[0]).join('').toUpperCase().slice(0,2);
+  S.team.push({id:uid(),nom,role:document.getElementById('nt-role').value||'Employé',statut:'Présent',perf:80,avatar:initials,color:colors[S.team.length%colors.length],heures:35});
+  closeModal();navigateTo('team');toast(`${nom} ajouté(e) à l'équipe !`,'success');
+}
+
+function renderAgenda(){
+  const today='2026-05-15';
+  const typeColors={team:'var(--cp)',client:'var(--cb)',stock:'var(--ct)'};
+  const typeBgs={team:'var(--cpl)',client:'var(--cbl)',stock:'var(--ctl)'};
+  const typeLabels={team:'Équipe',client:'Client',stock:'Stock'};
+  return `
+  <div style="display:flex;gap:8px;margin-bottom:14px;flex-wrap:wrap;align-items:center">
+    <span style="font-size:13px;color:var(--text2);flex:1">${S.agenda.length} événements cette semaine</span>
+    <button class="btn btn-primary" onclick="addEventModal()"><i class="ti ti-plus"></i> Nouvel événement</button>
+  </div>
+  <div style="display:flex;gap:6px;margin-bottom:14px;overflow-x:auto">
+    ${['Lun 12','Mar 13','Mer 14','Jeu 15','Ven 16','Sam 17','Dim 18'].map((d,i)=>{
+      const isToday=i===3;
+      return `<div style="flex:1;min-width:70px;text-align:center;padding:10px 4px;border-radius:var(--radius);background:${isToday?'var(--cb)':'var(--bg3)'};border:0.5px solid ${isToday?'var(--cb)':'var(--border)'};cursor:pointer" onclick="toast('${d} sélectionné','info')">
+        <div style="font-size:11px;color:${isToday?'rgba(255,255,255,0.8)':'var(--text3)'}">${d.split(' ')[0]}</div>
+        <div style="font-size:17px;font-weight:500;color:${isToday?'#fff':'var(--text)'}">${d.split(' ')[1]}</div>
+        ${isToday?`<div style="font-size:10px;color:rgba(255,255,255,0.8)">Auj.</div>`:''}
+      </div>`;
+    }).join('')}
+  </div>
+  <div class="card">
+    <div class="card-title"><i class="ti ti-calendar" aria-hidden="true"></i>Événements</div>
+    ${S.agenda.sort((a,b)=>a.heure.localeCompare(b.heure)).map(ev=>`
+    <div class="list-row">
+      <span style="font-size:12px;color:var(--text3);width:40px">${ev.heure}</span>
+      <div style="width:3px;height:36px;border-radius:2px;background:${typeColors[ev.type]||'var(--cg)'};flex-shrink:0"></div>
+      <div style="flex:1">
+        <div style="font-size:13px;font-weight:500" data-editable>${esc(ev.titre)}</div>
+        <div style="font-size:12px;color:var(--text2)">${ev.duree} min · ${fmtDate(ev.date)}</div>
+      </div>
+      <span class="badge" style="background:${typeBgs[ev.type]};color:${typeColors[ev.type]}">${typeLabels[ev.type]||'Autre'}</span>
+      <button class="btn btn-sm btn-icon" style="color:var(--cr)" onclick="deleteEvent(${ev.id})"><i class="ti ti-trash"></i></button>
+    </div>`).join('')}
+  </div>`;
+}
+function deleteEvent(id){S.agenda=S.agenda.filter(e=>e.id!==id);navigateTo('agenda');toast('Événement supprimé','success');}
+function addEventModal(){
+  openModal('Nouvel événement',`
+  <div class="form-group"><label>Titre</label><input id="ne-titre" placeholder="Ex: Réunion équipe"></div>
+  <div class="grid-2" style="margin-bottom:0">
+    <div class="form-group"><label>Date</label><input id="ne-date" type="date" value="2026-05-15"></div>
+    <div class="form-group"><label>Heure</label><input id="ne-heure" type="time" value="09:00"></div>
+  </div>
+  <div class="grid-2" style="margin-bottom:0">
+    <div class="form-group"><label>Durée (min)</label><input id="ne-duree" type="number" value="60"></div>
+    <div class="form-group"><label>Type</label><select id="ne-type"><option value="team">Équipe</option><option value="client">Client</option><option value="stock">Stock</option></select></div>
+  </div>
+  <div style="display:flex;gap:8px;justify-content:flex-end;margin-top:16px">
+    <button class="btn" onclick="closeModal()">Annuler</button>
+    <button class="btn btn-primary" onclick="saveEvent()"><i class="ti ti-check"></i> Créer</button>
+  </div>`);
+}
+function saveEvent(){
+  const titre=document.getElementById('ne-titre').value.trim();
+  if(!titre){toast('Titre requis','error');return;}
+  S.agenda.push({id:uid(),titre,date:document.getElementById('ne-date').value,heure:document.getElementById('ne-heure').value,type:document.getElementById('ne-type').value,duree:parseInt(document.getElementById('ne-duree').value)||60});
+  closeModal();navigateTo('agenda');toast(`Événement "${titre}" ajouté !`,'success');
+}
+
+function renderStats(){
+  const bars=[55,60,48,70,82,78,90,85,88,92,85,100];
+  const mois=['J','F','M','A','M','J','J','A','S','O','N','D'];
+  return `
+  <div class="grid-4">
+    <div class="stat-card"><div class="stat-label">CA mai 2026</div><div class="stat-val">${fmtEur(18420)}</div><div class="stat-sub" style="color:var(--ct)">+12 %</div></div>
+    <div class="stat-card"><div class="stat-label">Commandes</div><div class="stat-val">84</div><div class="stat-sub" style="color:var(--ct)">ce mois</div></div>
+    <div class="stat-card"><div class="stat-label">Panier moyen</div><div class="stat-val">${fmtEur(219)}</div></div>
+    <div class="stat-card"><div class="stat-label">Taux conversion</div><div class="stat-val">32 %</div><div class="stat-sub" style="color:var(--ct)">+4 pts</div></div>
+  </div>
+  <div class="grid-2">
+    <div class="card">
+      <div class="card-title"><i class="ti ti-trending-up" aria-hidden="true"></i>CA mensuel 2026</div>
+      <div class="bar-chart">
+        ${bars.map((v,i)=>`<div class="bar" style="height:${v}%;background:${i===4?'var(--ct)':'var(--cb)'}"></div>`).join('')}
+      </div>
+      <div class="chart-labels">${mois.map(m=>`<div class="chart-label">${m}</div>`).join('')}</div>
+    </div>
+    <div class="card">
+      <div class="card-title"><i class="ti ti-chart-pie" aria-hidden="true"></i>Répartition CA</div>
+      ${[['Chaussures',38,'var(--cb)'],['Textile',31,'var(--ct)'],['Accessoires',19,'var(--ca)'],['Autres',12,'var(--cp)']].map(([n,p,c])=>`
+      <div style="margin-bottom:8px">
+        <div style="display:flex;justify-content:space-between;font-size:13px;margin-bottom:3px"><span>${n}</span><span style="font-weight:500">${p} %</span></div>
+        <div class="progress"><div class="progress-fill" style="width:${p*2.5}%;background:${c}"></div></div>
+      </div>`).join('')}
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-title"><i class="ti ti-users" aria-hidden="true"></i>Performance vendeurs</div>
+    <table class="tbl">
+      <thead><tr><th>Vendeur</th><th>Ventes</th><th>CA réalisé</th><th>Objectif</th><th>Progression</th></tr></thead>
+      <tbody>
+        ${S.team.map(m=>{
+          const ca=m.perf*50+1000;
+          const obj=5000;
+          const p=pct(ca,obj);
+          return `<tr>
+            <td><div style="display:flex;align-items:center;gap:8px"><div class="avatar" style="background:${m.color};width:28px;height:28px;font-size:11px">${m.avatar}</div>${esc(m.nom)}</div></td>
+            <td>${Math.round(m.perf*0.4)}</td>
+            <td style="font-weight:500">${fmtEur(ca)}</td>
+            <td style="color:var(--text2)">${fmtEur(obj)}</td>
+            <td><div style="display:flex;align-items:center;gap:8px"><div class="progress" style="width:80px"><div class="progress-fill" style="width:${p}%;background:${p>=80?'var(--ct)':p>=60?'var(--ca)':'var(--cr)'}"></div></div><span style="font-size:12px">${p} %</span></div></td>
+          </tr>`;
+        }).join('')}
+      </tbody>
+    </table>
+  </div>`;
+}
+
+function renderBudget(){
+  const total=S.expenses.reduce((a,e)=>a+e.montant,0);
+  const budget=1500;
+  const reste=budget-total;
+  return `
+  <div class="grid-3">
+    <div class="stat-card"><div class="stat-label">Budget mensuel</div><div class="stat-val">${fmtEur(budget)}</div></div>
+    <div class="stat-card"><div class="stat-label">Dépenses</div><div class="stat-val" style="color:var(--cr)">${fmtEur(total)}</div></div>
+    <div class="stat-card"><div class="stat-label">Reste</div><div class="stat-val" style="${reste<0?'color:var(--cr)':'color:var(--ct)'}">${fmtEur(reste)}</div></div>
+  </div>
+  <div class="card">
+    <div class="card-title"><i class="ti ti-coin" aria-hidden="true"></i>Utilisation du budget</div>
+    <div class="progress" style="height:12px;margin-bottom:8px">
+      <div class="progress-fill" style="width:${Math.min(100,pct(total,budget))}%;background:${pct(total,budget)>90?'var(--cr)':pct(total,budget)>70?'var(--ca)':'var(--ct)'}"></div>
+    </div>
+    <div style="font-size:13px;color:var(--text2)">${pct(total,budget)} % du budget utilisé</div>
+  </div>
+  <div style="display:flex;gap:8px;margin-bottom:12px">
+    <button class="btn btn-primary" onclick="addExpenseModal()"><i class="ti ti-plus"></i> Ajouter dépense</button>
+  </div>
+  <div class="card" style="padding:0;overflow:hidden">
+    <table class="tbl">
+      <thead><tr><th>Libellé</th><th>Catégorie</th><th>Date</th><th>Montant</th><th>Actions</th></tr></thead>
+      <tbody>${S.expenses.map(e=>`<tr>
+        <td data-editable>${esc(e.libelle)}</td>
+        <td><span class="badge badge-gray">${esc(e.cat)}</span></td>
+        <td style="font-size:12px;color:var(--text2)">${fmtDate(e.date)}</td>
+        <td style="font-weight:500;color:var(--cr)">${fmtEur(e.montant)}</td>
+        <td><button class="btn btn-sm btn-icon" style="color:var(--cr)" onclick="deleteExpense(${e.id})"><i class="ti ti-trash"></i></button></td>
+      </tr>`).join('')}</tbody>
+    </table>
+  </div>`;
+}
+function deleteExpense(id){S.expenses=S.expenses.filter(e=>e.id!==id);navigateTo('budget');toast('Dépense supprimée','success');}
+function addExpenseModal(){
+  openModal('Nouvelle dépense',`
+  <div class="form-group"><label>Libellé</label><input id="exp-lib" placeholder="Ex: Courses"></div>
+  <div class="grid-2" style="margin-bottom:0">
+    <div class="form-group"><label>Montant (€)</label><input id="exp-montant" type="number" placeholder="0"></div>
+    <div class="form-group"><label>Catégorie</label><select id="exp-cat"><option>Alimentation</option><option>Transport</option><option>Loisirs</option><option>Santé</option><option>Autre</option></select></div>
+  </div>
+  <div class="form-group"><label>Date</label><input id="exp-date" type="date" value="2026-05-15"></div>
+  <div style="display:flex;gap:8px;justify-content:flex-end;margin-top:16px">
+    <button class="btn" onclick="closeModal()">Annuler</button>
+    <button class="btn btn-primary" onclick="saveExpense()"><i class="ti ti-check"></i> Ajouter</button>
+  </div>`);
+}
+function saveExpense(){
+  const lib=document.getElementById('exp-lib').value.trim();
+  if(!lib){toast('Libellé requis','error');return;}
+  S.expenses.unshift({id:uid(),libelle:lib,montant:parseFloat(document.getElementById('exp-montant').value)||0,cat:document.getElementById('exp-cat').value,date:document.getElementById('exp-date').value});
+  closeModal();navigateTo('budget');toast('Dépense ajoutée !','success');
+}
+
+function renderHabits(){
+  return `
+  <div class="card">
+    <div class="card-title"><i class="ti ti-repeat" aria-hidden="true"></i>Habitudes du jour</div>
+    ${S.habits.map((h,i)=>`
+    <div class="list-row">
+      <div style="width:28px;height:28px;border-radius:8px;border:2px solid ${h.done?'var(--ct)':'var(--border2)'};background:${h.done?'var(--ct)':'transparent'};display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0" onclick="toggleHabit(${i})">
+        ${h.done?'<i class="ti ti-check" style="font-size:14px;color:#fff" aria-hidden="true"></i>':''}
+      </div>
+      <i class="ti ${h.icon}" style="font-size:18px;color:var(--cb)" aria-hidden="true"></i>
+      <span style="flex:1;font-size:14px" data-editable>${esc(h.nom)}</span>
+      <span style="font-size:12px;color:var(--ca)">🔥 ${h.streak} jours</span>
+      ${h.done?'<span class="badge badge-green">Fait !</span>':''}
+    </div>`).join('')}
+  </div>
+  <div class="card">
+    <div class="card-title"><i class="ti ti-chart-bar" aria-hidden="true"></i>Progression hebdomadaire</div>
+    <div style="font-size:13px;color:var(--text2)">Habitudes complétées : <strong>${S.habits.filter(h=>h.done).length} / ${S.habits.length}</strong></div>
+    <div class="progress" style="margin-top:8px;height:12px">
+      <div class="progress-fill" style="width:${pct(S.habits.filter(h=>h.done).length,S.habits.length)}%;background:var(--ct)"></div>
+    </div>
+  </div>`;
+}
+function toggleHabit(i){S.habits[i].done=!S.habits[i].done;if(S.habits[i].done)S.habits[i].streak++;navigateTo('habits');toast(S.habits[i].done?`${S.habits[i].nom} accomplie ! 🔥`:'Habitude décochée','info');}
+
+function renderGoals(){
+  return `
+  <div style="margin-bottom:12px;display:flex;justify-content:flex-end">
+    <button class="btn btn-primary" onclick="addGoalModal()"><i class="ti ti-plus"></i> Nouvel objectif</button>
+  </div>
+  ${S.goals.map((g,i)=>`
+  <div class="card">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px">
+      <div style="font-size:14px;font-weight:500" data-editable>${esc(g.titre)}</div>
+      <span style="font-size:13px;font-weight:500;color:${pct(g.current,g.target)>=100?'var(--ct)':'var(--cb)'}">${pct(g.current,g.target)} %</span>
+    </div>
+    <div class="progress" style="height:12px;margin-bottom:6px">
+      <div class="progress-fill" style="width:${Math.min(100,pct(g.current,g.target))}%;background:${pct(g.current,g.target)>=100?'var(--ct)':pct(g.current,g.target)>=60?'var(--cb)':'var(--ca)'}"></div>
+    </div>
+    <div style="display:flex;justify-content:space-between;font-size:13px;color:var(--text2)">
+      <span>Actuel : <strong>${g.current}${g.unit}</strong></span>
+      <span>Cible : <strong>${g.target}${g.unit}</strong></span>
+    </div>
+  </div>`).join('')}`;
+}
+function addGoalModal(){
+  openModal('Nouvel objectif',`
+  <div class="form-group"><label>Titre</label><input id="ng-titre" placeholder="Ex: Nouveaux clients"></div>
+  <div class="grid-2" style="margin-bottom:0">
+    <div class="form-group"><label>Valeur actuelle</label><input id="ng-current" type="number" placeholder="0"></div>
+    <div class="form-group"><label>Cible</label><input id="ng-target" type="number" placeholder="100"></div>
+  </div>
+  <div class="form-group"><label>Unité (€, %, etc.)</label><input id="ng-unit" placeholder="Ex: €"></div>
+  <div style="display:flex;gap:8px;justify-content:flex-end;margin-top:16px">
+    <button class="btn" onclick="closeModal()">Annuler</button>
+    <button class="btn btn-primary" onclick="saveGoal()"><i class="ti ti-check"></i> Créer</button>
+  </div>`);
+}
+function saveGoal(){
+  const titre=document.getElementById('ng-titre').value.trim();
+  if(!titre){toast('Titre requis','error');return;}
+  S.goals.push({id:uid(),titre,current:parseFloat(document.getElementById('ng-current').value)||0,target:parseFloat(document.getElementById('ng-target').value)||100,unit:document.getElementById('ng-unit').value});
+  closeModal();navigateTo('goals');toast(`Objectif "${titre}" créé !`,'success');
+}
+
+function renderPasswords(){
+  return `
+  <div style="background:var(--cal);border:0.5px solid var(--ca);border-radius:var(--radius);padding:10px 14px;margin-bottom:12px;font-size:13px;color:var(--cad)"><i class="ti ti-shield-lock" aria-hidden="true"></i> Vos mots de passe sont stockés localement et jamais partagés.</div>
+  <div style="display:flex;gap:8px;margin-bottom:12px">
+    <button class="btn btn-primary" onclick="addPwdModal()"><i class="ti ti-plus"></i> Ajouter</button>
+    <button class="btn" onclick="toast('Coffre-fort verrouillé','info')"><i class="ti ti-lock"></i> Verrouiller</button>
+  </div>
+  <div class="card">
+    ${S.passwords.map((p,i)=>`
+    <div class="list-row">
+      <div class="avatar" style="background:${p.color};width:36px;height:36px;font-size:13px">${p.site[0]}</div>
+      <div style="flex:1">
+        <div style="font-size:13px;font-weight:500" data-editable>${esc(p.site)}</div>
+        <div style="font-size:12px;color:var(--text2)" data-editable>${esc(p.user)}</div>
+      </div>
+      <div style="display:flex;gap:6px;align-items:center">
+        <span id="pwd-${i}" style="font-size:13px;letter-spacing:2px">${p.password}</span>
+        <button class="btn btn-sm btn-icon" onclick="togglePwd(${i},'${esc(p.password)}')"><i class="ti ti-eye"></i></button>
+        <button class="btn btn-sm btn-icon" onclick="toast('Copié !','success')"><i class="ti ti-copy"></i></button>
+      </div>
+    </div>`).join('')}
+  </div>`;
+}
+function togglePwd(i,real){
+  const el=document.getElementById('pwd-'+i);
+  el.textContent=el.textContent==='*****'?real:'*****';
+}
+function addPwdModal(){
+  openModal('Nouveau mot de passe',`
+  <div class="form-group"><label>Site / Service</label><input id="np-site" placeholder="Ex: Gmail"></div>
+  <div class="form-group"><label>Identifiant / Email</label><input id="np-user" placeholder="vous@mail.fr"></div>
+  <div class="form-group"><label>Mot de passe</label><input id="np-pwd" type="password" placeholder="••••••••"></div>
+  <div style="display:flex;gap:8px;justify-content:flex-end;margin-top:16px">
+    <button class="btn" onclick="closeModal()">Annuler</button>
+    <button class="btn btn-primary" onclick="savePwd()"><i class="ti ti-lock"></i> Sauvegarder</button>
+  </div>`);
+}
+function savePwd(){
+  const site=document.getElementById('np-site').value.trim();
+  if(!site){toast('Site requis','error');return;}
+  const colors=['var(--cr)','var(--cb)','var(--ca)','var(--ct)','var(--cp)'];
+  S.passwords.push({id:uid(),site,user:document.getElementById('np-user').value,password:document.getElementById('np-pwd').value||'*****',color:colors[S.passwords.length%colors.length]});
+  closeModal();navigateTo('passwords');toast(`"${site}" enregistré !`,'success');
+}
+
+function renderNotesPro(){
+  return `
+  <div class="card">
+    <div class="card-title"><i class="ti ti-notes" aria-hidden="true"></i>Nouvelle note</div>
+    <div class="form-group"><label>Titre</label><input id="pro-note-title" placeholder="Titre de la note"></div>
+    <div class="form-group"><textarea id="pro-note-area" placeholder="Rédigez votre note ici..." style="min-height:120px"></textarea></div>
+    <div style="display:flex;gap:8px;justify-content:flex-end">
+      <button class="btn" onclick="document.getElementById('pro-note-title').value='';document.getElementById('pro-note-area').value=''">Effacer</button>
+      <button class="btn btn-primary" onclick="saveProNote()"><i class="ti ti-check"></i> Sauvegarder</button>
+    </div>
+  </div>
+  <div id="pro-notes-list">
+    <div class="card" style="border-left:3px solid var(--cb)">
+      <div style="font-size:11px;color:var(--text3);margin-bottom:4px">10 mai 2026 · Important</div>
+      <div style="font-size:14px;font-weight:500;margin-bottom:4px" data-editable>Réunion fournisseur lundi</div>
+      <div style="font-size:13px;color:var(--text2)">Vérifier les tarifs pour la prochaine saison. Demander un délai de 60 jours.</div>
+    </div>
+  </div>`;
+}
+function saveProNote(){
+  const title=document.getElementById('pro-note-title').value.trim();
+  const text=document.getElementById('pro-note-area').value.trim();
+  if(!text){toast('Rédigez une note d\'abord','error');return;}
+  const now=new Date().toLocaleDateString('fr-FR',{day:'numeric',month:'long',year:'numeric'});
+  const div=document.createElement('div');
+  div.className='card';
+  div.style.borderLeft='3px solid var(--cp)';
+  div.innerHTML=`<div style="font-size:11px;color:var(--text3);margin-bottom:4px">${now}</div>${title?`<div style="font-size:14px;font-weight:500;margin-bottom:4px" data-editable>${esc(title)}</div>`:''}<div style="font-size:13px;color:var(--text2)">${esc(text)}</div>`;
+  document.getElementById('pro-notes-list').prepend(div);
+  document.getElementById('pro-note-title').value='';
+  document.getElementById('pro-note-area').value='';
+  toast('Note sauvegardée !','success');
+  afterRender();
+}
+
+/* ===== KID SECTIONS ===== */
+function renderKHome(){
+  const doneCount=S.tasks.filter(t=>t.done).length;
+  const petAvg=Math.round((S.hunger+S.happy+S.energy)/3);
+  return `
+  <div class="card" style="text-align:center;padding:20px">
+    <div style="font-size:56px;margin-bottom:8px">${S.pets[S.petIdx]}</div>
+    <div style="font-size:17px;font-weight:500">Bonjour Joueur ! 👋</div>
+    <div style="font-size:13px;color:var(--text2);margin-top:4px">Niveau ${S.level} — Explorateur</div>
+    <div class="xp-bar" style="margin:10px auto;max-width:200px"><div class="xp-fill" style="width:${S.xp}%"></div></div>
+    <div style="font-size:12px;color:var(--text3)">${S.xp} / 100 XP</div>
+  </div>
+  <div class="grid-4">
+    <div class="stat-card" style="background:var(--cal);border:0.5px solid var(--ca)">
+      <div class="stat-label" style="color:var(--cad)">Étoiles</div>
+      <div class="stat-val" style="color:var(--cad)">⭐ ${S.stars}</div>
+    </div>
+    <div class="stat-card" style="background:var(--cpl);border:0.5px solid var(--cp)">
+      <div class="stat-label" style="color:var(--cpd)">Missions</div>
+      <div class="stat-val" style="color:var(--cpd)">${doneCount}/${S.tasks.length}</div>
+    </div>
+    <div class="stat-card" style="background:var(--ckl);border:0.5px solid var(--ck)">
+      <div class="stat-label" style="color:var(--ckd)">Animal</div>
+      <div class="stat-val" style="color:var(--ckd)">${petAvg}%</div>
+    </div>
+    <div class="stat-card" style="background:var(--ctl);border:0.5px solid var(--ct)">
+      <div class="stat-label" style="color:var(--ctd)">Quiz</div>
+      <div class="stat-val" style="color:var(--ctd)">${S.qScore}/7</div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-title"><i class="ti ti-bolt" aria-hidden="true"></i>Activités du jour</div>
+    <div class="list-row"><span style="font-size:20px">📚</span><span style="flex:1">Fais le quiz</span><span class="badge badge-purple">+20 XP</span></div>
+    <div class="list-row"><span style="font-size:20px">✅</span><span style="flex:1">Complète 3 missions</span><span class="badge badge-green">+15 XP</span></div>
+    <div class="list-row"><span style="font-size:20px">🐾</span><span style="flex:1">Nourris ton animal</span><span class="badge badge-pink">+10 XP</span></div>
+    <div class="list-row"><span style="font-size:20px">🛍️</span><span style="flex:1">Achète en boutique</span><span class="badge badge-amber">+5 XP</span></div>
+    <div class="list-row"><span style="font-size:20px">✏️</span><span style="flex:1">Écris dans ton journal</span><span class="badge badge-blue">+5 XP</span></div>
+  </div>`;
+}
+
+function renderKTasks(){
+  const done=S.tasks.filter(t=>t.done).length;
+  const p=pct(done,S.tasks.length);
+  return `
+  <div style="display:flex;gap:8px;margin-bottom:12px">
+    <input id="ktask-inp" placeholder="Nouvelle mission..." onkeydown="if(event.key==='Enter')addKTask()" style="flex:1">
+    <select id="ktask-priority" style="width:auto"><option value="normale">Normale</option><option value="haute">Haute</option><option value="basse">Basse</option></select>
+    <button class="btn btn-kid" onclick="addKTask()"><i class="ti ti-plus"></i></button>
+  </div>
+  <div class="card">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px">
+      <div class="card-title" style="margin-bottom:0"><i class="ti ti-checkbox" aria-hidden="true"></i>Mes missions</div>
+      <span style="font-size:12px;color:var(--text3)">${done}/${S.tasks.length} complétées</span>
+    </div>
+    ${S.tasks.map((t,i)=>{
+      const pc={haute:'badge-red',normale:'badge-blue',basse:'badge-gray'}[t.priority]||'badge-gray';
+      return `<div class="list-row">
+        <div style="width:24px;height:24px;border-radius:7px;border:2px solid ${t.done?'var(--ct)':'var(--border2)'};background:${t.done?'var(--ct)':'transparent'};display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0" onclick="toggleKTask(${i})">
+          ${t.done?'<i class="ti ti-check" style="font-size:13px;color:#fff" aria-hidden="true"></i>':''}
+        </div>
+        <span style="flex:1;font-size:14px;${t.done?'text-decoration:line-through;color:var(--text3)':''}" data-editable>${esc(t.text)}</span>
+        ${t.done?'<span style="font-size:16px">⭐</span>':''}
+        <span class="badge ${pc}">${t.priority}</span>
+        <button class="btn btn-sm btn-icon" style="color:var(--cr)" onclick="removeKTask(${i})"><i class="ti ti-trash"></i></button>
+      </div>`;
+    }).join('')}
+    <div class="progress" style="margin-top:12px;height:10px"><div class="progress-fill" style="width:${p}%;background:var(--cp)"></div></div>
+    <div style="font-size:12px;color:var(--text3);margin-top:5px;text-align:right">${p} % accompli</div>
+    ${p===100&&S.tasks.length>0?'<div style="text-align:center;margin-top:10px;font-size:14px;padding:10px;background:var(--ctl);border-radius:var(--radius);color:var(--ctd)">Bravo ! Toutes les missions sont accomplies ! 🎉</div>':''}
+  </div>`;
+}
+function addKTask(){
+  const inp=document.getElementById('ktask-inp');
+  const priority=document.getElementById('ktask-priority').value;
+  const text=inp.value.trim();
+  if(!text)return;
+  S.tasks.push({id:uid(),text,done:false,priority,due:''});
+  inp.value='';
+  navigateTo('ktasks');
+}
+function toggleKTask(i){
+  const was=S.tasks[i].done;
+  S.tasks[i].done=!was;
+  if(!was){S.stars++;S.xp=clamp(S.xp+5,0,100);toast('Mission accomplie ! +1 étoile ⭐','success');}
+  navigateTo('ktasks');
+}
+function removeKTask(i){S.tasks.splice(i,1);navigateTo('ktasks');}
+
+function renderKQuiz(){
+  if(S.qIdx>=S.quizData.length) return `
+  <div class="card" style="text-align:center;padding:24px">
+    <div style="font-size:56px">🎉</div>
+    <div style="font-size:17px;font-weight:500;margin-top:8px">Quiz terminé !</div>
+    <div style="font-size:14px;color:var(--text2);margin-top:6px">Score : ${S.qScore} / ${S.quizData.length}</div>
+    <div style="font-size:13px;color:var(--ca);margin-top:4px">Tu as gagné ${S.qScore*4} étoiles !</div>
+    <button class="btn btn-kid" style="margin-top:16px" onclick="S.qIdx=0;S.qScore=0;S.qAnswered=false;navigateTo('kquiz')"><i class="ti ti-refresh"></i> Recommencer</button>
+  </div>`;
+  const q=S.quizData[S.qIdx];
+  return `
+  <div class="card">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
+      <span class="badge badge-purple">${q.cat}</span>
+      <div style="font-size:13px;color:var(--text2)">Question ${S.qIdx+1} / ${S.quizData.length}</div>
+      <div style="font-size:13px;color:var(--ca);font-weight:500">⭐ ${S.qScore*4}</div>
+    </div>
+    <div class="progress" style="margin-bottom:14px"><div class="progress-fill" style="width:${pct(S.qIdx,S.quizData.length)}%;background:var(--cp)"></div></div>
+    <div style="font-size:16px;font-weight:500;color:var(--text);margin-bottom:16px;line-height:1.5">${esc(q.q)}</div>
+    ${q.opts.map((o,i)=>`<button class="quiz-opt" id="qopt-${i}" onclick="answerKQuiz(${i})">${esc(o)}</button>`).join('')}
+    <div id="kquiz-fb" style="display:none;font-size:13px;padding:10px;border-radius:var(--radius);text-align:center;margin-top:6px"></div>
+    <div style="display:flex;justify-content:flex-end;margin-top:12px">
+      <button class="btn btn-kid" id="kquiz-next" onclick="S.qIdx++;S.qAnswered=false;navigateTo('kquiz')" disabled>Suivant →</button>
+    </div>
+  </div>`;
+}
+function answerKQuiz(i){
+  if(S.qAnswered)return;
+  S.qAnswered=true;
+  const q=S.quizData[S.qIdx];
+  document.querySelectorAll('.quiz-opt').forEach((b,j)=>{
+    if(j===q.a)b.classList.add('correct');
+    else if(j===i&&i!==q.a)b.classList.add('wrong');
+    b.disabled=true;
+  });
+  const fb=document.getElementById('kquiz-fb');
+  fb.style.display='block';
+  if(i===q.a){S.qScore++;S.stars+=4;S.xp=clamp(S.xp+10,0,100);fb.style.background='var(--ctl)';fb.style.color='var(--ctd)';fb.textContent='Bravo ! Bonne réponse ! +4 étoiles ⭐';}
+  else{fb.style.background='var(--crl)';fb.style.color='var(--crd)';fb.textContent='Pas tout à fait... La réponse était : '+q.opts[q.a];}
+  document.getElementById('kquiz-next').disabled=false;
+}
+
+function renderKPet(){
+  const avg=Math.round((S.hunger+S.happy+S.energy)/3);
+  const mood=avg>80?'Content et plein d\'énergie ! 😺':avg>60?'Ça pourrait aller mieux...':'Un peu triste, câline-moi ! 😿';
+  return `
+  <div class="card">
+    <div class="card-title"><i class="ti ti-heart" aria-hidden="true"></i>Mon animal virtuel</div>
+    <div style="text-align:center;padding:10px 0 14px">
+      <span class="pet-emoji" id="pet-emoji" onclick="petTap()">${S.pets[S.petIdx]}</span>
+      <div style="font-size:15px;font-weight:500;margin-top:8px">Mochi</div>
+      <div style="font-size:13px;color:var(--text2);margin-top:3px">${mood}</div>
+    </div>
+    <div class="grid-3" style="margin-bottom:12px">
+      <div>
+        <div style="font-size:12px;color:var(--text2);margin-bottom:4px">🍎 Faim</div>
+        <div class="progress" style="height:10px"><div class="progress-fill" style="width:${S.hunger}%;background:var(--ct)"></div></div>
+        <div style="font-size:11px;color:var(--text3);margin-top:3px">${S.hunger} %</div>
+      </div>
+      <div>
+        <div style="font-size:12px;color:var(--text2);margin-bottom:4px">💕 Bonheur</div>
+        <div class="progress" style="height:10px"><div class="progress-fill" style="width:${S.happy}%;background:var(--ck)"></div></div>
+        <div style="font-size:11px;color:var(--text3);margin-top:3px">${S.happy} %</div>
+      </div>
+      <div>
+        <div style="font-size:12px;color:var(--text2);margin-bottom:4px">⚡ Énergie</div>
+        <div class="progress" style="height:10px"><div class="progress-fill" style="width:${S.energy}%;background:var(--ca)"></div></div>
+        <div style="font-size:11px;color:var(--text3);margin-top:3px">${S.energy} %</div>
+      </div>
+    </div>
+    <div style="display:flex;gap:8px;flex-wrap:wrap">
+      <button class="btn btn-success" onclick="feedPet()"><span style="font-size:16px">🍎</span> Nourrir</button>
+      <button class="btn btn-kid" onclick="playPet()"><span style="font-size:16px">🎾</span> Jouer</button>
+      <button class="btn" style="background:var(--cal);color:var(--cad);border-color:var(--ca)" onclick="sleepPet()"><span style="font-size:16px">😴</span> Dormir</button>
+      <button class="btn" onclick="changePet()"><i class="ti ti-refresh" aria-hidden="true"></i> Changer d'animal</button>
+    </div>
+    <div id="pet-msg" style="text-align:center;font-size:13px;color:var(--text2);margin-top:10px;min-height:20px"></div>
+  </div>`;
+}
+function feedPet(){S.hunger=clamp(S.hunger+20,0,100);S.stars++;navigateTo('kpet');petMsg('Miam miam ! Merci ! 😋');}
+function playPet(){S.happy=clamp(S.happy+20,0,100);S.stars++;navigateTo('kpet');petMsg('Woohoo ! J\'adore jouer ! 🎉');}
+function sleepPet(){S.energy=clamp(S.energy+30,0,100);navigateTo('kpet');petMsg('Zzz... Je me repose... 😴');}
+function changePet(){S.petIdx=(S.petIdx+1)%S.pets.length;navigateTo('kpet');}
+function petTap(){const e=document.getElementById('pet-emoji');if(e){e.style.transform='scale(1.25)';setTimeout(()=>e.style.transform='',200);}toast('Ronron... 💕','info');}
+function petMsg(m){const el=document.getElementById('pet-msg');if(el){el.textContent=m;setTimeout(()=>{if(el)el.textContent=''},2500);}}
+
+function renderKTimer(){
+  return `
+  <div class="card">
+    <div class="card-title"><i class="ti ti-clock" aria-hidden="true"></i>Minuteur</div>
+    <div class="timer-big" id="ktimer-display" style="font-size:52px;font-weight:500;text-align:center;letter-spacing:2px;margin:12px 0;color:var(--text)">${fmtTimer(S.timerSec)}</div>
+    <div class="progress" style="margin-bottom:16px">
+      <div class="progress-fill" style="width:${pct(S.timerInit-S.timerSec,S.timerInit)}%;background:var(--cp)" id="ktimer-progress"></div>
+    </div>
+    <div style="display:flex;gap:8px;justify-content:center;margin-bottom:14px;flex-wrap:wrap">
+      ${[[5,'5 min'],[10,'10 min'],[15,'15 min'],[25,'25 min'],[45,'45 min']].map(([s,l])=>`<button class="btn" onclick="setKTimer(${s*60})">${l}</button>`).join('')}
+    </div>
+    <div style="display:flex;gap:8px;justify-content:center">
+      <button class="btn btn-kid" style="min-width:120px" id="ktimer-start-btn" onclick="toggleKTimer()"><i class="ti ti-player-play"></i> Démarrer</button>
+      <button class="btn" onclick="resetKTimer()"><i class="ti ti-refresh"></i> Réinitialiser</button>
+    </div>
+    <div style="font-size:13px;color:var(--text2);text-align:center;margin-top:10px" id="ktimer-label">Prêt !</div>
+  </div>
+  <div class="card">
+    <div class="card-title"><i class="ti ti-bolt" aria-hidden="true"></i>Suggestions d'activités</div>
+    ${[['📚','Devoirs',25],['🎨','Dessin',15],['📖','Lecture',20],['🧘','Détente',5],['🎮','Jeu éducatif',30]].map(([icon,name,min])=>`
+    <div class="list-row">
+      <span style="font-size:20px">${icon}</span>
+      <span style="flex:1;font-size:13px">${name}</span>
+      <button class="btn btn-sm" onclick="setKTimer(${min*60})">${min} min</button>
+    </div>`).join('')}
+  </div>`;
+}
+function setKTimer(s){
+  if(S.timerRunning){clearInterval(S.timerIv);S.timerRunning=false;}
+  S.timerSec=s;S.timerInit=s;
+  const d=document.getElementById('ktimer-display');
+  if(d)d.textContent=fmtTimer(s);
+  const btn=document.getElementById('ktimer-start-btn');
+  if(btn)btn.innerHTML='<i class="ti ti-player-play"></i> Démarrer';
+}
+function toggleKTimer(){
+  if(S.timerRunning){
+    clearInterval(S.timerIv);S.timerRunning=false;
+    const btn=document.getElementById('ktimer-start-btn');
+    if(btn)btn.innerHTML='<i class="ti ti-player-play"></i> Reprendre';
+  }else{
+    S.timerRunning=true;
+    const btn=document.getElementById('ktimer-start-btn');
+    if(btn)btn.innerHTML='<i class="ti ti-player-pause"></i> Pause';
+    const label=document.getElementById('ktimer-label');
+    if(label)label.textContent='En cours... Courage !';
+    S.timerIv=setInterval(()=>{
+      if(S.timerSec<=0){
+        clearInterval(S.timerIv);S.timerRunning=false;
+        S.stars+=2;S.xp=clamp(S.xp+5,0,100);
+        toast('Minuteur terminé ! Bravo ! +2 étoiles ⭐','success');
+        const lb=document.getElementById('ktimer-label');
+        if(lb)lb.textContent='Terminé ! Bravo ! 🎉';
+        const b=document.getElementById('ktimer-start-btn');
+        if(b)b.innerHTML='<i class="ti ti-player-play"></i> Démarrer';
+      }else{
+        S.timerSec--;
+        const d=document.getElementById('ktimer-display');
+        if(d)d.textContent=fmtTimer(S.timerSec);
+        const p=document.getElementById('ktimer-progress');
+        if(p)p.style.width=pct(S.timerInit-S.timerSec,S.timerInit)+'%';
+      }
+    },1000);
+  }
+}
+function resetKTimer(){
+  clearInterval(S.timerIv);S.timerRunning=false;
+  S.timerSec=S.timerInit;
+  const d=document.getElementById('ktimer-display');if(d)d.textContent=fmtTimer(S.timerSec);
+  const p=document.getElementById('ktimer-progress');if(p)p.style.width='0%';
+  const b=document.getElementById('ktimer-start-btn');if(b)b.innerHTML='<i class="ti ti-player-play"></i> Démarrer';
+  const l=document.getElementById('ktimer-label');if(l)l.textContent='Prêt !';
+}
+
+function renderKNotes(){
+  return `
+  <div class="card">
+    <div class="card-title"><i class="ti ti-notes" aria-hidden="true"></i>Mon journal secret 🔒</div>
+    <div class="form-group"><input id="knote-title" placeholder="Titre de l'entrée (optionnel)"></div>
+    <div class="form-group"><textarea id="knote-area" placeholder="Raconte ta journée, tes rêves, ce qui te fait sourire..." style="min-height:100px"></textarea></div>
+    <div style="display:flex;gap:8px;align-items:center;margin-top:4px">
+      <span style="font-size:13px;color:var(--text2)">Couleur :</span>
+      ${S.noteColors.map((c,i)=>`<button onclick="S.noteColor=${i};updateNoteColors()" style="width:24px;height:24px;border-radius:50%;background:${c.b};border:2px solid ${S.noteColor===i?'var(--text)':'transparent'};cursor:pointer" title="Couleur ${i+1}"></button>`).join('')}
+      <button class="btn btn-kid" style="margin-left:auto" onclick="saveKNote()"><i class="ti ti-lock"></i> Sauvegarder</button>
+    </div>
+  </div>
+  <div id="knotes-list">
+    ${S.kidNotes.map(n=>`
+    <div style="background:${n.bg};border-left:4px solid ${n.b};border-radius:var(--radius-lg);padding:14px;margin-bottom:10px">
+      <div style="font-size:11px;color:var(--text3);margin-bottom:4px">${n.date}</div>
+      ${n.title?`<div style="font-size:14px;font-weight:500;color:${n.t};margin-bottom:4px">${esc(n.title)}</div>`:''}
+      <div style="font-size:13px;line-height:1.6;color:${n.t}">${esc(n.text)}</div>
+    </div>`).join('')}
+    ${S.kidNotes.length===0?'<div style="text-align:center;color:var(--text3);padding:20px;font-size:13px">Ton journal est vide. Commence à écrire !</div>':''}
+  </div>`;
+}
+function updateNoteColors(){navigateTo('knotes');}
+function saveKNote(){
+  const text=document.getElementById('knote-area').value.trim();
+  if(!text){toast('Écris quelque chose d\'abord !','error');return;}
+  const title=document.getElementById('knote-title').value.trim();
+  const c=S.noteColors[S.noteColor];
+  const now=new Date();
+  S.kidNotes.unshift({title,text,date:now.toLocaleDateString('fr-FR',{weekday:'long',day:'numeric',month:'long',year:'numeric'}),bg:c.bg,b:c.b,t:c.t});
+  S.stars++;S.xp=clamp(S.xp+5,0,100);
+  navigateTo('knotes');
+  toast('Journal mis à jour ! +1 étoile ⭐','success');
+}
+
+function renderKShop(){
+  return `
+  <div class="card" style="display:flex;justify-content:space-between;align-items:center;padding:14px">
+    <div>
+      <div style="font-size:15px;font-weight:500">Ma boutique</div>
+      <div style="font-size:13px;color:var(--text2)">Dépense tes étoiles !</div>
+    </div>
+    <div style="background:var(--cal);border:0.5px solid var(--ca);border-radius:20px;padding:6px 16px;font-size:14px;font-weight:500;color:var(--cad)">⭐ ${S.stars} étoiles</div>
+  </div>
+  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px">
+    ${S.shopItems.map((it,i)=>`
+    <div class="shop-item">
+      <div style="font-size:36px;margin-bottom:8px">${it.icon}</div>
+      <div style="font-size:12px;font-weight:500;color:var(--text);margin-bottom:8px">${esc(it.name)}</div>
+      ${it.owned
+        ?'<span class="badge badge-green">✓ Acquis</span>'
+        :`<button class="btn btn-sm ${S.stars>=it.prix?'btn-kid':'btn-gray'}" style="width:100%;${S.stars<it.prix?'opacity:0.5':''}" onclick="buyShopItem(${i})" ${S.stars<it.prix?'disabled':''}>${it.prix} ⭐</button>`
+      }
+    </div>`).join('')}
+  </div>`;
+}
+function buyShopItem(i){
+  const it=S.shopItems[i];
+  if(S.stars>=it.prix&&!it.owned){
+    S.stars-=it.prix;it.owned=true;
+    navigateTo('kshop');
+    toast(`"${it.name}" acheté ! 🎉`,'success');
+  }else if(it.owned){
+    toast('Tu possèdes déjà cet article !','info');
+  }else{
+    toast(`Il te manque ${it.prix-S.stars} étoiles...`,'error');
+  }
+}
+
+function renderKMood(){
+  return `
+  <div class="card">
+    <div class="card-title"><i class="ti ti-mood-smile" aria-hidden="true"></i>Comment tu te sens aujourd'hui ?</div>
+    <div style="display:flex;gap:14px;justify-content:center;margin:16px 0;flex-wrap:wrap">
+      ${S.moods.map((m,i)=>`
+      <div style="text-align:center;cursor:pointer" onclick="selectMood(${i})">
+        <span class="mood-face ${S.selectedMood===i?'selected':''}">${m}</span>
+        <div style="font-size:12px;color:var(--text2);margin-top:4px">${S.moodNames[i]}</div>
+      </div>`).join('')}
+    </div>
+    ${S.selectedMood>=0?`<div style="text-align:center;padding:10px;background:var(--cpl);border-radius:var(--radius);margin-bottom:12px;font-size:14px;color:var(--cpd)">Tu te sens <strong>${S.moodNames[S.selectedMood]}</strong> — c'est tout à fait normal !</div>`:''}
+    <div class="form-group"><textarea id="mood-note" placeholder="Tu veux écrire ce qui se passe ? (optionnel)" style="min-height:70px"></textarea></div>
+    <button class="btn btn-kid" style="width:100%" onclick="saveMood()"><i class="ti ti-check"></i> Enregistrer mon humeur</button>
+  </div>
+  <div class="card">
+    <div class="card-title"><i class="ti ti-chart-bar" aria-hidden="true"></i>Mon humeur cette semaine</div>
+    <div class="bar-chart">
+      ${[...S.moodHistory,S.selectedMood>=0?S.selectedMood:1].slice(-7).map((m,i)=>`
+      <div class="bar" style="height:${100-m*22}%;background:${i===6?'var(--cp)':'var(--cpl)'};position:relative;display:flex;align-items:flex-start;justify-content:center;padding-top:2px">
+        <span style="font-size:14px">${S.moods[m]}</span>
+      </div>`).join('')}
+    </div>
+    <div class="chart-labels">${['L','M','M','J','V','S','Auj.'].map(d=>`<div class="chart-label">${d}</div>`).join('')}</div>
+  </div>`;
+}
+function selectMood(i){S.selectedMood=i;navigateTo('kmood');}
+function saveMood(){
+  if(S.selectedMood<0){toast('Choisis une humeur d\'abord !','error');return;}
+  S.moodHistory.push(S.selectedMood);
+  S.stars++;S.xp=clamp(S.xp+3,0,100);
+  toast('Humeur enregistrée ! +1 étoile ⭐','success');
+}
+
+function renderKRecipes(){
+  return `
+  <div class="card">
+    <div class="card-title"><i class="ti ti-chef-hat" aria-hidden="true"></i>Recettes faciles</div>
+    ${S.recipes.map(r=>`
+    <div class="list-row" style="cursor:pointer" onclick="toast('Recette ${esc(r.nom)} ouverte !','info')">
+      <span style="font-size:28px">${r.icon}</span>
+      <div style="flex:1">
+        <div style="font-size:14px;font-weight:500">${esc(r.nom)}</div>
+        <div style="font-size:12px;color:var(--text2)"><i class="ti ti-clock" aria-hidden="true"></i> ${r.temps} min · <i class="ti ti-users" aria-hidden="true"></i> ${r.pers} pers.</div>
+      </div>
+      <span class="badge badge-purple">${esc(r.tag)}</span>
+    </div>`).join('')}
+  </div>
+  <div class="card" style="background:var(--ctl);border-color:var(--ct)">
+    <div class="card-title" style="color:var(--ctd)"><i class="ti ti-bulb" aria-hidden="true"></i>Conseil du jour</div>
+    <div style="font-size:13px;color:var(--ctd)">Lave toujours tes mains avant de cuisiner ! Et demande à un adulte avant d'utiliser le four. 👨‍🍳</div>
+  </div>`;
+}
+
+function renderKFitness(){
+  const done=S.workouts.filter(w=>w.done).length;
+  return `
+  <div class="grid-3" style="margin-bottom:14px">
+    <div class="stat-card" style="background:var(--cpl);border:0.5px solid var(--cp)"><div class="stat-label" style="color:var(--cpd)">Exercices faits</div><div class="stat-val" style="color:var(--cpd)">${done}/${S.workouts.length}</div></div>
+    <div class="stat-card" style="background:var(--ctl);border:0.5px solid var(--ct)"><div class="stat-label" style="color:var(--ctd)">Calories</div><div class="stat-val" style="color:var(--ctd)">${done*45}</div></div>
+    <div class="stat-card" style="background:var(--cal);border:0.5px solid var(--ca)"><div class="stat-label" style="color:var(--cad)">Streak</div><div class="stat-val" style="color:var(--cad)">🔥 ${done}</div></div>
+  </div>
+  <div class="card">
+    <div class="card-title"><i class="ti ti-run" aria-hidden="true"></i>Programme du jour — Full body</div>
+    ${S.workouts.map((w,i)=>`
+    <div class="list-row">
+      <div style="width:26px;height:26px;border-radius:8px;border:2px solid ${w.done?'var(--ct)':'var(--border2)'};background:${w.done?'var(--ct)':'transparent'};display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0" onclick="toggleWorkout(${i})">
+        ${w.done?'<i class="ti ti-check" style="font-size:13px;color:#fff" aria-hidden="true"></i>':''}
+      </div>
+      <div style="flex:1">
+        <div style="font-size:14px;font-weight:500;${w.done?'text-decoration:line-through;color:var(--text3)':''}">${esc(w.nom)}</div>
+        <div style="font-size:12px;color:var(--text2)">${esc(w.sets)} · ${esc(w.cat)}</div>
+      </div>
+      ${w.done?'<span class="badge badge-green">Fait !</span>':'<span class="badge badge-gray">À faire</span>'}
+    </div>`).join('')}
+    ${pct(done,S.workouts.length)===100?'<div style="text-align:center;padding:12px;font-size:14px;background:var(--ctl);border-radius:var(--radius);margin-top:8px;color:var(--ctd)">Entraînement terminé ! Bravo champion(ne) ! 🏆</div>':''}
+  </div>`;
+}
+function toggleWorkout(i){
+  S.workouts[i].done=!S.workouts[i].done;
+  if(S.workouts[i].done){S.stars++;toast(`${S.workouts[i].nom} accompli ! +1 étoile ⭐`,'success');}
+  navigateTo('kfitness');
+}
+
+function renderKTrophees(){
+  const trophees=[
+    {name:'Première étoile',desc:'Gagner 1 étoile',icon:'⭐',unlocked:S.stars>=1},
+    {name:'Super champion',desc:'Avoir 20 étoiles',icon:'🌟',unlocked:S.stars>=20},
+    {name:'Mission accomplie',desc:'Compléter une tâche',icon:'✅',unlocked:S.tasks.some(t=>t.done)},
+    {name:'Quiz master',desc:'Score parfait au quiz',icon:'🧠',unlocked:S.qScore>=7},
+    {name:'Animal heureux',desc:'Nourrir son animal',icon:'🐾',unlocked:S.hunger>=90},
+    {name:'Propriétaire',desc:'Acheter en boutique',icon:'🛍️',unlocked:S.shopItems.some(i=>i.owned)},
+    {name:'Écrivain',desc:'Écrire dans le journal',icon:'📖',unlocked:S.kidNotes.length>0},
+    {name:'À l\'écoute',desc:'Enregistrer son humeur',icon:'💆',unlocked:S.selectedMood>=0},
+    {name:'Sportif',desc:'Faire 3 exercices',icon:'🏃',unlocked:S.workouts.filter(w=>w.done).length>=3},
+    {name:'Chef cuisto',desc:'Consulter 2 recettes',icon:'👨‍🍳',unlocked:false},
+  ];
+  const unlocked=trophees.filter(t=>t.unlocked).length;
+  return `
+  <div class="card" style="text-align:center;padding:16px">
+    <div style="font-size:40px">🏆</div>
+    <div style="font-size:15px;font-weight:500;margin-top:6px">${unlocked} / ${trophees.length} trophées débloqués</div>
+    <div class="progress" style="margin:10px auto;max-width:200px"><div class="progress-fill" style="width:${pct(unlocked,trophees.length)}%;background:var(--ca)"></div></div>
+  </div>
+  ${trophees.map(t=>`
+  <div class="trophy-card" style="${t.unlocked?'background:var(--cal);border-color:var(--ca)':''}">
+    <div style="font-size:32px;width:48px;text-align:center">${t.unlocked?t.icon:'🔒'}</div>
+    <div style="flex:1">
+      <div style="font-size:13px;font-weight:500">${t.name}</div>
+      <div style="font-size:12px;color:var(--text2);margin-top:2px">${t.desc}</div>
+    </div>
+    ${t.unlocked?`<span class="badge badge-amber">Débloqué !</span>`:'<span class="badge badge-gray">Verrouillé</span>'}
+  </div>`).join('')}`;
+}
+
+function renderKStats(){
+  return `
+  <div class="grid-2">
+    <div class="stat-card" style="background:var(--cpl);border:0.5px solid var(--cp)"><div class="stat-label" style="color:var(--cpd)">Étoiles totales</div><div class="stat-val" style="color:var(--cpd)">⭐ ${S.stars}</div></div>
+    <div class="stat-card" style="background:var(--ctl);border:0.5px solid var(--ct)"><div class="stat-label" style="color:var(--ctd)">Niveau</div><div class="stat-val" style="color:var(--ctd)">${S.level}</div></div>
+    <div class="stat-card" style="background:var(--cal);border:0.5px solid var(--ca)"><div class="stat-label" style="color:var(--cad)">XP</div><div class="stat-val" style="color:var(--cad)">${S.xp} / 100</div></div>
+    <div class="stat-card" style="background:var(--ckl);border:0.5px solid var(--ck)"><div class="stat-label" style="color:var(--ckd)">Quiz score</div><div class="stat-val" style="color:var(--ckd)">${S.qScore} / ${S.quizData.length}</div></div>
+  </div>
+  <div class="card">
+    <div class="card-title"><i class="ti ti-chart-line" aria-hidden="true"></i>Mon humeur cette semaine</div>
+    <div class="bar-chart">
+      ${[...S.moodHistory].slice(-7).map(m=>`<div class="bar" style="height:${100-m*22}%;background:var(--cp)">${S.moods[m]}</div>`).join('')}
+    </div>
+    <div class="chart-labels">${['L','M','M','J','V','S','D'].map(d=>`<div class="chart-label">${d}</div>`).join('')}</div>
+  </div>
+  <div class="card">
+    <div class="card-title"><i class="ti ti-trophy" aria-hidden="true"></i>Récapitulatif</div>
+    <div class="list-row"><span style="flex:1">Missions complétées</span><span style="font-weight:500">${S.tasks.filter(t=>t.done).length}</span></div>
+    <div class="list-row"><span style="flex:1">Exercices faits</span><span style="font-weight:500">${S.workouts.filter(w=>w.done).length}</span></div>
+    <div class="list-row"><span style="flex:1">Entrées dans le journal</span><span style="font-weight:500">${S.kidNotes.length}</span></div>
+    <div class="list-row"><span style="flex:1">Articles en boutique</span><span style="font-weight:500">${S.shopItems.filter(i=>i.owned).length}</span></div>
+    <div class="list-row"><span style="flex:1">Bonnes réponses au quiz</span><span style="font-weight:500">${S.qScore}</span></div>
+  </div>`;
+}
+
+/* ===== INIT ===== */
+buildNav();
+renderPage();
+document.getElementById('notif-dot').style.display='block';
+</script>
+</body>
+</html>
