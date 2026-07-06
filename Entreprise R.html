@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<!-- saved from url=(0052)file:///C:/Users/RAPHAEL/Downloads/entreprise-r.html -->
+<html lang="fr"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Entreprise R</title>
+<link href="./Entreprise R_files/css2" rel="stylesheet">
+<style>
+:root {
+  --noir: #111;
+  --blanc: #FAF9F6;
+  --accent: #B8860B;
+  --gris: #666;
+  --border: #E0DDD8;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'DM Sans', sans-serif; background: var(--blanc); color: var(--noir); }
+
+/* BARRE D'ÉDITION */
+#edit-bar {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 999;
+  background: var(--noir); color: #fff;
+  padding: 10px 20px;
+  display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  font-size: 13px;
+}
+#edit-bar .info { opacity: .7; }
+#edit-bar .btns { display: flex; gap: 8px; }
+.bar-btn {
+  padding: 6px 16px; font-size: 13px; font-weight: 600;
+  border: none; border-radius: 6px; cursor: pointer;
+  font-family: 'DM Sans', sans-serif; transition: opacity .15s;
+}
+.bar-btn.edit  { background: var(--accent); color: #fff; }
+.bar-btn.save  { background: #2D9B6F; color: #fff; display: none; }
+.bar-btn.cancel{ background: #555; color: #fff; display: none; }
+.bar-btn:hover { opacity: .85; }
+
+/* MODE ÉDITION : zones cliquables */
+body.editing [contenteditable] {
+  outline: 2px dashed var(--accent);
+  outline-offset: 4px;
+  cursor: text;
+  border-radius: 4px;
+  min-width: 40px;
+  min-height: 1em;
+}
+body.editing [contenteditable]:focus {
+  outline: 2px solid var(--accent);
+  background: rgba(184,134,11,.06);
+}
+.edit-hint {
+  display: none;
+  position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%);
+  background: var(--noir); color: #fff; padding: 10px 20px;
+  border-radius: 20px; font-size: 13px; z-index: 998;
+  pointer-events: none;
+}
+body.editing .edit-hint { display: block; }
+
+/* SITE */
+.site-wrap { padding-top: 50px; }
+
+/* HERO */
+.hero {
+  min-height: 100vh;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  text-align: center;
+  padding: 4rem 2rem;
+  border-bottom: 1px solid var(--border);
+  position: relative;
+  background: var(--noir);
+  color: var(--blanc);
+}
+.hero::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse at 60% 40%, rgba(184,134,11,.15) 0%, transparent 70%);
+  pointer-events: none;
+}
+.hero-tag {
+  font-size: 11px; letter-spacing: .2em; text-transform: uppercase;
+  color: var(--accent); margin-bottom: 1.5rem; font-weight: 500;
+}
+.hero h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(3rem, 8vw, 6rem);
+  font-weight: 700; line-height: 1.05;
+  letter-spacing: -.02em;
+  margin-bottom: 1.5rem;
+}
+.hero-desc {
+  font-size: 1.1rem; color: rgba(255,255,255,.7);
+  max-width: 500px; line-height: 1.7;
+  margin-bottom: 2.5rem;
+}
+.hero-btn {
+  display: inline-block;
+  padding: 14px 32px; font-size: 15px; font-weight: 600;
+  background: var(--accent); color: #fff;
+  border: none; border-radius: 4px; cursor: pointer;
+  font-family: 'DM Sans', sans-serif; transition: opacity .15s;
+  text-decoration: none;
+}
+.hero-btn:hover { opacity: .85; }
+
+/* SECTIONS */
+section { padding: 5rem 2rem; max-width: 900px; margin: 0 auto; }
+section h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.5rem; font-weight: 700;
+  letter-spacing: -.02em; margin-bottom: 1rem;
+}
+.section-line {
+  width: 40px; height: 3px; background: var(--accent);
+  margin-bottom: 2rem;
+}
+section p {
+  font-size: 1.05rem; color: var(--gris);
+  line-height: 1.8; max-width: 600px;
+}
+
+/* SERVICES */
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.5rem;
+  margin-top: 2.5rem;
+}
+.service-card {
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 1.8rem;
+  transition: border-color .2s, transform .2s;
+}
+.service-card:hover { border-color: var(--accent); transform: translateY(-2px); }
+.service-icon { font-size: 2rem; margin-bottom: 1rem; display: block; }
+.service-card h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.2rem; margin-bottom: .5rem;
+}
+.service-card p { font-size: .95rem; }
+
+/* CONTACT */
+.contact-section {
+  background: var(--noir); color: var(--blanc);
+  padding: 5rem 2rem;
+}
+.contact-inner {
+  max-width: 900px; margin: 0 auto;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 4rem;
+  align-items: start;
+}
+.contact-section h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.5rem; font-weight: 700;
+  letter-spacing: -.02em; margin-bottom: 1rem;
+}
+.contact-line { width: 40px; height: 3px; background: var(--accent); margin-bottom: 2rem; }
+.contact-item { margin-bottom: 1.5rem; }
+.contact-label {
+  font-size: 11px; letter-spacing: .15em; text-transform: uppercase;
+  color: var(--accent); margin-bottom: 4px; font-weight: 500;
+}
+.contact-value { font-size: 1.05rem; color: rgba(255,255,255,.85); line-height: 1.6; }
+
+/* FOOTER */
+footer {
+  border-top: 1px solid var(--border);
+  padding: 1.5rem 2rem; text-align: center;
+  font-size: 12px; color: var(--gris);
+}
+
+@media (max-width: 600px) {
+  .contact-inner { grid-template-columns: 1fr; gap: 2rem; }
+}
+</style>
+</head>
+<body class="">
+
+<!-- BARRE D'ÉDITION -->
+<div id="edit-bar">
+  <span class="info">✏️ Cliquez sur "Modifier" pour éditer votre site</span>
+  <div class="btns">
+    <button class="bar-btn edit" onclick="startEdit()" style="display: inline-block;">✏️ Modifier le texte</button>
+    <button class="bar-btn save" id="btn-save" onclick="saveEdit()" style="display: none;">✅ Enregistrer</button>
+    <button class="bar-btn cancel" id="btn-cancel" onclick="cancelEdit()" style="display: none;">✕ Annuler</button>
+  </div>
+</div>
+
+<div class="edit-hint">👆 Cliquez sur n'importe quel texte pour le modifier</div>
+
+<div class="site-wrap">
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-tag" contenteditable="false">Bienvenue chez</div>
+    <h1 contenteditable="false">Entreprise R</h1>
+    <p class="hero-desc" contenteditable="false">! Par Raphaël !</p>
+    <a class="hero-btn" href="file:///C:/Users/RAPHAEL/Downloads/entreprise-r.html#contact" contenteditable="false">Nous contacter</a>
+  </div>
+
+  <!-- À PROPOS -->
+  <section>
+    <h2 contenteditable="false">Qui sommes-nous ?</h2>
+    <div class="section-line"></div>
+    <p contenteditable="false">Nous somme une entreprise multifonctions avec pour l'instant 4 entreprise officiels : Comics R Blague , R-HO , R-Rapdio , Fleur de joie .<div>C'est une entreprise créer par Raphaël ( 10 ans )&nbsp;</div><div>IMPORTANT = Pour les infos ou les pubs vérifier régulièrement sur cette page</div></p>
+  </section>
+
+  <!-- SERVICES -->
+  <section style="background: #F5F3EF; max-width: 100%; padding: 5rem 2rem;">
+    <div style="max-width: 900px; margin: 0 auto;">
+      <h2 contenteditable="false">Nos services</h2>
+      <div class="section-line"></div>
+      <div class="services-grid">
+        <div class="service-card">
+          <span class="service-icon" contenteditable="false">⭐<span style="background-color: rgb(245, 243, 239);">1/3 entreprise classiques</span></span>
+          <h3 contenteditable="false">Comics R Blague</h3>
+          <p contenteditable="false">Comics R Blague est une entreprise de vente et fait aussi des évenements</p>
+        </div>
+        <div class="service-card">
+          <span class="service-icon" contenteditable="false">🔧2<span style="background-color: rgb(245, 243, 239);">/3 entreprise classiques</span></span>
+          <h3 contenteditable="false">R-HO</h3>
+          <p contenteditable="false">R-HO est une entreprise de vente de magasines</p>
+        </div>
+        <div class="service-card">
+          <span class="service-icon" contenteditable="false">✅3<span style="background-color: rgb(245, 243, 239);">/3 entreprise classiques</span></span>
+          <h3 contenteditable="false">R-Radio</h3>
+          <p contenteditable="false">R-Radio fait une émission en direct tous les dimanches</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <div class="contact-section" id="contact">
+    <div class="contact-inner">
+      <div>
+        <h2 contenteditable="false">Nous contacter</h2>
+        <div class="contact-line"></div>
+        <div class="contact-item">
+          <div class="contact-label">Téléphone</div>
+          <div class="contact-value" contenteditable="false">Aucun téléphonne , mais pour nous contacter aller voire Raphaël le Chef de l'entrepriseR</div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-label">E-mail</div>
+          <div class="contact-value" contenteditable="false">Acun E mail</div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-label">Adresse</div>
+          <div class="contact-value" contenteditable="false">XXXXXXXXXXXXXXXXXXXXXXXXXXXXX</div>
+        </div>
+      </div>
+      <div>
+        <div class="contact-label" style="margin-bottom:1rem">Horaires</div>
+        <div class="contact-value" contenteditable="false">Horaires aléatoires</div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <span contenteditable="false">© 2025 Entreprise R — Tous droits réservés</span>
+  </footer>
+
+</div>
+
+<script>
+let editing = false;
+let backup = {};
+
+function startEdit() {
+  editing = true;
+  document.body.classList.add('editing');
+  document.querySelectorAll('[contenteditable]').forEach(el => {
+    el.setAttribute('contenteditable', 'true');
+    backup[el.dataset.id || Math.random()] = el.innerHTML;
+  });
+  document.querySelector('.bar-btn.edit').style.display = 'none';
+  document.getElementById('btn-save').style.display = 'inline-block';
+  document.getElementById('btn-cancel').style.display = 'inline-block';
+  document.querySelector('.info').textContent = '✏️ Cliquez sur n\'importe quel texte pour le modifier';
+}
+
+function saveEdit() {
+  editing = false;
+  document.body.classList.remove('editing');
+  document.querySelectorAll('[contenteditable]').forEach(el => el.setAttribute('contenteditable', 'false'));
+  document.querySelector('.bar-btn.edit').style.display = 'inline-block';
+  document.getElementById('btn-save').style.display = 'none';
+  document.getElementById('btn-cancel').style.display = 'none';
+  document.querySelector('.info').textContent = '✅ Modifications enregistrées !';
+  setTimeout(() => {
+    document.querySelector('.info').textContent = '✏️ Cliquez sur "Modifier" pour éditer votre site';
+  }, 3000);
+
+  // Sauvegarder dans localStorage
+  const data = {};
+  document.querySelectorAll('[contenteditable]').forEach((el, i) => {
+    data['el_' + i] = el.innerHTML;
+  });
+  localStorage.setItem('entreprise_r_content', JSON.stringify(data));
+}
+
+function cancelEdit() {
+  editing = false;
+  document.body.classList.remove('editing');
+  // Restaurer depuis localStorage
+  loadSaved();
+  document.querySelectorAll('[contenteditable]').forEach(el => el.setAttribute('contenteditable', 'false'));
+  document.querySelector('.bar-btn.edit').style.display = 'inline-block';
+  document.getElementById('btn-save').style.display = 'none';
+  document.getElementById('btn-cancel').style.display = 'none';
+  document.querySelector('.info').textContent = '✏️ Cliquez sur "Modifier" pour éditer votre site';
+}
+
+function loadSaved() {
+  const saved = localStorage.getItem('entreprise_r_content');
+  if (!saved) return;
+  const data = JSON.parse(saved);
+  document.querySelectorAll('[contenteditable]').forEach((el, i) => {
+    if (data['el_' + i] !== undefined) el.innerHTML = data['el_' + i];
+  });
+}
+
+// Charger les sauvegardes au démarrage
+loadSaved();
+</script>
+
+
+</body></html>
