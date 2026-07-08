@@ -1,0 +1,1063 @@
+<!DOCTYPE html>
+<!-- saved from url=(0059)file:///C:/Users/RAPHAEL/Downloads/mon-style_1.html#galerie -->
+<html lang="fr"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dressing — trouve ton style</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Outfit:wght@300;400;500;600&display=swap');
+
+  :root{
+    --creme:#faf6f1;
+    --rose:#f3d9dd;
+    --rose-fonce:#d99aa6;
+    --lavande:#dcd4ee;
+    --lavande-fonce:#9b8bc4;
+    --sauge:#c3d3c0;
+    --sauge-fonce:#7fa07a;
+    --encre:#4a4048;
+    --encre-doux:#8a7f88;
+    --blanc:#fffdfb;
+    --ombre:0 10px 40px rgba(120,100,120,.12);
+    --ombre-douce:0 4px 20px rgba(120,100,120,.08);
+  }
+
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:'Outfit',sans-serif;
+    background:var(--creme);
+    color:var(--encre);
+    line-height:1.6;
+    overflow-x:hidden;
+  }
+  h1,h2,h3{font-family:'Fraunces',serif;font-weight:500;line-height:1.15}
+  ::selection{background:var(--rose);color:var(--encre)}
+
+  /* ===== barre nav ===== */
+  nav{
+    position:sticky;top:0;z-index:100;
+    display:flex;align-items:center;justify-content:center;gap:8px;
+    padding:14px;
+    background:rgba(250,246,241,.82);
+    backdrop-filter:blur(12px);
+    border-bottom:1px solid rgba(155,139,196,.12);
+  }
+  nav a{
+    font-size:14px;color:var(--encre-doux);text-decoration:none;
+    padding:7px 15px;border-radius:20px;transition:.25s;font-weight:400;
+  }
+  nav a:hover{color:var(--encre);background:var(--rose)}
+  nav .logo{font-family:'Fraunces',serif;font-size:18px;color:var(--encre);font-weight:600;margin-right:auto;padding-left:8px}
+  @media(max-width:640px){nav .logo{display:none}nav{gap:4px;flex-wrap:wrap}}
+
+  /* ===== hero ===== */
+  header{
+    position:relative;
+    padding:100px 24px 90px;
+    text-align:center;
+    overflow:hidden;
+  }
+  .blob{position:absolute;border-radius:50%;filter:blur(50px);opacity:.55;z-index:0}
+  .blob1{width:340px;height:340px;background:var(--rose);top:-80px;left:-60px}
+  .blob2{width:300px;height:300px;background:var(--lavande);top:20px;right:-70px}
+  .blob3{width:260px;height:260px;background:var(--sauge);bottom:-120px;left:40%}
+  header .inner{position:relative;z-index:1;max-width:720px;margin:0 auto}
+  .eyebrow{
+    display:inline-block;font-size:13px;letter-spacing:3px;text-transform:uppercase;
+    color:var(--lavande-fonce);margin-bottom:22px;font-weight:500;
+  }
+  header h1{font-size:clamp(40px,8vw,72px);color:var(--encre);margin-bottom:20px;letter-spacing:-1px}
+  header h1 em{font-style:italic;color:var(--rose-fonce)}
+  header p{font-size:clamp(16px,2.4vw,20px);color:var(--encre-doux);max-width:520px;margin:0 auto 36px}
+  .cta{
+    display:inline-block;background:var(--encre);color:var(--creme);
+    padding:15px 38px;border-radius:30px;text-decoration:none;font-size:16px;font-weight:500;
+    transition:.3s;box-shadow:var(--ombre-douce);
+  }
+  .cta:hover{transform:translateY(-3px);box-shadow:var(--ombre)}
+
+  /* ===== sections ===== */
+  section{max-width:1000px;margin:0 auto;padding:70px 24px}
+  .sec-head{text-align:center;margin-bottom:48px}
+  .sec-head .num{font-size:13px;letter-spacing:2px;color:var(--sauge-fonce);text-transform:uppercase;font-weight:500}
+  .sec-head h2{font-size:clamp(28px,5vw,42px);color:var(--encre);margin:10px 0 14px}
+  .sec-head p{color:var(--encre-doux);max-width:480px;margin:0 auto}
+
+  /* ===== quiz ===== */
+  .quiz-card{
+    background:var(--blanc);border-radius:28px;padding:40px 36px;
+    box-shadow:var(--ombre);max-width:640px;margin:0 auto;
+  }
+  .q-progress{height:6px;background:var(--creme);border-radius:6px;overflow:hidden;margin-bottom:30px}
+  .q-progress span{display:block;height:100%;background:linear-gradient(90deg,var(--rose-fonce),var(--lavande-fonce));width:0;transition:.4s;border-radius:6px}
+  .q-count{font-size:13px;color:var(--encre-doux);letter-spacing:1px;margin-bottom:8px}
+  .q-text{font-family:'Fraunces',serif;font-size:24px;margin-bottom:26px;color:var(--encre)}
+  .q-options{display:grid;gap:12px}
+  .q-opt{
+    text-align:left;background:var(--creme);border:2px solid transparent;
+    padding:16px 20px;border-radius:16px;font-family:inherit;font-size:16px;color:var(--encre);
+    cursor:pointer;transition:.2s;display:flex;align-items:center;gap:14px;
+  }
+  .q-opt:hover{border-color:var(--lavande);background:var(--blanc);transform:translateX(4px)}
+  .q-opt .emo{font-size:24px}
+  .q-result{text-align:center;display:none}
+  .q-result .badge{font-size:60px;margin-bottom:10px}
+  .q-result h3{font-size:32px;color:var(--rose-fonce);margin-bottom:8px}
+  .q-result .tag{font-size:14px;color:var(--encre-doux);letter-spacing:2px;text-transform:uppercase;margin-bottom:18px}
+  .q-result p{color:var(--encre);margin-bottom:12px;text-align:left;background:var(--creme);padding:16px 20px;border-radius:14px}
+  .q-result .keys{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:18px 0 24px}
+  .q-result .keys span{background:var(--lavande);color:var(--lavande-fonce);padding:6px 14px;border-radius:16px;font-size:14px;font-weight:500}
+  .q-restart{background:var(--encre);color:var(--creme);border:none;padding:12px 28px;border-radius:24px;font-family:inherit;font-size:15px;cursor:pointer;transition:.2s}
+  .q-restart:hover{transform:translateY(-2px)}
+
+  /* ===== conseils morpho/couleurs ===== */
+  .tabs{display:flex;gap:8px;justify-content:center;margin-bottom:34px;flex-wrap:wrap}
+  .tab{
+    background:var(--blanc);border:2px solid transparent;color:var(--encre-doux);
+    padding:10px 22px;border-radius:24px;font-family:inherit;font-size:15px;cursor:pointer;transition:.25s;
+  }
+  .tab.on{background:var(--rose);color:var(--encre);border-color:var(--rose-fonce)}
+  .tab:hover{color:var(--encre)}
+  .panel{display:none}
+  .panel.on{display:block;animation:fade .4s}
+  @keyframes fade{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+  .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:18px}
+  .card{background:var(--blanc);border-radius:20px;padding:26px;box-shadow:var(--ombre-douce);transition:.3s}
+  .card:hover{transform:translateY(-5px);box-shadow:var(--ombre)}
+  .card .ic{font-size:34px;margin-bottom:12px}
+  .card h3{font-size:20px;margin-bottom:8px;color:var(--encre)}
+  .card p{font-size:15px;color:var(--encre-doux)}
+  .card .tip{margin-top:12px;font-size:14px;color:var(--sauge-fonce);background:var(--sauge);background:rgba(195,211,192,.35);padding:8px 12px;border-radius:10px}
+
+  /* palettes couleurs */
+  .palette{display:flex;gap:0;border-radius:14px;overflow:hidden;margin-top:14px;height:44px}
+  .palette div{flex:1}
+
+  /* ===== galerie ===== */
+  .gal-filters{display:flex;gap:8px;justify-content:center;margin-bottom:30px;flex-wrap:wrap}
+  .gal-filters button{background:var(--blanc);border:2px solid transparent;color:var(--encre-doux);padding:8px 18px;border-radius:20px;font-family:inherit;font-size:14px;cursor:pointer;transition:.2s}
+  .gal-filters button.on{background:var(--lavande);color:var(--lavande-fonce);border-color:var(--lavande-fonce)}
+  .gallery{columns:3;column-gap:16px}
+  @media(max-width:800px){.gallery{columns:2}}
+  @media(max-width:500px){.gallery{columns:1}}
+  .look{
+    break-inside:avoid;margin-bottom:16px;border-radius:20px;overflow:hidden;
+    background:var(--blanc);box-shadow:var(--ombre-douce);transition:.3s;cursor:default;
+  }
+  .look:hover{transform:scale(1.02);box-shadow:var(--ombre)}
+  .look .vis{height:0;position:relative}
+  .look .vis svg{position:absolute;inset:0;width:100%;height:100%}
+  .look .cap{padding:16px 18px}
+  .look .cap h4{font-family:'Fraunces',serif;font-size:18px;margin-bottom:4px;color:var(--encre);font-weight:500}
+  .look .cap p{font-size:13px;color:var(--encre-doux)}
+  .look .cap .mood{display:inline-block;margin-top:8px;font-size:12px;letter-spacing:1px;text-transform:uppercase;color:var(--rose-fonce)}
+
+  /* ===== garde-robe capsule (bonus interactif) ===== */
+  .capsule-wrap{background:var(--blanc);border-radius:28px;padding:36px;box-shadow:var(--ombre);max-width:760px;margin:0 auto}
+  .capsule-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:14px;margin-top:8px}
+  .piece{
+    background:var(--creme);border-radius:16px;padding:18px 12px;text-align:center;cursor:pointer;
+    border:2px solid transparent;transition:.2s;user-select:none;
+  }
+  .piece:hover{border-color:var(--sauge)}
+  .piece.picked{border-color:var(--sauge-fonce);background:rgba(195,211,192,.3)}
+  .piece .pe{font-size:32px;display:block;margin-bottom:6px}
+  .piece .pn{font-size:13px;color:var(--encre)}
+  .piece .pc{font-size:11px;color:var(--encre-doux)}
+  .capsule-count{text-align:center;margin-top:22px;font-size:15px;color:var(--encre-doux)}
+  .capsule-count b{color:var(--sauge-fonce)}
+
+  /* ===== footer ===== */
+  footer{text-align:center;padding:50px 24px;color:var(--encre-doux);font-size:14px}
+  footer .heart{color:var(--rose-fonce)}
+</style>
+</head>
+<body>
+
+<nav>
+  <span class="logo">✦ Dressing</span>
+  <a href="file:///C:/Users/RAPHAEL/Downloads/mon-style_1.html#quiz">Quiz</a>
+  <a href="file:///C:/Users/RAPHAEL/Downloads/mon-style_1.html#conseils">Conseils</a>
+  <a href="file:///C:/Users/RAPHAEL/Downloads/mon-style_1.html#galerie">Galerie</a>
+  <a href="file:///C:/Users/RAPHAEL/Downloads/mon-style_1.html#capsule">Ma capsule</a>
+</nav>
+
+<header>
+  <div class="blob blob1"></div>
+  <div class="blob blob2"></div>
+  <div class="blob blob3"></div>
+  <div class="inner">
+    <span class="eyebrow">ton style, à ton rythme</span>
+    <h1>Trouve la garde-robe qui te <em>ressemble</em></h1>
+    <p>Un quiz pour cerner ton style, des conseils selon ta morphologie et tes couleurs, et une galerie de tenues pour t'inspirer.</p>
+    <a href="file:///C:/Users/RAPHAEL/Downloads/mon-style_1.html#quiz" class="cta">Commencer le quiz →</a>
+  </div>
+</header>
+
+<!-- ===================== QUIZ ===================== -->
+<section id="quiz">
+  <div class="sec-head">
+    <span class="num">01 — Découvrir</span>
+    <h2>Quel est ton style ?</h2>
+    <p>Six questions, une minute. Réponds spontanément, sans trop réfléchir.</p>
+  </div>
+
+  <div class="quiz-card">
+    <div id="q-live">
+      <div class="q-progress"><span id="q-bar" style="width: 0%;"></span></div>
+      <div class="q-count" id="q-count">Question 1 / 6</div>
+      <div class="q-text" id="q-text">Un samedi idéal, tu portes…</div>
+      <div class="q-options" id="q-options"><button class="q-opt"><span class="emo">🧥</span> Un trench et des bottines</button><button class="q-opt"><span class="emo">👟</span> Un jean large et des sneakers</button><button class="q-opt"><span class="emo">🌷</span> Une robe fluide à fleurs</button><button class="q-opt"><span class="emo">🖤</span> Total look noir minimal</button><button class="q-opt"><span class="emo">🪶</span> Une longue jupe et des breloques</button><button class="q-opt"><span class="emo">🏃‍♀️</span> Un legging et une veste zippée</button></div>
+    </div>
+    <div class="q-result" id="q-result">
+      <div class="badge" id="r-badge"></div>
+      <h3 id="r-name"></h3>
+      <div class="tag" id="r-tag"></div>
+      <p id="r-desc"></p>
+      <div class="keys" id="r-keys"></div>
+      <button class="q-restart" onclick="restartQuiz()">↺ Refaire le quiz</button>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== CONSEILS ===================== -->
+<section id="conseils">
+  <div class="sec-head">
+    <span class="num">02 — Comprendre</span>
+    <h2>Conseils sur mesure</h2>
+    <p>Deux repères simples pour choisir des vêtements qui te mettent en valeur : ta morphologie et tes couleurs.</p>
+  </div>
+
+  <div class="tabs">
+    <button class="tab on" onclick="showTab(&#39;morpho&#39;,this)">Morphologie</button>
+    <button class="tab" onclick="showTab(&#39;couleurs&#39;,this)">Couleurs</button>
+  </div>
+
+  <div class="panel on" id="morpho">
+    <div class="cards" id="morpho-cards"><div class="card"><div class="ic">🍐</div><h3>Silhouette A</h3><p>Épaules plus fines que les hanches.</p><div class="tip">💡 Structure le haut (épaulettes, cols) et fluidifie le bas.</div></div><div class="card"><div class="ic">🍎</div><h3>Silhouette V</h3><p>Épaules plus larges que les hanches.</p><div class="tip">💡 Adoucis le haut, apporte du volume et des motifs en bas.</div></div><div class="card"><div class="ic">⌛</div><h3>Silhouette X</h3><p>Épaules et hanches alignées, taille marquée.</p><div class="tip">💡 Souligne la taille : ceintures, coupes cintrées.</div></div><div class="card"><div class="ic">▭</div><h3>Silhouette H</h3><p>Ligne droite, taille peu marquée.</p><div class="tip">💡 Crée des courbes : superpositions, taille haute, ceinture.</div></div><div class="card"><div class="ic">🔷</div><h3>Silhouette O</h3><p>Rondeurs au centre, jolies jambes.</p><div class="tip">💡 Mets les jambes en valeur, opte pour des matières fluides.</div></div></div>
+  </div>
+
+  <div class="panel" id="couleurs">
+    <div class="cards" id="couleur-cards"><div class="card"><div class="ic">🌸</div><h3>Sous-ton chaud</h3><p>Veines verdâtres, l'or te va mieux que l'argent.</p><div class="palette"><div style="background:#e8b98a"></div><div style="background:#d98a5a"></div><div style="background:#c46a3a"></div><div style="background:#8a9a4a"></div></div></div><div class="card"><div class="ic">❄️</div><h3>Sous-ton froid</h3><p>Veines bleutées, l'argent te sublime.</p><div class="palette"><div style="background:#a8c0e0"></div><div style="background:#8a9ac8"></div><div style="background:#b89ad0"></div><div style="background:#7a8aa8"></div></div></div><div class="card"><div class="ic">🌗</div><h3>Sous-ton neutre</h3><p>Un mix des deux : presque tout te va.</p><div class="palette"><div style="background:#d8c8b8"></div><div style="background:#c0b0a8"></div><div style="background:#b8a8c0"></div><div style="background:#a8b8b0"></div></div></div><div class="card"><div class="ic">🎨</div><h3>Règle des 3</h3><p>Trois couleurs max par tenue, pour rester harmonieuse.</p><div class="palette"><div style="background:#f3d9dd"></div><div style="background:#dcd4ee"></div><div style="background:#c3d3c0"></div><div style="background:#faf6f1"></div></div></div></div>
+  </div>
+</section>
+
+<!-- ===================== GALERIE ===================== -->
+<section id="galerie">
+  <div class="sec-head">
+    <span class="num">03 — S'inspirer</span>
+    <h2>Galerie de tenues</h2>
+    <p>Des idées de looks à piocher selon l'occasion. Filtre par ambiance.</p>
+  </div>
+
+  <div class="gal-filters" id="gal-filters"><button class="on">Tout</button><button class="">Casual</button><button class="">Chic</button><button class="">Romantique</button><button class="">Minimal</button><button class="">Boheme</button><button class="">Sportif</button></div>
+  <div class="gallery" id="gallery"><div class="look">
+      <div class="vis" style="padding-bottom:125%"><svg viewBox="0 0 200 250" xmlns="http://www.w3.org/2000/svg">
+    <rect width="200" height="250" fill="#f3d9dd"></rect>
+    <ellipse cx="100" cy="235" rx="60" ry="14" fill="#000" opacity="0.05"></ellipse>
+    
+    <rect x="88" y="196" width="10" height="34" rx="4" fill="#aebfd8"></rect>
+    <rect x="102" y="196" width="10" height="34" rx="4" fill="#aebfd8"></rect>
+    <ellipse cx="90" cy="234" rx="11" ry="6" fill="#fffdfb"></ellipse>
+    <ellipse cx="110" cy="234" rx="11" ry="6" fill="#fffdfb"></ellipse>
+    <rect x="94" y="46" width="12" height="16" fill="#f0d0bc"></rect>
+    <path d="M76 42 Q74 8 100 8 Q126 8 124 42 L124 60 Q118 50 100 50 Q82 50 76 60 Z" fill="#7a5638"></path>
+    <circle cx="100" cy="34" r="18" fill="#f0d0bc"></circle>
+    <path d="M82 30 Q84 16 100 16 Q116 16 118 30 Q112 22 100 22 Q88 22 82 30 Z" fill="#7a5638"></path>
+    <circle cx="93" cy="34" r="1.6" fill="#6a5a60"></circle>
+    <circle cx="107" cy="34" r="1.6" fill="#6a5a60"></circle>
+    <path d="M96 40 Q100 43 104 40" stroke="#c98a8a" stroke-width="1.4" fill="none" stroke-linecap="round"></path>
+    <circle cx="88" cy="39" r="2.5" fill="#f0b8b8" opacity="0.5"></circle>
+    <circle cx="112" cy="39" r="2.5" fill="#f0b8b8" opacity="0.5"></circle>
+    <path d="M70 66 Q100 58 130 66 L134 130 Q100 138 66 130 Z" fill="#f0e6d4"></path>
+        <path d="M66 68 Q58 100 62 128 L74 126 L72 74 Z" fill="#f0e6d4"></path>
+        <path d="M134 68 Q142 100 138 128 L126 126 L128 74 Z" fill="#f0e6d4"></path>
+        <path d="M74 128 L126 128 L130 198 L70 198 Z" fill="#aebfd8"></path>
+        <line x1="100" y1="130" x2="100" y2="196" stroke="#98a8c4" stroke-width="1"></line></svg></div>
+      <div class="cap"><h4>Douceur du dimanche</h4><p>Pull crème oversize + jean large + baskets</p><span class="mood">casual</span></div>
+    </div><div class="look">
+      <div class="vis" style="padding-bottom:125%"><svg viewBox="0 0 200 250" xmlns="http://www.w3.org/2000/svg">
+    <rect width="200" height="250" fill="#dcd4ee"></rect>
+    <ellipse cx="100" cy="235" rx="60" ry="14" fill="#000" opacity="0.05"></ellipse>
+    
+    <rect x="88" y="196" width="10" height="34" rx="4" fill="#3a3038"></rect>
+    <rect x="102" y="196" width="10" height="34" rx="4" fill="#3a3038"></rect>
+    <ellipse cx="90" cy="234" rx="11" ry="6" fill="#2a2228"></ellipse>
+    <ellipse cx="110" cy="234" rx="11" ry="6" fill="#2a2228"></ellipse>
+    <rect x="94" y="46" width="12" height="16" fill="#e8bd9a"></rect>
+    <path d="M76 42 Q74 8 100 8 Q126 8 124 42 L124 60 Q118 50 100 50 Q82 50 76 60 Z" fill="#4a3628"></path>
+    <circle cx="100" cy="34" r="18" fill="#e8bd9a"></circle>
+    <path d="M82 30 Q84 16 100 16 Q116 16 118 30 Q112 22 100 22 Q88 22 82 30 Z" fill="#4a3628"></path>
+    <circle cx="93" cy="34" r="1.6" fill="#6a5a60"></circle>
+    <circle cx="107" cy="34" r="1.6" fill="#6a5a60"></circle>
+    <path d="M96 40 Q100 43 104 40" stroke="#c98a8a" stroke-width="1.4" fill="none" stroke-linecap="round"></path>
+    <circle cx="88" cy="39" r="2.5" fill="#f0b8b8" opacity="0.5"></circle>
+    <circle cx="112" cy="39" r="2.5" fill="#f0b8b8" opacity="0.5"></circle>
+    <rect x="86" y="52" width="28" height="24" rx="6" fill="#8a7060"></rect>
+        <path d="M68 74 Q100 66 132 74 L138 200 L62 200 Z" fill="#cf9e5e"></path>
+        <path d="M64 76 Q56 120 60 170 L74 168 L72 82 Z" fill="#cf9e5e"></path>
+        <path d="M136 76 Q144 120 140 170 L126 168 L128 82 Z" fill="#cf9e5e"></path>
+        <path d="M100 74 L100 200" stroke="#a87a3e" stroke-width="1.5"></path>
+        <path d="M86 74 L82 200 M114 74 L118 200" stroke="#b98a4a" stroke-width="1" opacity="0.6"></path>
+        <rect x="62" y="128" width="76" height="9" rx="2" fill="#8a5e2e"></rect>
+        <circle cx="100" cy="132" r="3" fill="#6a4620"></circle></svg></div>
+      <div class="cap"><h4>Élégance camel</h4><p>Trench ceinturé + col roulé + bottines</p><span class="mood">chic</span></div>
+    </div><div class="look">
+      <div class="vis" style="padding-bottom:125%"><svg viewBox="0 0 200 250" xmlns="http://www.w3.org/2000/svg">
+    <rect width="200" height="250" fill="#c3d3c0"></rect>
+    <ellipse cx="100" cy="235" rx="60" ry="14" fill="#000" opacity="0.05"></ellipse>
+    
+    <rect x="88" y="196" width="10" height="34" rx="4" fill="#f0d8dc"></rect>
+    <rect x="102" y="196" width="10" height="34" rx="4" fill="#f0d8dc"></rect>
+    <ellipse cx="90" cy="234" rx="11" ry="6" fill="#f3d9dd"></ellipse>
+    <ellipse cx="110" cy="234" rx="11" ry="6" fill="#f3d9dd"></ellipse>
+    <rect x="94" y="46" width="12" height="16" fill="#f0d0bc"></rect>
+    <path d="M76 42 Q74 8 100 8 Q126 8 124 42 L124 60 Q118 50 100 50 Q82 50 76 60 Z" fill="#d4a860"></path>
+    <circle cx="100" cy="34" r="18" fill="#f0d0bc"></circle>
+    <path d="M82 30 Q84 16 100 16 Q116 16 118 30 Q112 22 100 22 Q88 22 82 30 Z" fill="#d4a860"></path>
+    <circle cx="93" cy="34" r="1.6" fill="#6a5a60"></circle>
+    <circle cx="107" cy="34" r="1.6" fill="#6a5a60"></circle>
+    <path d="M96 40 Q100 43 104 40" stroke="#c98a8a" stroke-width="1.4" fill="none" stroke-linecap="round"></path>
+    <circle cx="88" cy="39" r="2.5" fill="#f0b8b8" opacity="0.5"></circle>
+    <circle cx="112" cy="39" r="2.5" fill="#f0b8b8" opacity="0.5"></circle>
+    <path d="M80 64 Q100 58 120 64 L118 82 Q100 76 82 82 Z" fill="#f5e0e8"></path>
+        <path d="M82 80 Q100 74 118 80 L140 206 Q100 220 60 206 Z" fill="#f5e0e8"></path>
+        <path d="M80 66 Q66 76 64 96 L74 94 L82 78 Z" fill="#f5e0e8"></path>
+        <path d="M120 66 Q134 76 136 96 L126 94 L118 78 Z" fill="#f5e0e8"></path>
+        <circle cx="86" cy="110" r="5" fill="#d99aa6"></circle><circle cx="112" cy="130" r="5" fill="#9b8bc4"></circle>
+        <circle cx="95" cy="165" r="5" fill="#7fa07a"></circle><circle cx="120" cy="98" r="4" fill="#d99aa6"></circle>
+        <circle cx="78" cy="150" r="4" fill="#9b8bc4"></circle><circle cx="122" cy="175" r="5" fill="#e0a860"></circle>
+        <circle cx="100" cy="192" r="4" fill="#d99aa6"></circle></svg></div>
+      <div class="cap"><h4>Robe jardin</h4><p>Robe fleurie fluide + ballerines</p><span class="mood">romantique</span></div>
+    </div><div class="look">
+      <div class="vis" style="padding-bottom:125%"><svg viewBox="0 0 200 250" xmlns="http://www.w3.org/2000/svg">
+    <rect width="200" height="250" fill="#e8e4de"></rect>
+    <ellipse cx="100" cy="235" rx="60" ry="14" fill="#000" opacity="0.05"></ellipse>
+    
+    <rect x="88" y="196" width="10" height="34" rx="4" fill="#26222a"></rect>
+    <rect x="102" y="196" width="10" height="34" rx="4" fill="#26222a"></rect>
+    <ellipse cx="90" cy="234" rx="11" ry="6" fill="#1a1620"></ellipse>
+    <ellipse cx="110" cy="234" rx="11" ry="6" fill="#1a1620"></ellipse>
+    <rect x="94" y="46" width="12" height="16" fill="#e8bd9a"></rect>
+    <path d="M76 42 Q74 8 100 8 Q126 8 124 42 L124 60 Q118 50 100 50 Q82 50 76 60 Z" fill="#2a2028"></path>
+    <circle cx="100" cy="34" r="18" fill="#e8bd9a"></circle>
+    <path d="M82 30 Q84 16 100 16 Q116 16 118 30 Q112 22 100 22 Q88 22 82 30 Z" fill="#2a2028"></path>
+    <circle cx="93" cy="34" r="1.6" fill="#6a5a60"></circle>
+    <circle cx="107" cy="34" r="1.6" fill="#6a5a60"></circle>
+    <path d="M96 40 Q100 43 104 40" stroke="#c98a8a" stroke-width="1.4" fill="none" stroke-linecap="round"></path>
+    <circle cx="88" cy="39" r="2.5" fill="#f0b8b8" opacity="0.5"></circle>
+    <circle cx="112" cy="39" r="2.5" fill="#f0b8b8" opacity="0.5"></circle>
+    <path d="M74 64 Q100 58 126 64 L130 134 L70 134 Z" fill="#fffdfb"></path>
+        <path d="M70 66 Q60 96 64 126 L76 124 L74 72 Z" fill="#fffdfb"></path>
+        <path d="M130 66 Q140 96 136 126 L124 124 L126 72 Z" fill="#fffdfb"></path>
+        <path d="M100 60 L94 72 L100 80 L106 72 Z" fill="#e8e4de"></path>
+        <line x1="100" y1="80" x2="100" y2="132" stroke="#e0ddd6" stroke-width="1.5"></line>
+        <circle cx="100" cy="96" r="1" fill="#ccc"></circle><circle cx="100" cy="112" r="1" fill="#ccc"></circle>
+        <rect x="72" y="134" width="56" height="66" rx="3" fill="#26222a"></rect>
+        <line x1="100" y1="136" x2="100" y2="198" stroke="#000" stroke-width="0.6" opacity="0.4"></line></svg></div>
+      <div class="cap"><h4>Noir sur blanc</h4><p>Chemise blanche nette + pantalon noir droit</p><span class="mood">minimal</span></div>
+    </div><div class="look">
+      <div class="vis" style="padding-bottom:125%"><svg viewBox="0 0 200 250" xmlns="http://www.w3.org/2000/svg">
+    <rect width="200" height="250" fill="#dcd4ee"></rect>
+    <ellipse cx="100" cy="235" rx="60" ry="14" fill="#000" opacity="0.05"></ellipse>
+    
+    <rect x="88" y="196" width="10" height="34" rx="4" fill="#5a7aa8"></rect>
+    <rect x="102" y="196" width="10" height="34" rx="4" fill="#5a7aa8"></rect>
+    <ellipse cx="90" cy="234" rx="11" ry="6" fill="#e8e4de"></ellipse>
+    <ellipse cx="110" cy="234" rx="11" ry="6" fill="#e8e4de"></ellipse>
+    <rect x="94" y="46" width="12" height="16" fill="#f0d0bc"></rect>
+    <path d="M76 42 Q74 8 100 8 Q126 8 124 42 L124 60 Q118 50 100 50 Q82 50 76 60 Z" fill="#b06838"></path>
+    <circle cx="100" cy="34" r="18" fill="#f0d0bc"></circle>
+    <path d="M82 30 Q84 16 100 16 Q116 16 118 30 Q112 22 100 22 Q88 22 82 30 Z" fill="#b06838"></path>
+    <circle cx="93" cy="34" r="1.6" fill="#6a5a60"></circle>
+    <circle cx="107" cy="34" r="1.6" fill="#6a5a60"></circle>
+    <path d="M96 40 Q100 43 104 40" stroke="#c98a8a" stroke-width="1.4" fill="none" stroke-linecap="round"></path>
+    <circle cx="88" cy="39" r="2.5" fill="#f0b8b8" opacity="0.5"></circle>
+    <circle cx="112" cy="39" r="2.5" fill="#f0b8b8" opacity="0.5"></circle>
+    <path d="M82 66 L118 66 L116 128 L84 128 Z" fill="#aec4a6"></path>
+        <path d="M78 64 Q66 70 64 130 L82 128 L84 68 Z" fill="#6f92c0"></path>
+        <path d="M122 64 Q134 70 136 130 L118 128 L116 68 Z" fill="#6f92c0"></path>
+        <path d="M78 64 L92 66 L88 132 L76 130 Z" fill="#6f92c0"></path>
+        <path d="M122 64 L108 66 L112 132 L124 130 Z" fill="#6f92c0"></path>
+        <rect x="80" y="130" width="40" height="68" rx="4" fill="#5a7aa8"></rect>
+        <line x1="88" y1="80" x2="86" y2="126" stroke="#4a6a98" stroke-width="1" stroke-dasharray="2 2"></line>
+        <line x1="112" y1="80" x2="114" y2="126" stroke="#4a6a98" stroke-width="1" stroke-dasharray="2 2"></line></svg></div>
+      <div class="cap"><h4>Denim &amp; sauge</h4><p>Veste en jean ouverte + t-shirt vert doux</p><span class="mood">casual</span></div>
+    </div><div class="look">
+      <div class="vis" style="padding-bottom:125%"><svg viewBox="0 0 200 250" xmlns="http://www.w3.org/2000/svg">
+    <rect width="200" height="250" fill="#c3d3c0"></rect>
+    <ellipse cx="100" cy="235" rx="60" ry="14" fill="#000" opacity="0.05"></ellipse>
+    
+    <rect x="88" y="196" width="10" height="34" rx="4" fill="#5a6a9a"></rect>
+    <rect x="102" y="196" width="10" height="34" rx="4" fill="#5a6a9a"></rect>
+    <ellipse cx="90" cy="234" rx="11" ry="6" fill="#3a3442"></ellipse>
+    <ellipse cx="110" cy="234" rx="11" ry="6" fill="#3a3442"></ellipse>
+    <rect x="94" y="46" width="12" height="16" fill="#d09a72"></rect>
+    <path d="M76 42 Q74 8 100 8 Q126 8 124 42 L124 60 Q118 50 100 50 Q82 50 76 60 Z" fill="#4a3628"></path>
+    <circle cx="100" cy="34" r="18" fill="#d09a72"></circle>
+    <path d="M82 30 Q84 16 100 16 Q116 16 118 30 Q112 22 100 22 Q88 22 82 30 Z" fill="#4a3628"></path>
+    <circle cx="93" cy="34" r="1.6" fill="#6a5a60"></circle>
+    <circle cx="107" cy="34" r="1.6" fill="#6a5a60"></circle>
+    <path d="M96 40 Q100 43 104 40" stroke="#c98a8a" stroke-width="1.4" fill="none" stroke-linecap="round"></path>
+    <circle cx="88" cy="39" r="2.5" fill="#f0b8b8" opacity="0.5"></circle>
+    <circle cx="112" cy="39" r="2.5" fill="#f0b8b8" opacity="0.5"></circle>
+    <rect x="84" y="62" width="32" height="70" fill="#fffdfb"></rect>
+        <path d="M76 62 L96 66 L88 150 L70 142 Z" fill="#e6b4c0"></path>
+        <path d="M124 62 L104 66 L112 150 L130 142 Z" fill="#e6b4c0"></path>
+        <path d="M96 66 L100 96 L104 66 Z" fill="#fffdfb"></path>
+        <rect x="80" y="132" width="40" height="66" rx="4" fill="#5a6a9a"></rect>
+        <line x1="80" y1="150" x2="120" y2="150" stroke="#4a5a88" stroke-width="0.8" opacity="0.5"></line></svg></div>
+      <div class="cap"><h4>Blazer poudré</h4><p>Blazer rose structuré + top blanc + jean brut</p><span class="mood">chic</span></div>
+    </div><div class="look">
+      <div class="vis" style="padding-bottom:125%"><svg viewBox="0 0 200 250" xmlns="http://www.w3.org/2000/svg">
+    <rect width="200" height="250" fill="#f3d9dd"></rect>
+    <ellipse cx="100" cy="235" rx="60" ry="14" fill="#000" opacity="0.05"></ellipse>
+    
+    <rect x="88" y="196" width="10" height="34" rx="4" fill="#e8dcc0"></rect>
+    <rect x="102" y="196" width="10" height="34" rx="4" fill="#e8dcc0"></rect>
+    <ellipse cx="90" cy="234" rx="11" ry="6" fill="#d8b8c0"></ellipse>
+    <ellipse cx="110" cy="234" rx="11" ry="6" fill="#d8b8c0"></ellipse>
+    <rect x="94" y="46" width="12" height="16" fill="#f0d0bc"></rect>
+    <path d="M76 42 Q74 8 100 8 Q126 8 124 42 L124 60 Q118 50 100 50 Q82 50 76 60 Z" fill="#d4a860"></path>
+    <circle cx="100" cy="34" r="18" fill="#f0d0bc"></circle>
+    <path d="M82 30 Q84 16 100 16 Q116 16 118 30 Q112 22 100 22 Q88 22 82 30 Z" fill="#d4a860"></path>
+    <circle cx="93" cy="34" r="1.6" fill="#6a5a60"></circle>
+    <circle cx="107" cy="34" r="1.6" fill="#6a5a60"></circle>
+    <path d="M96 40 Q100 43 104 40" stroke="#c98a8a" stroke-width="1.4" fill="none" stroke-linecap="round"></path>
+    <circle cx="88" cy="39" r="2.5" fill="#f0b8b8" opacity="0.5"></circle>
+    <circle cx="112" cy="39" r="2.5" fill="#f0b8b8" opacity="0.5"></circle>
+    <path d="M74 64 Q100 58 126 64 L128 124 L72 124 Z" fill="#c9bce8"></path>
+        <path d="M70 66 Q60 96 64 122 L76 120 L74 72 Z" fill="#c9bce8"></path>
+        <path d="M130 66 Q140 96 136 122 L124 120 L126 72 Z" fill="#c9bce8"></path>
+        <path d="M72 124 L128 124 L142 204 L58 204 Z" fill="#e8dcc0"></path>
+        <g stroke="#d0bfa0" stroke-width="1.4">
+        <line x1="78" y1="128" x2="66" y2="200"></line><line x1="90" y1="128" x2="84" y2="202"></line>
+        <line x1="100" y1="128" x2="100" y2="202"></line><line x1="110" y1="128" x2="116" y2="202"></line>
+        <line x1="122" y1="128" x2="134" y2="200"></line></g></svg></div>
+      <div class="cap"><h4>Jupe midi plissée</h4><p>Maille lavande rentrée + jupe beige plissée</p><span class="mood">romantique</span></div>
+    </div><div class="look">
+      <div class="vis" style="padding-bottom:125%"><svg viewBox="0 0 200 250" xmlns="http://www.w3.org/2000/svg">
+    <rect width="200" height="250" fill="#dcd4ee"></rect>
+    <ellipse cx="100" cy="235" rx="60" ry="14" fill="#000" opacity="0.05"></ellipse>
+    
+    <rect x="88" y="196" width="10" height="34" rx="4" fill="#96af92"></rect>
+    <rect x="102" y="196" width="10" height="34" rx="4" fill="#96af92"></rect>
+    <ellipse cx="90" cy="234" rx="11" ry="6" fill="#7f9a7b"></ellipse>
+    <ellipse cx="110" cy="234" rx="11" ry="6" fill="#7f9a7b"></ellipse>
+    <rect x="94" y="46" width="12" height="16" fill="#f0d0bc"></rect>
+    <path d="M76 42 Q74 8 100 8 Q126 8 124 42 L124 60 Q118 50 100 50 Q82 50 76 60 Z" fill="#b0a8b0"></path>
+    <circle cx="100" cy="34" r="18" fill="#f0d0bc"></circle>
+    <path d="M82 30 Q84 16 100 16 Q116 16 118 30 Q112 22 100 22 Q88 22 82 30 Z" fill="#b0a8b0"></path>
+    <circle cx="93" cy="34" r="1.6" fill="#6a5a60"></circle>
+    <circle cx="107" cy="34" r="1.6" fill="#6a5a60"></circle>
+    <path d="M96 40 Q100 43 104 40" stroke="#c98a8a" stroke-width="1.4" fill="none" stroke-linecap="round"></path>
+    <circle cx="88" cy="39" r="2.5" fill="#f0b8b8" opacity="0.5"></circle>
+    <circle cx="112" cy="39" r="2.5" fill="#f0b8b8" opacity="0.5"></circle>
+    <path d="M76 64 Q100 58 124 64 L126 128 L74 128 Z" fill="#b2c6ae"></path>
+        <path d="M72 66 Q62 96 66 126 L78 124 L76 72 Z" fill="#b2c6ae"></path>
+        <path d="M128 66 Q138 96 134 126 L122 124 L124 72 Z" fill="#b2c6ae"></path>
+        <rect x="76" y="128" width="48" height="72" rx="5" fill="#96af92"></rect>
+        <path d="M76 128 L124 128 L124 140 L76 140 Z" fill="#8aa386" opacity="0.5"></path></svg></div>
+      <div class="cap"><h4>Monochrome sauge</h4><p>Ensemble maille ton sur ton</p><span class="mood">minimal</span></div>
+    </div><div class="look">
+      <div class="vis" style="padding-bottom:125%"><svg viewBox="0 0 200 250" xmlns="http://www.w3.org/2000/svg">
+    <rect width="200" height="250" fill="#e8d5c0"></rect>
+    <ellipse cx="100" cy="235" rx="60" ry="14" fill="#000" opacity="0.05"></ellipse>
+    
+    <rect x="88" y="196" width="10" height="34" rx="4" fill="#c17a4a"></rect>
+    <rect x="102" y="196" width="10" height="34" rx="4" fill="#c17a4a"></rect>
+    <ellipse cx="90" cy="234" rx="11" ry="6" fill="#8a5a38"></ellipse>
+    <ellipse cx="110" cy="234" rx="11" ry="6" fill="#8a5a38"></ellipse>
+    <rect x="94" y="46" width="12" height="16" fill="#d09a72"></rect>
+    <path d="M76 42 Q74 8 100 8 Q126 8 124 42 L124 60 Q118 50 100 50 Q82 50 76 60 Z" fill="#7a5638"></path>
+    <circle cx="100" cy="34" r="18" fill="#d09a72"></circle>
+    <path d="M82 30 Q84 16 100 16 Q116 16 118 30 Q112 22 100 22 Q88 22 82 30 Z" fill="#7a5638"></path>
+    <circle cx="93" cy="34" r="1.6" fill="#6a5a60"></circle>
+    <circle cx="107" cy="34" r="1.6" fill="#6a5a60"></circle>
+    <path d="M96 40 Q100 43 104 40" stroke="#c98a8a" stroke-width="1.4" fill="none" stroke-linecap="round"></path>
+    <circle cx="88" cy="39" r="2.5" fill="#f0b8b8" opacity="0.5"></circle>
+    <circle cx="112" cy="39" r="2.5" fill="#f0b8b8" opacity="0.5"></circle>
+    <path d="M76 64 Q100 58 124 64 L126 120 L74 120 Z" fill="#f0e4d0"></path>
+        <path d="M72 66 Q58 78 56 110 L70 106 L74 72 Z" fill="#f0e4d0"></path>
+        <path d="M128 66 Q142 78 144 110 L130 106 L126 72 Z" fill="#f0e4d0"></path>
+        <g stroke="#d8c4a8" stroke-width="0.8" opacity="0.7">
+        <line x1="80" y1="72" x2="120" y2="72"></line><line x1="78" y1="84" x2="122" y2="84"></line><line x1="76" y1="96" x2="124" y2="96"></line><line x1="76" y1="108" x2="124" y2="108"></line></g>
+        <path d="M74 120 L126 120 L138 208 Q100 218 62 208 Z" fill="#c17a4a"></path>
+        <path d="M74 120 L126 120 L128 134 L72 134 Z" fill="#a8663a"></path>
+        <g stroke="#e0a878" stroke-width="1" opacity="0.5"><line x1="70" y1="150" x2="130" y2="150"></line><line x1="66" y1="175" x2="134" y2="175"></line></g>
+        <path d="M92 52 Q100 64 108 52" stroke="#c9a860" stroke-width="1.5" fill="none"></path>
+        <path d="M88 52 Q100 72 112 52" stroke="#b08850" stroke-width="1.5" fill="none"></path>
+        <circle cx="100" cy="70" r="2" fill="#c9a860"></circle></svg></div>
+      <div class="cap"><h4>Esprit voyage</h4><p>Blouse crochet + jupe longue terracotta</p><span class="mood">boheme</span></div>
+    </div><div class="look">
+      <div class="vis" style="padding-bottom:125%"><svg viewBox="0 0 200 250" xmlns="http://www.w3.org/2000/svg">
+    <rect width="200" height="250" fill="#d8c8b0"></rect>
+    <ellipse cx="100" cy="235" rx="60" ry="14" fill="#000" opacity="0.05"></ellipse>
+    
+    <rect x="88" y="196" width="10" height="34" rx="4" fill="#b89878"></rect>
+    <rect x="102" y="196" width="10" height="34" rx="4" fill="#b89878"></rect>
+    <ellipse cx="90" cy="234" rx="11" ry="6" fill="#7a5a3a"></ellipse>
+    <ellipse cx="110" cy="234" rx="11" ry="6" fill="#7a5a3a"></ellipse>
+    <rect x="94" y="46" width="12" height="16" fill="#e8bd9a"></rect>
+    <path d="M76 42 Q74 8 100 8 Q126 8 124 42 L124 60 Q118 50 100 50 Q82 50 76 60 Z" fill="#b06838"></path>
+    <circle cx="100" cy="34" r="18" fill="#e8bd9a"></circle>
+    <path d="M82 30 Q84 16 100 16 Q116 16 118 30 Q112 22 100 22 Q88 22 82 30 Z" fill="#b06838"></path>
+    <circle cx="93" cy="34" r="1.6" fill="#6a5a60"></circle>
+    <circle cx="107" cy="34" r="1.6" fill="#6a5a60"></circle>
+    <path d="M96 40 Q100 43 104 40" stroke="#c98a8a" stroke-width="1.4" fill="none" stroke-linecap="round"></path>
+    <circle cx="88" cy="39" r="2.5" fill="#f0b8b8" opacity="0.5"></circle>
+    <circle cx="112" cy="39" r="2.5" fill="#f0b8b8" opacity="0.5"></circle>
+    <path d="M78 64 Q100 58 122 64 L124 200 Q100 210 76 200 Z" fill="#d9a878"></path>
+        <path d="M74 66 Q64 96 68 140 L80 136 L78 72 Z" fill="#d9a878"></path>
+        <path d="M126 66 Q136 96 132 140 L120 136 L122 72 Z" fill="#d9a878"></path>
+        <path d="M80 66 L84 150 L76 150 L74 70 Z" fill="#a0763a"></path>
+        <path d="M120 66 L116 150 L124 150 L126 70 Z" fill="#a0763a"></path>
+        <g stroke="#8a6430" stroke-width="1.2">
+        <line x1="76" y1="150" x2="75" y2="166"></line><line x1="79" y1="150" x2="78" y2="168"></line><line x1="82" y1="150" x2="81" y2="165"></line>
+        <line x1="124" y1="150" x2="125" y2="166"></line><line x1="121" y1="150" x2="122" y2="168"></line><line x1="118" y1="150" x2="119" y2="165"></line></g></svg></div>
+      <div class="cap"><h4>Franges &amp; daim</h4><p>Gilet à franges + robe unie + bottes</p><span class="mood">boheme</span></div>
+    </div><div class="look">
+      <div class="vis" style="padding-bottom:125%"><svg viewBox="0 0 200 250" xmlns="http://www.w3.org/2000/svg">
+    <rect width="200" height="250" fill="#d4dde8"></rect>
+    <ellipse cx="100" cy="235" rx="60" ry="14" fill="#000" opacity="0.05"></ellipse>
+    
+    <rect x="88" y="196" width="10" height="34" rx="4" fill="#3a4048"></rect>
+    <rect x="102" y="196" width="10" height="34" rx="4" fill="#3a4048"></rect>
+    <ellipse cx="90" cy="234" rx="11" ry="6" fill="#fffdfb"></ellipse>
+    <ellipse cx="110" cy="234" rx="11" ry="6" fill="#fffdfb"></ellipse>
+    <rect x="94" y="46" width="12" height="16" fill="#a87850"></rect>
+    <path d="M76 42 Q74 8 100 8 Q126 8 124 42 L124 60 Q118 50 100 50 Q82 50 76 60 Z" fill="#2a2028"></path>
+    <circle cx="100" cy="34" r="18" fill="#a87850"></circle>
+    <path d="M82 30 Q84 16 100 16 Q116 16 118 30 Q112 22 100 22 Q88 22 82 30 Z" fill="#2a2028"></path>
+    <circle cx="93" cy="34" r="1.6" fill="#6a5a60"></circle>
+    <circle cx="107" cy="34" r="1.6" fill="#6a5a60"></circle>
+    <path d="M96 40 Q100 43 104 40" stroke="#c98a8a" stroke-width="1.4" fill="none" stroke-linecap="round"></path>
+    <circle cx="88" cy="39" r="2.5" fill="#f0b8b8" opacity="0.5"></circle>
+    <circle cx="112" cy="39" r="2.5" fill="#f0b8b8" opacity="0.5"></circle>
+    <rect x="84" y="62" width="32" height="66" fill="#e8e8ea"></rect>
+        <path d="M76 62 L96 66 L90 146 L70 138 Z" fill="#5a6472"></path>
+        <path d="M124 62 L104 66 L110 146 L130 138 Z" fill="#5a6472"></path>
+        <rect x="80" y="128" width="40" height="72" rx="8" fill="#3a4048"></rect>
+        <line x1="88" y1="130" x2="86" y2="198" stroke="#2a3038" stroke-width="1.5"></line>
+        <line x1="112" y1="130" x2="114" y2="198" stroke="#2a3038" stroke-width="1.5"></line></svg></div>
+      <div class="cap"><h4>Sport-chic urbain</h4><p>Blazer + t-shirt + jogging + sneakers</p><span class="mood">sportif</span></div>
+    </div><div class="look">
+      <div class="vis" style="padding-bottom:125%"><svg viewBox="0 0 200 250" xmlns="http://www.w3.org/2000/svg">
+    <rect width="200" height="250" fill="#cfe0dc"></rect>
+    <ellipse cx="100" cy="235" rx="60" ry="14" fill="#000" opacity="0.05"></ellipse>
+    
+    <rect x="88" y="196" width="10" height="34" rx="4" fill="#8a9aa8"></rect>
+    <rect x="102" y="196" width="10" height="34" rx="4" fill="#8a9aa8"></rect>
+    <ellipse cx="90" cy="234" rx="11" ry="6" fill="#f3c9d0"></ellipse>
+    <ellipse cx="110" cy="234" rx="11" ry="6" fill="#f3c9d0"></ellipse>
+    <rect x="94" y="46" width="12" height="16" fill="#f0d0bc"></rect>
+    <path d="M76 42 Q74 8 100 8 Q126 8 124 42 L124 60 Q118 50 100 50 Q82 50 76 60 Z" fill="#d4a860"></path>
+    <circle cx="100" cy="34" r="18" fill="#f0d0bc"></circle>
+    <path d="M82 30 Q84 16 100 16 Q116 16 118 30 Q112 22 100 22 Q88 22 82 30 Z" fill="#d4a860"></path>
+    <circle cx="93" cy="34" r="1.6" fill="#6a5a60"></circle>
+    <circle cx="107" cy="34" r="1.6" fill="#6a5a60"></circle>
+    <path d="M96 40 Q100 43 104 40" stroke="#c98a8a" stroke-width="1.4" fill="none" stroke-linecap="round"></path>
+    <circle cx="88" cy="39" r="2.5" fill="#f0b8b8" opacity="0.5"></circle>
+    <circle cx="112" cy="39" r="2.5" fill="#f0b8b8" opacity="0.5"></circle>
+    <path d="M74 64 Q100 58 126 64 L128 120 L72 120 Z" fill="#f0c8d0"></path>
+        <path d="M70 66 Q58 92 62 120 L76 116 L74 72 Z" fill="#f0c8d0"></path>
+        <path d="M130 66 Q142 92 138 120 L124 116 L126 72 Z" fill="#f0c8d0"></path>
+        <path d="M72 116 L128 116 L128 124 L72 124 Z" fill="#e0b0bc"></path>
+        <rect x="82" y="124" width="36" height="76" rx="6" fill="#8a9aa8"></rect>
+        <line x1="100" y1="126" x2="100" y2="198" stroke="#7a8a98" stroke-width="0.8"></line></svg></div>
+      <div class="cap"><h4>Athleisure doux</h4><p>Sweat court + legging + baskets pastel</p><span class="mood">sportif</span></div>
+    </div><div class="look">
+      <div class="vis" style="padding-bottom:125%"><svg viewBox="0 0 200 250" xmlns="http://www.w3.org/2000/svg">
+    <rect width="200" height="250" fill="#e6e0f0"></rect>
+    <ellipse cx="100" cy="235" rx="60" ry="14" fill="#000" opacity="0.05"></ellipse>
+    
+    <rect x="88" y="196" width="10" height="34" rx="4" fill="#a493c8"></rect>
+    <rect x="102" y="196" width="10" height="34" rx="4" fill="#a493c8"></rect>
+    <ellipse cx="90" cy="234" rx="11" ry="6" fill="#6a5a88"></ellipse>
+    <ellipse cx="110" cy="234" rx="11" ry="6" fill="#6a5a88"></ellipse>
+    <rect x="94" y="46" width="12" height="16" fill="#f0d0bc"></rect>
+    <path d="M76 42 Q74 8 100 8 Q126 8 124 42 L124 60 Q118 50 100 50 Q82 50 76 60 Z" fill="#7a5638"></path>
+    <circle cx="100" cy="34" r="18" fill="#f0d0bc"></circle>
+    <path d="M82 30 Q84 16 100 16 Q116 16 118 30 Q112 22 100 22 Q88 22 82 30 Z" fill="#7a5638"></path>
+    <circle cx="93" cy="34" r="1.6" fill="#6a5a60"></circle>
+    <circle cx="107" cy="34" r="1.6" fill="#6a5a60"></circle>
+    <path d="M96 40 Q100 43 104 40" stroke="#c98a8a" stroke-width="1.4" fill="none" stroke-linecap="round"></path>
+    <circle cx="88" cy="39" r="2.5" fill="#f0b8b8" opacity="0.5"></circle>
+    <circle cx="112" cy="39" r="2.5" fill="#f0b8b8" opacity="0.5"></circle>
+    <rect x="86" y="62" width="28" height="66" fill="#f0eaf8"></rect>
+        <path d="M76 62 L96 66 L90 148 L70 140 Z" fill="#a493c8"></path>
+        <path d="M124 62 L104 66 L110 148 L130 140 Z" fill="#a493c8"></path>
+        <path d="M96 66 L100 92 L104 66 Z" fill="#f0eaf8"></path>
+        <rect x="82" y="130" width="36" height="70" rx="4" fill="#a493c8"></rect>
+        <line x1="100" y1="132" x2="100" y2="198" stroke="#8a79b0" stroke-width="0.8"></line></svg></div>
+      <div class="cap"><h4>Tailleur lavande</h4><p>Blazer + pantalon assorti + escarpins</p><span class="mood">chic</span></div>
+    </div><div class="look">
+      <div class="vis" style="padding-bottom:125%"><svg viewBox="0 0 200 250" xmlns="http://www.w3.org/2000/svg">
+    <rect width="200" height="250" fill="#f0dde2"></rect>
+    <ellipse cx="100" cy="235" rx="60" ry="14" fill="#000" opacity="0.05"></ellipse>
+    
+    <rect x="88" y="196" width="10" height="34" rx="4" fill="#e0b0bc"></rect>
+    <rect x="102" y="196" width="10" height="34" rx="4" fill="#e0b0bc"></rect>
+    <ellipse cx="90" cy="234" rx="11" ry="6" fill="#c89aa0"></ellipse>
+    <ellipse cx="110" cy="234" rx="11" ry="6" fill="#c89aa0"></ellipse>
+    <rect x="94" y="46" width="12" height="16" fill="#d09a72"></rect>
+    <path d="M76 42 Q74 8 100 8 Q126 8 124 42 L124 60 Q118 50 100 50 Q82 50 76 60 Z" fill="#2a2028"></path>
+    <circle cx="100" cy="34" r="18" fill="#d09a72"></circle>
+    <path d="M82 30 Q84 16 100 16 Q116 16 118 30 Q112 22 100 22 Q88 22 82 30 Z" fill="#2a2028"></path>
+    <circle cx="93" cy="34" r="1.6" fill="#6a5a60"></circle>
+    <circle cx="107" cy="34" r="1.6" fill="#6a5a60"></circle>
+    <path d="M96 40 Q100 43 104 40" stroke="#c98a8a" stroke-width="1.4" fill="none" stroke-linecap="round"></path>
+    <circle cx="88" cy="39" r="2.5" fill="#f0b8b8" opacity="0.5"></circle>
+    <circle cx="112" cy="39" r="2.5" fill="#f0b8b8" opacity="0.5"></circle>
+    <path d="M76 64 Q100 58 124 64 L126 120 L74 120 Z" fill="#f2c4ce"></path>
+        <path d="M72 66 Q60 84 60 108 L74 104 L76 72 Z" fill="#f2c4ce"></path>
+        <path d="M128 66 Q140 84 140 108 L126 104 L124 72 Z" fill="#f2c4ce"></path>
+        <path d="M74 118 L100 118 L96 168 L72 164 Z" fill="#e8b4c0"></path>
+        <path d="M126 118 L100 118 L104 168 L128 164 Z" fill="#e8b4c0"></path></svg></div>
+      <div class="cap"><h4>Combishort volanté</h4><p>Combinaison courte rose + sandales</p><span class="mood">romantique</span></div>
+    </div><div class="look">
+      <div class="vis" style="padding-bottom:125%"><svg viewBox="0 0 200 250" xmlns="http://www.w3.org/2000/svg">
+    <rect width="200" height="250" fill="#dde6ec"></rect>
+    <ellipse cx="100" cy="235" rx="60" ry="14" fill="#000" opacity="0.05"></ellipse>
+    
+    <rect x="88" y="196" width="10" height="34" rx="4" fill="#6a86ac"></rect>
+    <rect x="102" y="196" width="10" height="34" rx="4" fill="#6a86ac"></rect>
+    <ellipse cx="90" cy="234" rx="11" ry="6" fill="#e8b850"></ellipse>
+    <ellipse cx="110" cy="234" rx="11" ry="6" fill="#e8b850"></ellipse>
+    <rect x="94" y="46" width="12" height="16" fill="#e8bd9a"></rect>
+    <path d="M76 42 Q74 8 100 8 Q126 8 124 42 L124 60 Q118 50 100 50 Q82 50 76 60 Z" fill="#7a5638"></path>
+    <circle cx="100" cy="34" r="18" fill="#e8bd9a"></circle>
+    <path d="M82 30 Q84 16 100 16 Q116 16 118 30 Q112 22 100 22 Q88 22 82 30 Z" fill="#7a5638"></path>
+    <circle cx="93" cy="34" r="1.6" fill="#6a5a60"></circle>
+    <circle cx="107" cy="34" r="1.6" fill="#6a5a60"></circle>
+    <path d="M96 40 Q100 43 104 40" stroke="#c98a8a" stroke-width="1.4" fill="none" stroke-linecap="round"></path>
+    <circle cx="88" cy="39" r="2.5" fill="#f0b8b8" opacity="0.5"></circle>
+    <circle cx="112" cy="39" r="2.5" fill="#f0b8b8" opacity="0.5"></circle>
+    <rect x="82" y="60" width="36" height="70" fill="#fffdfb"></rect>
+        <g stroke="#4a6a98" stroke-width="3"><line x1="82" y1="72" x2="118" y2="72"></line><line x1="82" y1="84" x2="118" y2="84"></line><line x1="82" y1="96" x2="118" y2="96"></line><line x1="82" y1="108" x2="118" y2="108"></line></g>
+        <path d="M76 116 L124 116 L128 200 L72 200 Z" fill="#6a86ac"></path>
+        <rect x="84" y="90" width="32" height="34" fill="#6a86ac"></rect>
+        <line x1="90" y1="64" x2="88" y2="92" stroke="#5a76a0" stroke-width="5"></line>
+        <line x1="110" y1="64" x2="112" y2="92" stroke="#5a76a0" stroke-width="5"></line>
+        <circle cx="88" cy="92" r="2" fill="#c9a860"></circle><circle cx="112" cy="92" r="2" fill="#c9a860"></circle>
+        <line x1="100" y1="128" x2="100" y2="198" stroke="#5a76a0" stroke-width="1"></line></svg></div>
+      <div class="cap"><h4>Salopette &amp; rayures</h4><p>Salopette denim + marinière + baskets</p><span class="mood">casual</span></div>
+    </div><div class="look">
+      <div class="vis" style="padding-bottom:125%"><svg viewBox="0 0 200 250" xmlns="http://www.w3.org/2000/svg">
+    <rect width="200" height="250" fill="#eceaf0"></rect>
+    <ellipse cx="100" cy="235" rx="60" ry="14" fill="#000" opacity="0.05"></ellipse>
+    
+    <rect x="88" y="196" width="10" height="34" rx="4" fill="#c8c4cc"></rect>
+    <rect x="102" y="196" width="10" height="34" rx="4" fill="#c8c4cc"></rect>
+    <ellipse cx="90" cy="234" rx="11" ry="6" fill="#b0acb8"></ellipse>
+    <ellipse cx="110" cy="234" rx="11" ry="6" fill="#b0acb8"></ellipse>
+    <rect x="94" y="46" width="12" height="16" fill="#f0d0bc"></rect>
+    <path d="M76 42 Q74 8 100 8 Q126 8 124 42 L124 60 Q118 50 100 50 Q82 50 76 60 Z" fill="#b0a8b0"></path>
+    <circle cx="100" cy="34" r="18" fill="#f0d0bc"></circle>
+    <path d="M82 30 Q84 16 100 16 Q116 16 118 30 Q112 22 100 22 Q88 22 82 30 Z" fill="#b0a8b0"></path>
+    <circle cx="93" cy="34" r="1.6" fill="#6a5a60"></circle>
+    <circle cx="107" cy="34" r="1.6" fill="#6a5a60"></circle>
+    <path d="M96 40 Q100 43 104 40" stroke="#c98a8a" stroke-width="1.4" fill="none" stroke-linecap="round"></path>
+    <circle cx="88" cy="39" r="2.5" fill="#f0b8b8" opacity="0.5"></circle>
+    <circle cx="112" cy="39" r="2.5" fill="#f0b8b8" opacity="0.5"></circle>
+    <path d="M80 62 L120 62 L124 206 Q100 214 76 206 Z" fill="#c8c6ce"></path>
+        <path d="M80 62 Q72 66 68 96 L78 94 L82 66 Z" fill="#c8c6ce"></path>
+        <path d="M120 62 Q128 66 132 96 L122 94 L118 66 Z" fill="#c8c6ce"></path>
+        <path d="M88 58 L100 62 L112 58 L112 66 L88 66 Z" fill="#eceaf0"></path>
+        <line x1="100" y1="66" x2="100" y2="206" stroke="#bab6c2" stroke-width="0.8" opacity="0.6"></line></svg></div>
+      <div class="cap"><h4>Robe colonne</h4><p>Robe droite gris perle + mules</p><span class="mood">minimal</span></div>
+    </div></div>
+</section>
+
+<!-- ===================== CAPSULE ===================== -->
+<section id="capsule">
+  <div class="sec-head">
+    <span class="num">04 — Construire</span>
+    <h2>Ta garde-robe capsule</h2>
+    <p>Sélectionne tes essentiels. Une bonne capsule tient en 10 à 15 pièces qui se combinent entre elles.</p>
+  </div>
+
+  <div class="capsule-wrap">
+    <div class="capsule-grid" id="capsule-grid"><div class="piece"><span class="pe">👕</span><span class="pn">T-shirt blanc</span><span class="pc">basique</span></div><div class="piece"><span class="pe">👖</span><span class="pn">Jean brut</span><span class="pc">basique</span></div><div class="piece"><span class="pe">🧥</span><span class="pn">Trench</span><span class="pc">structure</span></div><div class="piece"><span class="pe">👗</span><span class="pn">Robe fluide</span><span class="pc">pièce forte</span></div><div class="piece"><span class="pe">🧶</span><span class="pn">Maille douce</span><span class="pc">chaleur</span></div><div class="piece"><span class="pe">👚</span><span class="pn">Chemise</span><span class="pc">basique</span></div><div class="piece"><span class="pe">🩳</span><span class="pn">Short tailleur</span><span class="pc">détente</span></div><div class="piece"><span class="pe">🥿</span><span class="pn">Ballerines</span><span class="pc">chaussure</span></div><div class="piece"><span class="pe">👟</span><span class="pn">Sneakers</span><span class="pc">chaussure</span></div><div class="piece"><span class="pe">👢</span><span class="pn">Bottines</span><span class="pc">chaussure</span></div><div class="piece"><span class="pe">🧣</span><span class="pn">Écharpe</span><span class="pc">accessoire</span></div><div class="piece"><span class="pe">👜</span><span class="pn">Sac cuir</span><span class="pc">accessoire</span></div><div class="piece"><span class="pe">🧦</span><span class="pn">Pantalon large</span><span class="pc">basique</span></div><div class="piece"><span class="pe">🕶️</span><span class="pn">Lunettes</span><span class="pc">accessoire</span></div></div>
+    <div class="capsule-count">Tu as choisi <b id="cap-n">0</b> pièce(s) · <span id="cap-msg">clique pour composer ta capsule</span></div>
+  </div>
+</section>
+
+<footer>
+  Fait avec <span class="heart">♥</span> pour t'aider à te sentir bien dans tes vêtements.<br>
+  Ton style n'appartient qu'à toi — ces conseils sont des points de départ, pas des règles.
+</footer>
+
+<script>
+/* ============ QUIZ ============ */
+const questions = [
+  {q:"Un samedi idéal, tu portes…", opts:[
+    {e:"🧥",t:"Un trench et des bottines",s:"classique"},
+    {e:"👟",t:"Un jean large et des sneakers",s:"street"},
+    {e:"🌷",t:"Une robe fluide à fleurs",s:"romantique"},
+    {e:"🖤",t:"Total look noir minimal",s:"minimal"},
+    {e:"🪶",t:"Une longue jupe et des breloques",s:"boheme"},
+    {e:"🏃‍♀️",t:"Un legging et une veste zippée",s:"sportif"}]},
+  {q:"Ta couleur coup de cœur ?", opts:[
+    {e:"🤍",t:"Beige, crème, camel",s:"classique"},
+    {e:"🧡",t:"Orange, jaune, imprimés",s:"street"},
+    {e:"💗",t:"Rose poudré, lavande",s:"romantique"},
+    {e:"⚫",t:"Noir, gris, blanc",s:"minimal"},
+    {e:"🍂",t:"Terracotta, ocre, kaki",s:"boheme"},
+    {e:"💙",t:"Bleu, blanc, touches fluo",s:"sportif"}]},
+  {q:"Quel accessoire te définit ?", opts:[
+    {e:"👜",t:"Un sac structuré en cuir",s:"classique"},
+    {e:"🧢",t:"Une casquette ou un bob",s:"street"},
+    {e:"🎀",t:"Un ruban, des perles",s:"romantique"},
+    {e:"⌚",t:"Une montre fine, rien de plus",s:"minimal"},
+    {e:"📿",t:"Des colliers superposés",s:"boheme"},
+    {e:"🎽",t:"Une banane ou un sac de sport",s:"sportif"}]},
+  {q:"Ton icône de style serait…", opts:[
+    {e:"🕶️",t:"Élégante et intemporelle",s:"classique"},
+    {e:"🛹",t:"Cool et décontractée",s:"street"},
+    {e:"🦢",t:"Douce et féminine",s:"romantique"},
+    {e:"📐",t:"Épurée et graphique",s:"minimal"},
+    {e:"🌾",t:"Libre et voyageuse",s:"boheme"},
+    {e:"⚡",t:"Énergique et dynamique",s:"sportif"}]},
+  {q:"Dans ton armoire, surtout…", opts:[
+    {e:"🧵",t:"Des matières nobles qui durent",s:"classique"},
+    {e:"♻️",t:"Des pièces oversize et confort",s:"street"},
+    {e:"🌸",t:"Des tissus légers et des volants",s:"romantique"},
+    {e:"◻️",t:"Des basiques bien coupés",s:"minimal"},
+    {e:"🪡",t:"Du crochet, du daim, des franges",s:"boheme"},
+    {e:"👕",t:"Du technique, du respirant",s:"sportif"}]},
+  {q:"Le compliment qui te touche le plus ?", opts:[
+    {e:"✨",t:"« Tu es toujours si chic »",s:"classique"},
+    {e:"🔥",t:"« T'as trop de style, c'est cool »",s:"street"},
+    {e:"💐",t:"« Tu es ravissante »",s:"romantique"},
+    {e:"🤍",t:"« C'est tellement élégant et net »",s:"minimal"},
+    {e:"🌻",t:"« Tu as une allure si libre »",s:"boheme"},
+    {e:"💪",t:"« Tu as l'air en pleine forme »",s:"sportif"}]},
+];
+const profils = {
+  classique:{badge:"🧥",name:"Classique chic",tag:"intemporel · raffiné",
+    desc:"Tu aimes les pièces qui traversent les saisons sans se démoder. Ta force : une élégance sûre, jamais tape-à-l'œil. Mise sur des coupes nettes, de belles matières et une palette neutre que tu réchauffes d'un accessoire.",
+    keys:["Trench","Camel","Cuir","Coupe nette","Neutres"]},
+  street:{badge:"👟",name:"Streetwear décontracté",tag:"cool · confortable",
+    desc:"Le confort d'abord, mais avec du caractère. Tu joues les volumes oversize, les sneakers et une pointe d'audace dans les couleurs. Ta force : un style qui respire la liberté et l'énergie.",
+    keys:["Oversize","Sneakers","Denim","Couleurs vives","Casquette"]},
+  romantique:{badge:"🌷",name:"Romantique doux",tag:"féminin · délicat",
+    desc:"Tu es attirée par la douceur : tissus fluides, imprimés floraux, tons poudrés. Ta force : une allure tendre et lumineuse. Ose les superpositions légères et les détails (dentelle, ruban, volants) sans surcharger.",
+    keys:["Fleuri","Rose poudré","Volants","Fluide","Perles"]},
+  minimal:{badge:"🖤",name:"Minimaliste graphique",tag:"épuré · net",
+    desc:"Moins mais mieux. Tu construis des tenues autour de lignes pures et d'une palette réduite. Ta force : une cohérence qui semble sans effort. Investis dans quelques pièces parfaitement coupées qui se combinent toutes entre elles.",
+    keys:["Noir & blanc","Basiques","Lignes pures","Monochrome","Qualité"]},
+  boheme:{badge:"🪶",name:"Bohème libre",tag:"naturel · voyageur",
+    desc:"Tu respires la liberté et la nature. Matières brutes, superpositions, bijoux qui tintent et couleurs de terre : ton style raconte une histoire. Ta force : une allure décontractée et pleine d'âme. Mixe les textures (crochet, daim, lin) et assume les accessoires.",
+    keys:["Franges","Terracotta","Superposition","Crochet","Bijoux"]},
+  sportif:{badge:"⚡",name:"Sport-chic dynamique",tag:"actif · moderne",
+    desc:"Tu bouges, et tes vêtements suivent. Tu maîtrises l'art du confort stylé : le sport qui devient tenue de tous les jours. Ta force : une énergie moderne et sans effort. Associe une pièce technique à une pièce nette (blazer + sneakers) pour élever le look.",
+    keys:["Sneakers","Technique","Zippé","Confort","Touches vives"]},
+};
+let qi=0, scores={classique:0,street:0,romantique:0,minimal:0,boheme:0,sportif:0};
+
+function renderQ(){
+  const q=questions[qi];
+  document.getElementById('q-bar').style.width=((qi)/questions.length*100)+'%';
+  document.getElementById('q-count').textContent='Question '+(qi+1)+' / '+questions.length;
+  document.getElementById('q-text').textContent=q.q;
+  const box=document.getElementById('q-options'); box.innerHTML='';
+  q.opts.forEach(o=>{
+    const b=document.createElement('button');
+    b.className='q-opt';
+    b.innerHTML='<span class="emo">'+o.e+'</span> '+o.t;
+    b.onclick=()=>{scores[o.s]++; qi++; qi<questions.length?renderQ():showResult();};
+    box.appendChild(b);
+  });
+}
+function showResult(){
+  document.getElementById('q-bar').style.width='100%';
+  document.getElementById('q-live').style.display='none';
+  const win=Object.keys(scores).reduce((a,b)=>scores[a]>=scores[b]?a:b);
+  const p=profils[win];
+  document.getElementById('r-badge').textContent=p.badge;
+  document.getElementById('r-name').textContent=p.name;
+  document.getElementById('r-tag').textContent=p.tag;
+  document.getElementById('r-desc').textContent=p.desc;
+  const k=document.getElementById('r-keys'); k.innerHTML='';
+  p.keys.forEach(x=>{const s=document.createElement('span');s.textContent=x;k.appendChild(s);});
+  document.getElementById('q-result').style.display='block';
+}
+function restartQuiz(){
+  qi=0;scores={classique:0,street:0,romantique:0,minimal:0,boheme:0,sportif:0};
+  document.getElementById('q-result').style.display='none';
+  document.getElementById('q-live').style.display='block';
+  renderQ();
+}
+renderQ();
+
+/* ============ CONSEILS ============ */
+const morpho=[
+  {ic:"🍐",h:"Silhouette A",p:"Épaules plus fines que les hanches.",tip:"Structure le haut (épaulettes, cols) et fluidifie le bas."},
+  {ic:"🍎",h:"Silhouette V",p:"Épaules plus larges que les hanches.",tip:"Adoucis le haut, apporte du volume et des motifs en bas."},
+  {ic:"⌛",h:"Silhouette X",p:"Épaules et hanches alignées, taille marquée.",tip:"Souligne la taille : ceintures, coupes cintrées."},
+  {ic:"▭",h:"Silhouette H",p:"Ligne droite, taille peu marquée.",tip:"Crée des courbes : superpositions, taille haute, ceinture."},
+  {ic:"🔷",h:"Silhouette O",p:"Rondeurs au centre, jolies jambes.",tip:"Mets les jambes en valeur, opte pour des matières fluides."},
+];
+const couleurs=[
+  {ic:"🌸",h:"Sous-ton chaud",p:"Veines verdâtres, l'or te va mieux que l'argent.",pal:["#e8b98a","#d98a5a","#c46a3a","#8a9a4a"]},
+  {ic:"❄️",h:"Sous-ton froid",p:"Veines bleutées, l'argent te sublime.",pal:["#a8c0e0","#8a9ac8","#b89ad0","#7a8aa8"]},
+  {ic:"🌗",h:"Sous-ton neutre",p:"Un mix des deux : presque tout te va.",pal:["#d8c8b8","#c0b0a8","#b8a8c0","#a8b8b0"]},
+  {ic:"🎨",h:"Règle des 3",p:"Trois couleurs max par tenue, pour rester harmonieuse.",pal:["#f3d9dd","#dcd4ee","#c3d3c0","#faf6f1"]},
+];
+const mc=document.getElementById('morpho-cards');
+morpho.forEach(m=>{mc.innerHTML+=`<div class="card"><div class="ic">${m.ic}</div><h3>${m.h}</h3><p>${m.p}</p><div class="tip">💡 ${m.tip}</div></div>`;});
+const cc=document.getElementById('couleur-cards');
+couleurs.forEach(c=>{
+  const pal=c.pal.map(x=>`<div style="background:${x}"></div>`).join('');
+  cc.innerHTML+=`<div class="card"><div class="ic">${c.ic}</div><h3>${c.h}</h3><p>${c.p}</p><div class="palette">${pal}</div></div>`;
+});
+function showTab(id,btn){
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('on'));
+  btn.classList.add('on');
+  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('on'));
+  document.getElementById(id).classList.add('on');
+}
+
+/* ============ GALERIE (looks illustrés en SVG) ============ */
+// mannequin de base : tête, cheveux, cou, jambes
+function figure(hair, skin, legwear, shoes){
+  return `
+    <rect x="88" y="196" width="10" height="34" rx="4" fill="${legwear}"/>
+    <rect x="102" y="196" width="10" height="34" rx="4" fill="${legwear}"/>
+    <ellipse cx="90" cy="234" rx="11" ry="6" fill="${shoes}"/>
+    <ellipse cx="110" cy="234" rx="11" ry="6" fill="${shoes}"/>
+    <rect x="94" y="46" width="12" height="16" fill="${skin}"/>
+    <path d="M76 42 Q74 8 100 8 Q126 8 124 42 L124 60 Q118 50 100 50 Q82 50 76 60 Z" fill="${hair}"/>
+    <circle cx="100" cy="34" r="18" fill="${skin}"/>
+    <path d="M82 30 Q84 16 100 16 Q116 16 118 30 Q112 22 100 22 Q88 22 82 30 Z" fill="${hair}"/>
+    <circle cx="93" cy="34" r="1.6" fill="#6a5a60"/>
+    <circle cx="107" cy="34" r="1.6" fill="#6a5a60"/>
+    <path d="M96 40 Q100 43 104 40" stroke="#c98a8a" stroke-width="1.4" fill="none" stroke-linecap="round"/>
+    <circle cx="88" cy="39" r="2.5" fill="#f0b8b8" opacity="0.5"/>
+    <circle cx="112" cy="39" r="2.5" fill="#f0b8b8" opacity="0.5"/>`;
+}
+function lookSVG(bg, hair, skin, legwear, shoes, clothes){
+  return `<svg viewBox="0 0 200 250" xmlns="http://www.w3.org/2000/svg">
+    <rect width="200" height="250" fill="${bg}"/>
+    <ellipse cx="100" cy="235" rx="60" ry="14" fill="#000" opacity="0.05"/>
+    ${figure(hair,skin,legwear,shoes)}
+    ${clothes}</svg>`;
+}
+const SK={clair:"#f0d0bc",dore:"#e8bd9a",hale:"#d09a72",mat:"#a87850"};
+const HR={brun:"#4a3628",chatain:"#7a5638",blond:"#d4a860",noir:"#2a2028",roux:"#b06838",gris:"#b0a8b0"};
+
+const looks=[
+  {mood:"casual",title:"Douceur du dimanche",desc:"Pull crème oversize + jean large + baskets",
+   bg:"#f3d9dd",hair:HR.chatain,skin:SK.clair,legwear:"#aebfd8",shoes:"#fffdfb",
+   svg:`<path d="M70 66 Q100 58 130 66 L134 130 Q100 138 66 130 Z" fill="#f0e6d4"/>
+        <path d="M66 68 Q58 100 62 128 L74 126 L72 74 Z" fill="#f0e6d4"/>
+        <path d="M134 68 Q142 100 138 128 L126 126 L128 74 Z" fill="#f0e6d4"/>
+        <path d="M74 128 L126 128 L130 198 L70 198 Z" fill="#aebfd8"/>
+        <line x1="100" y1="130" x2="100" y2="196" stroke="#98a8c4" stroke-width="1"/>`},
+
+  {mood:"chic",title:"Élégance camel",desc:"Trench ceinturé + col roulé + bottines",
+   bg:"#dcd4ee",hair:HR.brun,skin:SK.dore,legwear:"#3a3038",shoes:"#2a2228",
+   svg:`<rect x="86" y="52" width="28" height="24" rx="6" fill="#8a7060"/>
+        <path d="M68 74 Q100 66 132 74 L138 200 L62 200 Z" fill="#cf9e5e"/>
+        <path d="M64 76 Q56 120 60 170 L74 168 L72 82 Z" fill="#cf9e5e"/>
+        <path d="M136 76 Q144 120 140 170 L126 168 L128 82 Z" fill="#cf9e5e"/>
+        <path d="M100 74 L100 200" stroke="#a87a3e" stroke-width="1.5"/>
+        <path d="M86 74 L82 200 M114 74 L118 200" stroke="#b98a4a" stroke-width="1" opacity="0.6"/>
+        <rect x="62" y="128" width="76" height="9" rx="2" fill="#8a5e2e"/>
+        <circle cx="100" cy="132" r="3" fill="#6a4620"/>`},
+
+  {mood:"romantique",title:"Robe jardin",desc:"Robe fleurie fluide + ballerines",
+   bg:"#c3d3c0",hair:HR.blond,skin:SK.clair,legwear:"#f0d8dc",shoes:"#f3d9dd",
+   svg:`<path d="M80 64 Q100 58 120 64 L118 82 Q100 76 82 82 Z" fill="#f5e0e8"/>
+        <path d="M82 80 Q100 74 118 80 L140 206 Q100 220 60 206 Z" fill="#f5e0e8"/>
+        <path d="M80 66 Q66 76 64 96 L74 94 L82 78 Z" fill="#f5e0e8"/>
+        <path d="M120 66 Q134 76 136 96 L126 94 L118 78 Z" fill="#f5e0e8"/>
+        <circle cx="86" cy="110" r="5" fill="#d99aa6"/><circle cx="112" cy="130" r="5" fill="#9b8bc4"/>
+        <circle cx="95" cy="165" r="5" fill="#7fa07a"/><circle cx="120" cy="98" r="4" fill="#d99aa6"/>
+        <circle cx="78" cy="150" r="4" fill="#9b8bc4"/><circle cx="122" cy="175" r="5" fill="#e0a860"/>
+        <circle cx="100" cy="192" r="4" fill="#d99aa6"/>`},
+
+  {mood:"minimal",title:"Noir sur blanc",desc:"Chemise blanche nette + pantalon noir droit",
+   bg:"#e8e4de",hair:HR.noir,skin:SK.dore,legwear:"#26222a",shoes:"#1a1620",
+   svg:`<path d="M74 64 Q100 58 126 64 L130 134 L70 134 Z" fill="#fffdfb"/>
+        <path d="M70 66 Q60 96 64 126 L76 124 L74 72 Z" fill="#fffdfb"/>
+        <path d="M130 66 Q140 96 136 126 L124 124 L126 72 Z" fill="#fffdfb"/>
+        <path d="M100 60 L94 72 L100 80 L106 72 Z" fill="#e8e4de"/>
+        <line x1="100" y1="80" x2="100" y2="132" stroke="#e0ddd6" stroke-width="1.5"/>
+        <circle cx="100" cy="96" r="1" fill="#ccc"/><circle cx="100" cy="112" r="1" fill="#ccc"/>
+        <rect x="72" y="134" width="56" height="66" rx="3" fill="#26222a"/>
+        <line x1="100" y1="136" x2="100" y2="198" stroke="#000" stroke-width="0.6" opacity="0.4"/>`},
+
+  {mood:"casual",title:"Denim & sauge",desc:"Veste en jean ouverte + t-shirt vert doux",
+   bg:"#dcd4ee",hair:HR.roux,skin:SK.clair,legwear:"#5a7aa8",shoes:"#e8e4de",
+   svg:`<path d="M82 66 L118 66 L116 128 L84 128 Z" fill="#aec4a6"/>
+        <path d="M78 64 Q66 70 64 130 L82 128 L84 68 Z" fill="#6f92c0"/>
+        <path d="M122 64 Q134 70 136 130 L118 128 L116 68 Z" fill="#6f92c0"/>
+        <path d="M78 64 L92 66 L88 132 L76 130 Z" fill="#6f92c0"/>
+        <path d="M122 64 L108 66 L112 132 L124 130 Z" fill="#6f92c0"/>
+        <rect x="80" y="130" width="40" height="68" rx="4" fill="#5a7aa8"/>
+        <line x1="88" y1="80" x2="86" y2="126" stroke="#4a6a98" stroke-width="1" stroke-dasharray="2 2"/>
+        <line x1="112" y1="80" x2="114" y2="126" stroke="#4a6a98" stroke-width="1" stroke-dasharray="2 2"/>`},
+
+  {mood:"chic",title:"Blazer poudré",desc:"Blazer rose structuré + top blanc + jean brut",
+   bg:"#c3d3c0",hair:HR.brun,skin:SK.hale,legwear:"#5a6a9a",shoes:"#3a3442",
+   svg:`<rect x="84" y="62" width="32" height="70" fill="#fffdfb"/>
+        <path d="M76 62 L96 66 L88 150 L70 142 Z" fill="#e6b4c0"/>
+        <path d="M124 62 L104 66 L112 150 L130 142 Z" fill="#e6b4c0"/>
+        <path d="M96 66 L100 96 L104 66 Z" fill="#fffdfb"/>
+        <rect x="80" y="132" width="40" height="66" rx="4" fill="#5a6a9a"/>
+        <line x1="80" y1="150" x2="120" y2="150" stroke="#4a5a88" stroke-width="0.8" opacity="0.5"/>`},
+
+  {mood:"romantique",title:"Jupe midi plissée",desc:"Maille lavande rentrée + jupe beige plissée",
+   bg:"#f3d9dd",hair:HR.blond,skin:SK.clair,legwear:"#e8dcc0",shoes:"#d8b8c0",
+   svg:`<path d="M74 64 Q100 58 126 64 L128 124 L72 124 Z" fill="#c9bce8"/>
+        <path d="M70 66 Q60 96 64 122 L76 120 L74 72 Z" fill="#c9bce8"/>
+        <path d="M130 66 Q140 96 136 122 L124 120 L126 72 Z" fill="#c9bce8"/>
+        <path d="M72 124 L128 124 L142 204 L58 204 Z" fill="#e8dcc0"/>
+        <g stroke="#d0bfa0" stroke-width="1.4">
+        <line x1="78" y1="128" x2="66" y2="200"/><line x1="90" y1="128" x2="84" y2="202"/>
+        <line x1="100" y1="128" x2="100" y2="202"/><line x1="110" y1="128" x2="116" y2="202"/>
+        <line x1="122" y1="128" x2="134" y2="200"/></g>`},
+
+  {mood:"minimal",title:"Monochrome sauge",desc:"Ensemble maille ton sur ton",
+   bg:"#dcd4ee",hair:HR.gris,skin:SK.clair,legwear:"#96af92",shoes:"#7f9a7b",
+   svg:`<path d="M76 64 Q100 58 124 64 L126 128 L74 128 Z" fill="#b2c6ae"/>
+        <path d="M72 66 Q62 96 66 126 L78 124 L76 72 Z" fill="#b2c6ae"/>
+        <path d="M128 66 Q138 96 134 126 L122 124 L124 72 Z" fill="#b2c6ae"/>
+        <rect x="76" y="128" width="48" height="72" rx="5" fill="#96af92"/>
+        <path d="M76 128 L124 128 L124 140 L76 140 Z" fill="#8aa386" opacity="0.5"/>`},
+
+  {mood:"boheme",title:"Esprit voyage",desc:"Blouse crochet + jupe longue terracotta",
+   bg:"#e8d5c0",hair:HR.chatain,skin:SK.hale,legwear:"#c17a4a",shoes:"#8a5a38",
+   svg:`<path d="M76 64 Q100 58 124 64 L126 120 L74 120 Z" fill="#f0e4d0"/>
+        <path d="M72 66 Q58 78 56 110 L70 106 L74 72 Z" fill="#f0e4d0"/>
+        <path d="M128 66 Q142 78 144 110 L130 106 L126 72 Z" fill="#f0e4d0"/>
+        <g stroke="#d8c4a8" stroke-width="0.8" opacity="0.7">
+        <line x1="80" y1="72" x2="120" y2="72"/><line x1="78" y1="84" x2="122" y2="84"/><line x1="76" y1="96" x2="124" y2="96"/><line x1="76" y1="108" x2="124" y2="108"/></g>
+        <path d="M74 120 L126 120 L138 208 Q100 218 62 208 Z" fill="#c17a4a"/>
+        <path d="M74 120 L126 120 L128 134 L72 134 Z" fill="#a8663a"/>
+        <g stroke="#e0a878" stroke-width="1" opacity="0.5"><line x1="70" y1="150" x2="130" y2="150"/><line x1="66" y1="175" x2="134" y2="175"/></g>
+        <path d="M92 52 Q100 64 108 52" stroke="#c9a860" stroke-width="1.5" fill="none"/>
+        <path d="M88 52 Q100 72 112 52" stroke="#b08850" stroke-width="1.5" fill="none"/>
+        <circle cx="100" cy="70" r="2" fill="#c9a860"/>`},
+
+  {mood:"boheme",title:"Franges & daim",desc:"Gilet à franges + robe unie + bottes",
+   bg:"#d8c8b0",hair:HR.roux,skin:SK.dore,legwear:"#b89878",shoes:"#7a5a3a",
+   svg:`<path d="M78 64 Q100 58 122 64 L124 200 Q100 210 76 200 Z" fill="#d9a878"/>
+        <path d="M74 66 Q64 96 68 140 L80 136 L78 72 Z" fill="#d9a878"/>
+        <path d="M126 66 Q136 96 132 140 L120 136 L122 72 Z" fill="#d9a878"/>
+        <path d="M80 66 L84 150 L76 150 L74 70 Z" fill="#a0763a"/>
+        <path d="M120 66 L116 150 L124 150 L126 70 Z" fill="#a0763a"/>
+        <g stroke="#8a6430" stroke-width="1.2">
+        <line x1="76" y1="150" x2="75" y2="166"/><line x1="79" y1="150" x2="78" y2="168"/><line x1="82" y1="150" x2="81" y2="165"/>
+        <line x1="124" y1="150" x2="125" y2="166"/><line x1="121" y1="150" x2="122" y2="168"/><line x1="118" y1="150" x2="119" y2="165"/></g>`},
+
+  {mood:"sportif",title:"Sport-chic urbain",desc:"Blazer + t-shirt + jogging + sneakers",
+   bg:"#d4dde8",hair:HR.noir,skin:SK.mat,legwear:"#3a4048",shoes:"#fffdfb",
+   svg:`<rect x="84" y="62" width="32" height="66" fill="#e8e8ea"/>
+        <path d="M76 62 L96 66 L90 146 L70 138 Z" fill="#5a6472"/>
+        <path d="M124 62 L104 66 L110 146 L130 138 Z" fill="#5a6472"/>
+        <rect x="80" y="128" width="40" height="72" rx="8" fill="#3a4048"/>
+        <line x1="88" y1="130" x2="86" y2="198" stroke="#2a3038" stroke-width="1.5"/>
+        <line x1="112" y1="130" x2="114" y2="198" stroke="#2a3038" stroke-width="1.5"/>`},
+
+  {mood:"sportif",title:"Athleisure doux",desc:"Sweat court + legging + baskets pastel",
+   bg:"#cfe0dc",hair:HR.blond,skin:SK.clair,legwear:"#8a9aa8",shoes:"#f3c9d0",
+   svg:`<path d="M74 64 Q100 58 126 64 L128 120 L72 120 Z" fill="#f0c8d0"/>
+        <path d="M70 66 Q58 92 62 120 L76 116 L74 72 Z" fill="#f0c8d0"/>
+        <path d="M130 66 Q142 92 138 120 L124 116 L126 72 Z" fill="#f0c8d0"/>
+        <path d="M72 116 L128 116 L128 124 L72 124 Z" fill="#e0b0bc"/>
+        <rect x="82" y="124" width="36" height="76" rx="6" fill="#8a9aa8"/>
+        <line x1="100" y1="126" x2="100" y2="198" stroke="#7a8a98" stroke-width="0.8"/>`},
+
+  {mood:"chic",title:"Tailleur lavande",desc:"Blazer + pantalon assorti + escarpins",
+   bg:"#e6e0f0",hair:HR.chatain,skin:SK.clair,legwear:"#a493c8",shoes:"#6a5a88",
+   svg:`<rect x="86" y="62" width="28" height="66" fill="#f0eaf8"/>
+        <path d="M76 62 L96 66 L90 148 L70 140 Z" fill="#a493c8"/>
+        <path d="M124 62 L104 66 L110 148 L130 140 Z" fill="#a493c8"/>
+        <path d="M96 66 L100 92 L104 66 Z" fill="#f0eaf8"/>
+        <rect x="82" y="130" width="36" height="70" rx="4" fill="#a493c8"/>
+        <line x1="100" y1="132" x2="100" y2="198" stroke="#8a79b0" stroke-width="0.8"/>`},
+
+  {mood:"romantique",title:"Combishort volanté",desc:"Combinaison courte rose + sandales",
+   bg:"#f0dde2",hair:HR.noir,skin:SK.hale,legwear:"#e0b0bc",shoes:"#c89aa0",
+   svg:`<path d="M76 64 Q100 58 124 64 L126 120 L74 120 Z" fill="#f2c4ce"/>
+        <path d="M72 66 Q60 84 60 108 L74 104 L76 72 Z" fill="#f2c4ce"/>
+        <path d="M128 66 Q140 84 140 108 L126 104 L124 72 Z" fill="#f2c4ce"/>
+        <path d="M74 118 L100 118 L96 168 L72 164 Z" fill="#e8b4c0"/>
+        <path d="M126 118 L100 118 L104 168 L128 164 Z" fill="#e8b4c0"/>`},
+
+  {mood:"casual",title:"Salopette & rayures",desc:"Salopette denim + marinière + baskets",
+   bg:"#dde6ec",hair:HR.chatain,skin:SK.dore,legwear:"#6a86ac",shoes:"#e8b850",
+   svg:`<rect x="82" y="60" width="36" height="70" fill="#fffdfb"/>
+        <g stroke="#4a6a98" stroke-width="3"><line x1="82" y1="72" x2="118" y2="72"/><line x1="82" y1="84" x2="118" y2="84"/><line x1="82" y1="96" x2="118" y2="96"/><line x1="82" y1="108" x2="118" y2="108"/></g>
+        <path d="M76 116 L124 116 L128 200 L72 200 Z" fill="#6a86ac"/>
+        <rect x="84" y="90" width="32" height="34" fill="#6a86ac"/>
+        <line x1="90" y1="64" x2="88" y2="92" stroke="#5a76a0" stroke-width="5"/>
+        <line x1="110" y1="64" x2="112" y2="92" stroke="#5a76a0" stroke-width="5"/>
+        <circle cx="88" cy="92" r="2" fill="#c9a860"/><circle cx="112" cy="92" r="2" fill="#c9a860"/>
+        <line x1="100" y1="128" x2="100" y2="198" stroke="#5a76a0" stroke-width="1"/>`},
+
+  {mood:"minimal",title:"Robe colonne",desc:"Robe droite gris perle + mules",
+   bg:"#eceaf0",hair:HR.gris,skin:SK.clair,legwear:"#c8c4cc",shoes:"#b0acb8",
+   svg:`<path d="M80 62 L120 62 L124 206 Q100 214 76 206 Z" fill="#c8c6ce"/>
+        <path d="M80 62 Q72 66 68 96 L78 94 L82 66 Z" fill="#c8c6ce"/>
+        <path d="M120 62 Q128 66 132 96 L122 94 L118 66 Z" fill="#c8c6ce"/>
+        <path d="M88 58 L100 62 L112 58 L112 66 L88 66 Z" fill="#eceaf0"/>
+        <line x1="100" y1="66" x2="100" y2="206" stroke="#bab6c2" stroke-width="0.8" opacity="0.6"/>`},
+];
+const moods=["tout","casual","chic","romantique","minimal","boheme","sportif"];
+const gf=document.getElementById('gal-filters');
+moods.forEach((m,i)=>{
+  const b=document.createElement('button');
+  b.textContent=m.charAt(0).toUpperCase()+m.slice(1);
+  if(i===0)b.classList.add('on');
+  b.onclick=()=>{document.querySelectorAll('.gal-filters button').forEach(x=>x.classList.remove('on'));b.classList.add('on');renderGallery(m);};
+  gf.appendChild(b);
+});
+function renderGallery(filter){
+  const g=document.getElementById('gallery'); g.innerHTML='';
+  looks.filter(l=>filter==='tout'||l.mood===filter).forEach(l=>{
+    const pad = 125; // ratio 250/200
+    g.innerHTML+=`<div class="look">
+      <div class="vis" style="padding-bottom:${pad}%">${lookSVG(l.bg,l.hair,l.skin,l.legwear,l.shoes,l.svg)}</div>
+      <div class="cap"><h4>${l.title}</h4><p>${l.desc}</p><span class="mood">${l.mood}</span></div>
+    </div>`;
+  });
+}
+renderGallery('tout');
+
+/* ============ CAPSULE ============ */
+const pieces=[
+  {e:"👕",n:"T-shirt blanc",c:"basique"},{e:"👖",n:"Jean brut",c:"basique"},
+  {e:"🧥",n:"Trench",c:"structure"},{e:"👗",n:"Robe fluide",c:"pièce forte"},
+  {e:"🧶",n:"Maille douce",c:"chaleur"},{e:"👚",n:"Chemise",c:"basique"},
+  {e:"🩳",n:"Short tailleur",c:"détente"},{e:"🥿",n:"Ballerines",c:"chaussure"},
+  {e:"👟",n:"Sneakers",c:"chaussure"},{e:"👢",n:"Bottines",c:"chaussure"},
+  {e:"🧣",n:"Écharpe",c:"accessoire"},{e:"👜",n:"Sac cuir",c:"accessoire"},
+  {e:"🧦",n:"Pantalon large",c:"basique"},{e:"🕶️",n:"Lunettes",c:"accessoire"},
+];
+const cg=document.getElementById('capsule-grid');
+let picked=0;
+pieces.forEach(p=>{
+  const d=document.createElement('div');
+  d.className='piece';
+  d.innerHTML=`<span class="pe">${p.e}</span><span class="pn">${p.n}</span><span class="pc">${p.c}</span>`;
+  d.onclick=()=>{
+    d.classList.toggle('picked');
+    picked=document.querySelectorAll('.piece.picked').length;
+    document.getElementById('cap-n').textContent=picked;
+    const msg=document.getElementById('cap-msg');
+    if(picked===0)msg.textContent='clique pour composer ta capsule';
+    else if(picked<10)msg.textContent='continue, vise 10 à 15 pièces';
+    else if(picked<=15)msg.textContent='✨ capsule idéale, tout se combine !';
+    else msg.textContent="un peu trop — l'essence de la capsule, c'est peu mais bien";
+  };
+  cg.appendChild(d);
+});
+</script>
+
+
+</body></html>
